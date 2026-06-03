@@ -1,4 +1,4 @@
-<!doctype html>https://gist.githubusercontent.com/starkles/76b38680b9580e05ca8348206b3ebba2/raw/263da1bf76432a9ec508a13e410e33a4b9cc17eb/badges.json
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -42,7 +42,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px;
-      padding-top: 18vh;
+      padding-top: 7vh;
       transition: padding-top 600ms cubic-bezier(0.25, 1, 0.5, 1);
     }
     .wrap.shifted-up {
@@ -307,7 +307,7 @@
       max-width: 120px;
       object-fit: contain;
       border-radius: 3px;
-      background: rgba(255, 255, 255, 0.08);
+      background: transparent;
       display: block;
     }
     .template-group .chip {
@@ -487,14 +487,27 @@
       height: 24px;
       object-fit: contain;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2px;
+      border: none;
+      background: transparent;
+      padding: 1px;
     }
     .group-mini-more {
       color: var(--muted);
       font-size: 0.78rem;
       font-weight: 600;
+    }
+    .group-mini-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      padding: 1px;
+      flex: 0 0 auto;
     }
     .group-meta {
       color: var(--muted);
@@ -821,7 +834,7 @@
     }
     @media (max-width: 920px) {
       .wrap {
-        padding-top: 8vh;
+        padding-top: 2vh;
       }
       .wrap.shifted-up {
         padding-top: 0vh;
@@ -1616,7 +1629,7 @@
         creator: "starkles",
         creatorUrl: "https://gist.github.com/starkles",
         fallbackInlineJson: CLEAN_MINIMALIST_FALLBACK,
-        url: "https://gist.githubusercontent.com/starkles/76b38680b9580e05ca8348206b3ebba2/raw/3ecb64ac6661a5dca55574a2dec7797438e3d1b1/badges.json"
+        url: "https://gist.githubusercontent.com/starkles/76b38680b9580e05ca8348206b3ebba2/raw/263da1bf76432a9ec508a13e410e33a4b9cc17eb/badges.json"
       },
       {
         id: "colored",
@@ -2324,8 +2337,8 @@
       });
     }
     function chipHtml(filter) {
-      const bg = isTransparentColor(filter.tagColor) ? "rgba(255,255,255,0.08)" : filter.tagColor;
-      const border = filter.borderColor || "transparent";
+      const bg = isFilterFilled(filter) ? filter.tagColor : "transparent";
+      const border = isFilterBordered(filter) ? (filter.borderColor || "transparent") : "transparent";
       if (!filter.imageURL) {
         return "";
       }
@@ -2537,6 +2550,15 @@
     function renderGroupList() {
       const wrap = byId("groupList");
       wrap.innerHTML = "";
+      const miniBadgeHtml = (filter) => {
+        const filled = isFilterFilled(filter);
+        const bordered = isFilterBordered(filter);
+        const fillColor = extractHexColor(filter.tagColor);
+        const borderColor = extractHexColor(filter.borderColor || "#FFFFFF");
+        const miniBg = filled ? fillColor : "transparent";
+        const miniBorder = bordered ? borderColor : "transparent";
+        return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" /></span>`;
+      };
       state.groups.forEach((group) => {
         const filters = state.filters.filter((f) => f.groupId === group.id);
         const isOpen = openGroupIds.has(group.id);
@@ -2547,7 +2569,7 @@
         const headerBadgesHtml = !isOpen
           ? `
             <span class="group-mini-badges">
-              ${headerBadges.map((f) => `<img class="group-mini-badge" src="${escapeHtml(f.imageURL)}" alt="${escapeHtml(f.name)}" referrerpolicy="no-referrer" />`).join("")}
+              ${headerBadges.map((f) => miniBadgeHtml(f)).join("")}
               ${headerBadgeCountExtra > 0 ? `<span class="group-mini-more">+${headerBadgeCountExtra}</span>` : ""}
             </span>
           `
@@ -2608,7 +2630,7 @@
               <span class="group-title-wrap">
                 <span class="group-title-text">${escapeHtml(group.name)}</span>
                 <span class="group-mini-badges ${isOpen ? "hidden-fade" : ""}">
-                  ${headerBadges.map((f) => `<img class="group-mini-badge" src="${escapeHtml(f.imageURL)}" alt="${escapeHtml(f.name)}" referrerpolicy="no-referrer" />`).join("")}
+                  ${headerBadges.map((f) => miniBadgeHtml(f)).join("")}
                   ${headerBadgeCountExtra > 0 ? `<span class="group-mini-more">+${headerBadgeCountExtra}</span>` : ""}
                 </span>
               </span>
