@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Badge Template Editor</title>
+  <title>BadgeWorks</title>
   <style>
     :root {
       --bg-1: #071421;
@@ -40,10 +40,17 @@
 
     .wrap {
       max-width: 1280px;
+      width: 100%;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px;
+      padding-top: 18vh;
+      transition: padding-top 600ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .wrap.shifted-up {
+      padding-top: 0vh;
     }
 
     .panel {
@@ -144,20 +151,75 @@
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
+      gap: 24px;
+      margin-top: 24px;
     }
 
     .mode-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 16px;
+      padding: 36px 28px;
       background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px;
+      transition: border-color 300ms ease, background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+    }
+
+    .mode-card:hover {
+      border-color: rgba(60, 190, 201, 0.35);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
 
     .mode-card h3 {
-      margin: 0 0 6px;
-      font-size: 1.04rem;
+      margin: 0 0 10px;
+      font-size: 1.45rem;
+    }
+
+    .mode-card .muted {
+      font-size: 1.02rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .mode-card button {
+      padding: 12px 20px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    /* Start screen spacious welcome layout styling */
+    .wrap > section:first-child.panel {
+      padding: 36px 32px;
+    }
+
+    .wrap > section:first-child.panel h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .wrap > section:first-child.panel .sub {
+      font-size: 1.12rem;
+      line-height: 1.5;
+    }
+
+    #startScreen.panel {
+      padding: 44px 38px;
+    }
+
+    #startScreen h2 {
+      font-size: 1.75rem;
+      margin-bottom: 10px;
+    }
+
+    #startScreen .sub {
+      font-size: 1.08rem;
+      margin-bottom: 18px;
     }
 
     .template-grid {
@@ -278,13 +340,13 @@
     }
 
     .template-group .chip {
-      padding: 2px;
+      padding: 3px 4px;
       border-radius: 6px;
     }
 
     .template-group .chip img {
-      max-height: 15px;
-      max-width: 80px;
+      max-height: 20px;
+      max-width: 90px;
     }
 
     .preview-link {
@@ -663,7 +725,151 @@
       letter-spacing: 0.02em;
     }
 
+    /* Clean animation wrappers for subpanels */
+    .collapsible-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      visibility: hidden;
+      transition: 
+        grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1), 
+        opacity 350ms cubic-bezier(0.4, 0, 0.2, 1), 
+        visibility 350ms step-end;
+      overflow: hidden;
+    }
+
+    .collapsible-wrapper.is-open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+      transition: 
+        grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1), 
+        opacity 350ms cubic-bezier(0.4, 0, 0.2, 1), 
+        visibility 0s step-start;
+    }
+
+    .collapsible-inner {
+      min-height: 0;
+    }
+
+    .btn-main.active {
+      background: linear-gradient(130deg, #3cc983, #2f9eb6);
+      box-shadow: 0 0 14px rgba(60, 201, 131, 0.35);
+      transform: scale(1.02);
+    }
+
+    /* Screen transitions */
+    @keyframes screenFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.995);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes screenFadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.995);
+      }
+    }
+
+    .screen-animate-in {
+      animation: screenFadeIn 350ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .screen-animate-out {
+      animation: screenFadeOut 200ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    /* Category card smooth toggle styles */
+    .group-card {
+      transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+    }
+
+    .group-card.is-open {
+      border-color: rgba(60, 190, 201, 0.4);
+      box-shadow: 0 4px 20px rgba(60, 190, 201, 0.08);
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .group-mini-badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 1;
+      max-width: 300px;
+      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .group-mini-badges.hidden-fade {
+      opacity: 0;
+      max-width: 0px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .group-action-buttons {
+      display: inline-flex;
+      gap: 6px;
+      opacity: 1;
+      max-width: 400px;
+      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .group-action-buttons.hidden-fade {
+      opacity: 0;
+      max-width: 0px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .toggle-icon {
+      font-family: monospace;
+      font-weight: bold;
+    }
+
     @media (max-width: 920px) {
+      .wrap {
+        padding-top: 8vh;
+      }
+      .wrap.shifted-up {
+        padding-top: 0vh;
+      }
+
+      .wrap > section:first-child.panel,
+      #startScreen.panel {
+        padding: 24px 20px;
+      }
+
+      .wrap > section:first-child.panel h1 {
+        font-size: 1.8rem;
+      }
+
+      #startScreen h2 {
+        font-size: 1.4rem;
+      }
+
+      .mode-card {
+        padding: 24px 20px;
+        min-height: 180px;
+      }
+
+      .mode-card h3 {
+        font-size: 1.25rem;
+      }
+
+      .mode-card .muted {
+        font-size: 0.95rem;
+      }
+
       .mode-grid,
       .template-grid,
       .template-category-grid,
@@ -703,8 +909,8 @@
 <body>
   <main class="wrap">
     <section class="panel">
-      <h1>Badge Template Editor</h1>
-      <p class="sub">Choose a template or import your own JSON, then adjust badge usage, fill color, and border color.</p>
+      <h1>BadgeWorks</h1>
+      <p class="sub">Nuvio/Fusion Badge templates and editor</p>
     </section>
 
     <section id="startScreen" class="panel">
@@ -724,28 +930,36 @@
         </div>
       </div>
 
-      <div id="importPanel" class="panel hidden" style="margin-top: 12px; padding: 12px;">
-        <h3 style="margin: 0 0 8px;">Import JSON</h3>
-        <div class="row">
-          <input id="jsonUrl" type="url" placeholder="Paste JSON URL (GitHub links are auto-fixed)" />
-          <button id="loadFromUrl" class="btn-main">Load URL</button>
+      <div id="importWrapper" class="collapsible-wrapper">
+        <div class="collapsible-inner">
+          <div id="importPanel" class="panel" style="margin-top: 12px; padding: 12px;">
+            <h3 style="margin: 0 0 8px;">Import JSON</h3>
+            <div class="row">
+              <input id="jsonUrl" type="url" placeholder="Paste JSON URL (GitHub links are auto-fixed)" />
+              <button id="loadFromUrl" class="btn-main">Load URL</button>
+            </div>
+            <div class="row">
+              <input id="jsonFile" type="file" accept="application/json" />
+              <button id="loadFile" class="btn-soft">Load File</button>
+            </div>
+            <div class="row">
+              <textarea id="jsonCodeInput" class="import-code" placeholder="Paste full JSON code here"></textarea>
+              <button id="loadFromCode" class="btn-soft">Load Code</button>
+            </div>
+            <div class="status" id="startStatus"></div>
+          </div>
         </div>
-        <div class="row">
-          <input id="jsonFile" type="file" accept="application/json" />
-          <button id="loadFile" class="btn-soft">Load File</button>
-        </div>
-        <div class="row">
-          <textarea id="jsonCodeInput" class="import-code" placeholder="Paste full JSON code here"></textarea>
-          <button id="loadFromCode" class="btn-soft">Load Code</button>
-        </div>
-        <div class="status" id="startStatus"></div>
       </div>
 
-      <div id="premadePanel" class="panel hidden" style="margin-top: 12px; padding: 12px;">
-        <h3 style="margin: 0 0 8px;">Community Templates</h3>
-        <p class="muted">These are community-made templates, and each creator is credited on their template.</p>
-        <p class="muted">If you want to add your own template, contact me on the Nuvio Discord: <strong>Nint</strong>.</p>
-        <div id="premadeGrid" class="template-grid"></div>
+      <div id="premadeWrapper" class="collapsible-wrapper">
+        <div class="collapsible-inner">
+          <div id="premadePanel" class="panel" style="margin-top: 12px; padding: 12px;">
+            <h3 style="margin: 0 0 8px;">Community Templates</h3>
+            <p class="muted">These are community-made templates, and each creator is credited on their template.</p>
+            <p class="muted">If you want to add your own template, contact me on the Nuvio Discord: <strong>Nint</strong>.</p>
+            <div id="premadeGrid" class="template-grid"></div>
+          </div>
+        </div>
       </div>
       <div class="site-credit">Made with ❤ by ATL and Codex</div>
     </section>
@@ -1429,6 +1643,13 @@
         creatorUrl: "",
         fallbackInlineJson: CLEAN_MINIMALIST_FALLBACK,
         url: "https://hastebin.com/share/nunuvawoge.swift"
+      },
+      {
+        id: "gold-badges",
+        name: "Gold Badges",
+        creator: "k45sle",
+        creatorUrl: "https://github.com/k45sle",
+        url: "https://raw.githubusercontent.com/k45sle/NUVIO_BADGES/refs/heads/main/GOLD-NONAMES.json"
       }
     ];
 
@@ -1444,6 +1665,8 @@
     const GROUP_CLIPBOARD_KEY = "badgeTemplateEditor.groupClipboard.v1";
     let copiedGroupPayload = null;
     let healthCheckRunId = 0;
+    let lastUploadedJson = "";
+    let lastUploadedLink = "";
 
     function setStatus(elementId, message, tone = "") {
       const el = byId(elementId);
@@ -1797,23 +2020,81 @@
       setStatus("editorStatus", `Pasted category "${newGroup.name}"${source}.`, "good");
     }
 
+    function updateLayoutSpacing() {
+      const wrap = document.querySelector(".wrap");
+      const isStartActive = !byId("startScreen").classList.contains("hidden");
+      
+      if (isStartActive) {
+        const importOpen = byId("importWrapper").classList.contains("is-open");
+        const premadeOpen = byId("premadeWrapper").classList.contains("is-open");
+        if (importOpen || premadeOpen) {
+          wrap.classList.add("shifted-up");
+        } else {
+          wrap.classList.remove("shifted-up");
+        }
+      } else {
+        wrap.classList.add("shifted-up");
+      }
+    }
+
+    function transitionToScreen(targetScreenId, onComplete = null) {
+      const screens = ["startScreen", "editorScreen", "exportScreen"];
+      const activeScreenId = screens.find(id => !byId(id).classList.contains("hidden"));
+      
+      // Update shifted-up state
+      const wrap = document.querySelector(".wrap");
+      if (targetScreenId === "startScreen") {
+        const importOpen = byId("importWrapper").classList.contains("is-open");
+        const premadeOpen = byId("premadeWrapper").classList.contains("is-open");
+        if (importOpen || premadeOpen) {
+          wrap.classList.add("shifted-up");
+        } else {
+          wrap.classList.remove("shifted-up");
+        }
+      } else {
+        wrap.classList.add("shifted-up");
+      }
+
+      if (!activeScreenId || activeScreenId === targetScreenId) {
+        screens.forEach(id => {
+          if (id === targetScreenId) {
+            byId(id).classList.remove("hidden");
+            byId(id).classList.add("screen-animate-in");
+          } else {
+            byId(id).classList.add("hidden");
+            byId(id).classList.remove("screen-animate-in");
+          }
+        });
+        if (onComplete) onComplete();
+        return;
+      }
+      
+      const fromEl = byId(activeScreenId);
+      const toEl = byId(targetScreenId);
+      
+      fromEl.classList.remove("screen-animate-in");
+      fromEl.classList.add("screen-animate-out");
+      
+      setTimeout(() => {
+        fromEl.classList.add("hidden");
+        fromEl.classList.remove("screen-animate-out");
+        
+        toEl.classList.remove("hidden");
+        toEl.classList.add("screen-animate-in");
+        if (onComplete) onComplete();
+      }, 200);
+    }
+
     function showEditor() {
-      byId("startScreen").classList.add("hidden");
-      byId("exportScreen").classList.add("hidden");
-      byId("editorScreen").classList.remove("hidden");
+      transitionToScreen("editorScreen");
     }
 
     function showExport() {
-      byId("startScreen").classList.add("hidden");
-      byId("editorScreen").classList.add("hidden");
-      byId("exportScreen").classList.remove("hidden");
-      renderExportScreen();
+      transitionToScreen("exportScreen", renderExportScreen);
     }
 
     function showStart() {
-      byId("editorScreen").classList.add("hidden");
-      byId("exportScreen").classList.add("hidden");
-      byId("startScreen").classList.remove("hidden");
+      transitionToScreen("startScreen");
     }
 
     function isTransparentColor(input) {
@@ -2277,26 +2558,33 @@
           : '<div class="muted group-empty">No filters in this category.</div>';
 
         const card = document.createElement("article");
-        card.className = "group-card";
+        card.className = `group-card ${isOpen ? "is-open" : ""}`;
         card.innerHTML = `
           <div class="group-head">
             <button class="group-toggle" data-toggle-group="${group.id}" aria-expanded="${isOpen ? "true" : "false"}">
               <span class="group-title-wrap">
                 <span class="group-title-text">${escapeHtml(group.name)}</span>
-                ${headerBadgesHtml}
+                <span class="group-mini-badges ${isOpen ? "hidden-fade" : ""}">
+                  ${headerBadges.map((f) => `<img class="group-mini-badge" src="${escapeHtml(f.imageURL)}" alt="${escapeHtml(f.name)}" referrerpolicy="no-referrer" />`).join("")}
+                  ${headerBadgeCountExtra > 0 ? `<span class="group-mini-more">+${headerBadgeCountExtra}</span>` : ""}
+                </span>
               </span>
-              <span class="group-meta">${filters.length} badges ${isOpen ? "[-]" : "[+]"}</span>
+              <span class="group-meta">${filters.length} badges <span class="toggle-icon">${isOpen ? "[-]" : "[+]"}</span></span>
             </button>
             <div class="group-actions">
-              ${isOpen ? `
+              <div class="group-action-buttons ${isOpen ? "" : "hidden-fade"}">
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="copy-group">Copy Category</button>
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="enable-all">Enable All</button>
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="disable-all">Disable All</button>
-              ` : ""}
+              </div>
               <button class="btn-danger btn-icon" data-group-id="${group.id}" data-group-action="delete-group" title="Delete Category" aria-label="Delete Category">&#128465;</button>
             </div>
           </div>
-          ${isOpen ? `<div class="group-body">${filterRows}</div>` : ""}
+          <div class="collapsible-wrapper ${isOpen ? "is-open" : ""}">
+            <div class="collapsible-inner">
+              <div class="group-body">${filterRows}</div>
+            </div>
+          </div>
         `;
 
         wrap.appendChild(card);
@@ -2306,12 +2594,32 @@
         el.addEventListener("click", () => {
           const id = el.getAttribute("data-toggle-group");
           if (!id) return;
-          if (openGroupIds.has(id)) {
-            openGroupIds.delete(id);
-          } else {
+          
+          const card = el.closest(".group-card");
+          const wrapper = card.querySelector(".collapsible-wrapper");
+          const badges = card.querySelector(".group-mini-badges");
+          const actionButtons = card.querySelector(".group-action-buttons");
+          const toggleIcon = card.querySelector(".toggle-icon");
+          
+          const willOpen = !wrapper.classList.contains("is-open");
+          
+          if (willOpen) {
             openGroupIds.add(id);
+            wrapper.classList.add("is-open");
+            card.classList.add("is-open");
+            if (badges) badges.classList.add("hidden-fade");
+            if (actionButtons) actionButtons.classList.remove("hidden-fade");
+            if (toggleIcon) toggleIcon.textContent = "[-]";
+            el.setAttribute("aria-expanded", "true");
+          } else {
+            openGroupIds.delete(id);
+            wrapper.classList.remove("is-open");
+            card.classList.remove("is-open");
+            if (badges) badges.classList.remove("hidden-fade");
+            if (actionButtons) actionButtons.classList.add("hidden-fade");
+            if (toggleIcon) toggleIcon.textContent = "[+]";
+            el.setAttribute("aria-expanded", "false");
           }
-          renderEditor();
         });
       });
 
@@ -2546,10 +2854,18 @@
       }
     }
 
-    async function createLinkWithJsonBlob(json) {
-      const response = await fetch("https://jsonblob.com/api/jsonBlob", {
+
+
+    async function createLinkWithJsonBlob(json, useProxy = false) {
+      const url = useProxy 
+        ? "https://corsproxy.io/?url=https://jsonblob.com/api/jsonBlob" 
+        : "https://jsonblob.com/api/jsonBlob";
+      const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: json
       });
       if (!response.ok) {
@@ -2561,12 +2877,15 @@
         throw new Error("jsonblob returned no location header");
       }
 
-      const url = location.startsWith("http") ? location : `https://jsonblob.com${location}`;
-      return { url, provider: "jsonblob" };
+      const rawUrl = location.startsWith("http") ? location : `https://jsonblob.com${location}`;
+      return { url: rawUrl, provider: "jsonblob" };
     }
 
-    async function createLinkWithHastebin(json) {
-      const response = await fetch("https://hastebin.com/documents", {
+    async function createLinkWithHastebin(json, useProxy = false) {
+      const url = useProxy 
+        ? "https://corsproxy.io/?url=https://hastebin.com/documents" 
+        : "https://hastebin.com/documents";
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
         body: json
@@ -2583,22 +2902,25 @@
       return { url: `https://hastebin.com/raw/${payload.key}`, provider: "hastebin" };
     }
 
-    async function createLinkWithPasteRs(json) {
-      const response = await fetch("https://paste.rs", {
+    async function createLinkWithPasteRs(json, useProxy = false) {
+      const url = useProxy 
+        ? "https://corsproxy.io/?url=https://paste.rs" 
+        : "https://paste.rs";
+      const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        headers: { "Content-Type": "text/plain" },
         body: json
       });
       if (!response.ok) {
         throw new Error(`paste.rs HTTP ${response.status}`);
       }
 
-      const url = (await response.text()).trim();
-      if (!/^https?:\/\//i.test(url)) {
+      const linkText = (await response.text()).trim();
+      if (!/^https?:\/\//i.test(linkText)) {
         throw new Error("paste.rs returned an invalid URL");
       }
 
-      return { url, provider: "paste.rs" };
+      return { url: linkText, provider: "paste.rs" };
     }
 
     async function copyJsonCode() {
@@ -2670,15 +2992,43 @@
     }
 
     function showImportMode() {
-      byId("importPanel").classList.remove("hidden");
-      byId("premadePanel").classList.add("hidden");
-      setStatus("startStatus", "Import mode selected.", "good");
+      const importWrap = byId("importWrapper");
+      const premadeWrap = byId("premadeWrapper");
+      const btnImport = byId("chooseImport");
+      const btnPremade = byId("choosePremade");
+      
+      if (importWrap.classList.contains("is-open")) {
+        importWrap.classList.remove("is-open");
+        btnImport.classList.remove("active");
+        setStatus("startStatus", "Choose Import or Premade to continue.");
+      } else {
+        importWrap.classList.add("is-open");
+        btnImport.classList.add("active");
+        premadeWrap.classList.remove("is-open");
+        btnPremade.classList.remove("active");
+        setStatus("startStatus", "Import mode selected.", "good");
+      }
+      updateLayoutSpacing();
     }
 
     function showPremadeMode() {
-      byId("premadePanel").classList.remove("hidden");
-      byId("importPanel").classList.add("hidden");
-      setStatus("startStatus", "Community mode selected. Pick a template below.", "good");
+      const importWrap = byId("importWrapper");
+      const premadeWrap = byId("premadeWrapper");
+      const btnImport = byId("chooseImport");
+      const btnPremade = byId("choosePremade");
+      
+      if (premadeWrap.classList.contains("is-open")) {
+        premadeWrap.classList.remove("is-open");
+        btnPremade.classList.remove("active");
+        setStatus("startStatus", "Choose Import or Premade to continue.");
+      } else {
+        premadeWrap.classList.add("is-open");
+        btnPremade.classList.add("active");
+        importWrap.classList.remove("is-open");
+        btnImport.classList.remove("active");
+        setStatus("startStatus", "Community mode selected. Pick a template below.", "good");
+      }
+      updateLayoutSpacing();
     }
 
     async function initPremadePreviews() {
@@ -2711,11 +3061,15 @@
       if (!byId("editorScreen").classList.contains("hidden")) {
         renderEditor();
       }
-      if (!byId("premadePanel").classList.contains("hidden")) {
+      if (byId("premadeWrapper").classList.contains("is-open")) {
         renderPremadeCards();
       }
     });
     byId("backToStart").addEventListener("click", () => {
+      byId("importWrapper").classList.remove("is-open");
+      byId("premadeWrapper").classList.remove("is-open");
+      byId("chooseImport").classList.remove("active");
+      byId("choosePremade").classList.remove("active");
       showStart();
       setStatus("startStatus", "Choose Import or Premade to continue.");
     });
