@@ -6,20 +6,20 @@
   <title>Badger</title>
   <style>
     :root {
-      --bg-1: #071421;
-      --bg-2: #112a2a;
-      --bg-3: #1f101a;
-      --panel: rgba(7, 16, 28, 0.86);
-      --panel-2: rgba(15, 27, 43, 0.92);
-      --line: rgba(255, 255, 255, 0.14);
-      --text: #eef7ff;
-      --muted: #9ab0c9;
+      --bg-1: #0B0B0C;
+      --bg-2: #141416;
+      --bg-3: #080809;
+      --panel: rgba(20, 20, 22, 0.85);
+      --panel-2: rgba(30, 30, 34, 0.92);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #F5F5F7;
+      --muted: #8E8E93;
       --good: #4fd986;
       --warn: #ffc06a;
       --danger: #ff7e75;
       --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
       --radius: 16px;
-      --accent: #3cbec9;
+      --accent: #FFCC00;
     }
 
     * {
@@ -31,8 +31,8 @@
       color: var(--text);
       font-family: "Space Grotesk", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background:
-        radial-gradient(circle at 10% 8%, rgba(59, 191, 201, 0.26), transparent 36%),
-        radial-gradient(circle at 88% 15%, rgba(235, 137, 98, 0.18), transparent 33%),
+        radial-gradient(circle at 10% 8%, rgba(255, 204, 0, 0.12), transparent 36%),
+        radial-gradient(circle at 88% 15%, rgba(218, 165, 32, 0.08), transparent 33%),
         linear-gradient(140deg, var(--bg-1), var(--bg-2), var(--bg-3));
       min-height: 100vh;
       padding: 18px;
@@ -122,9 +122,9 @@
 
     .btn-main {
       border: none;
-      color: #06181d;
+      color: #121212;
       font-weight: 700;
-      background: linear-gradient(130deg, #2f9eb6, #3cc983);
+      background: linear-gradient(130deg, #FFDD3C, #FF9500);
     }
 
     .btn-soft {
@@ -168,7 +168,7 @@
     }
 
     .mode-card:hover {
-      border-color: rgba(60, 190, 201, 0.35);
+      border-color: rgba(255, 204, 0, 0.35);
       background: rgba(255, 255, 255, 0.05);
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -198,14 +198,36 @@
       padding: 36px 32px;
     }
 
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-logo {
+      height: 80px;
+      width: auto;
+      flex-shrink: 0;
+      object-fit: contain;
+      border-radius: 14px;
+      filter: drop-shadow(0 2px 10px rgba(255, 204, 0, 0.3));
+    }
+
     .wrap > section:first-child.panel h1 {
       font-size: 2.4rem;
-      margin-bottom: 12px;
+      margin: 0 0 4px 0;
     }
 
     .wrap > section:first-child.panel .sub {
       font-size: 1.12rem;
       line-height: 1.5;
+      margin: 0;
     }
 
     #startScreen.panel {
@@ -259,7 +281,7 @@
     }
 
     .template-title a {
-      color: #85d6df;
+      color: #FFD54F;
       text-decoration: none;
     }
 
@@ -304,7 +326,7 @@
     }
 
     .template-more-badges {
-      color: #d0e2f5;
+      color: #fffae6;
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0;
@@ -353,7 +375,7 @@
       border: 1px dashed rgba(255, 255, 255, 0.2);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.02);
-      color: #b8cbdf;
+      color: #E5E5EA;
       padding: 8px;
       font-size: 0.82rem;
       line-height: 1.4;
@@ -390,9 +412,9 @@
 
     .btn-highlight {
       border: none;
-      color: #071821;
+      color: #121212;
       font-weight: 700;
-      background: linear-gradient(135deg, #57e3a2, #39c6e6);
+      background: linear-gradient(135deg, #FFE033, #FFAA00);
     }
 
     .json-code {
@@ -418,7 +440,7 @@
     }
 
     .health-list li {
-      color: #d9e9fa;
+      color: #F5F5F7;
     }
 
     .health-list li.good { color: var(--good); }
@@ -439,11 +461,11 @@
 
     .help-box {
       margin-top: 10px;
-      border: 1px solid rgba(87, 227, 162, 0.35);
-      background: rgba(87, 227, 162, 0.08);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      background: rgba(255, 204, 0, 0.06);
       border-radius: 10px;
       padding: 10px;
-      color: #d9ffee;
+      color: #fffae6;
       font-size: 1rem;
       line-height: 1.45;
     }
@@ -604,7 +626,7 @@
     .filter-name-heading {
       font-size: 0.9rem;
       font-weight: 700;
-      color: #e6f4ff;
+      color: #fffae6;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -676,7 +698,7 @@
     }
 
     .field-label {
-      color: #d8e9fb;
+      color: #E5E5EA;
       font-size: 0.82rem;
     }
 
@@ -684,7 +706,7 @@
       width: 16px;
       height: 16px;
       margin: 0;
-      accent-color: #3cc983;
+      accent-color: #FFCC00;
       cursor: pointer;
     }
 
@@ -708,7 +730,7 @@
     }
 
     .credit a {
-      color: #85d6df;
+      color: #FFD54F;
     }
 
     #startScreen {
@@ -720,7 +742,7 @@
       position: absolute;
       left: 10px;
       bottom: 8px;
-      color: rgba(230, 243, 255, 0.72);
+      color: rgba(245, 245, 247, 0.5);
       font-size: 0.72rem;
       letter-spacing: 0.02em;
     }
@@ -753,8 +775,8 @@
     }
 
     .btn-main.active {
-      background: linear-gradient(130deg, #3cc983, #2f9eb6);
-      box-shadow: 0 0 14px rgba(60, 201, 131, 0.35);
+      background: linear-gradient(130deg, #FF9500, #FFDD3C);
+      box-shadow: 0 0 14px rgba(255, 204, 0, 0.35);
       transform: scale(1.02);
     }
 
@@ -795,8 +817,8 @@
     }
 
     .group-card.is-open {
-      border-color: rgba(60, 190, 201, 0.4);
-      box-shadow: 0 4px 20px rgba(60, 190, 201, 0.08);
+      border-color: rgba(255, 204, 0, 0.4);
+      box-shadow: 0 4px 20px rgba(255, 204, 0, 0.08);
       background: rgba(0, 0, 0, 0.24);
     }
 
@@ -851,6 +873,10 @@
 
       .wrap > section:first-child.panel h1 {
         font-size: 1.8rem;
+      }
+
+      .header-logo {
+        height: 56px;
       }
 
       #startScreen h2 {
@@ -909,8 +935,13 @@
 <body>
   <main class="wrap">
     <section class="panel">
-      <h1>Badger</h1>
-      <p class="sub">Nuvio/Fusion Badge templates and editor</p>
+      <div class="header-content">
+        <div class="header-text">
+          <h1>Badger</h1>
+          <p class="sub">Nuvio/Fusion Badge templates and editor</p>
+        </div>
+        <img class="header-logo" src="https://raw.githubusercontent.com/Nintle/Badger/main/badger.png" alt="Badger Logo" />
+      </div>
     </section>
 
     <section id="startScreen" class="panel">
@@ -1867,7 +1898,7 @@
         ...g,
         id: String(g?.id || `g-${idx + 1}`),
         name: String(g?.name || `Category ${idx + 1}`),
-        color: String(g?.color || "#3CBEC9"),
+        color: String(g?.color || "#FFCC00"),
         borderColor: String(g?.borderColor || "#00000000"),
         isExpanded: Boolean(g?.isExpanded)
       }));
@@ -2124,7 +2155,7 @@
     }
 
     function extractHexColor(input) {
-      if (typeof input !== "string") return "#3CBEC9";
+      if (typeof input !== "string") return "#FFCC00";
       const v = input.trim();
 
       const hex3 = v.match(/^#([0-9a-f]{3})$/i);
@@ -2143,7 +2174,7 @@
         return `#${hex8[1].slice(0, 6)}`.toUpperCase();
       }
 
-      return "#3CBEC9";
+      return "#FFCC00";
     }
 
     function syncFilterTagStyleFromVisuals(filter) {
