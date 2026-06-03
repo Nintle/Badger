@@ -21,11 +21,9 @@
       --radius: 16px;
       --accent: #FFCC00;
     }
-
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       color: var(--text);
@@ -37,7 +35,6 @@
       min-height: 100vh;
       padding: 18px;
     }
-
     .wrap {
       max-width: 1280px;
       width: 100%;
@@ -48,11 +45,9 @@
       padding-top: 18vh;
       transition: padding-top 600ms cubic-bezier(0.25, 1, 0.5, 1);
     }
-
     .wrap.shifted-up {
       padding-top: 0vh;
     }
-
     .panel {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -61,46 +56,38 @@
       padding: 16px;
       backdrop-filter: blur(4px);
     }
-
     h1 {
       margin: 0 0 8px;
       font-size: 1.8rem;
       letter-spacing: 0.02em;
     }
-
     h2 {
       margin: 0;
       font-size: 1.2rem;
     }
-
     .sub {
       margin: 0;
       color: var(--muted);
       font-size: 0.95rem;
     }
-
     .muted {
       color: var(--muted);
       font-size: 0.9rem;
     }
-
     .hidden {
       display: none !important;
     }
-
     .row {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
       margin-top: 10px;
     }
-
     .row-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
-
     input, button, textarea {
       border-radius: 10px;
       border: 1px solid var(--line);
@@ -109,52 +96,43 @@
       padding: 10px 12px;
       font: inherit;
     }
-
     button {
       cursor: pointer;
       transition: transform 120ms ease, border-color 120ms ease;
     }
-
     button:hover {
       transform: translateY(-1px);
       border-color: rgba(255, 255, 255, 0.36);
     }
-
     .btn-main {
       border: none;
       color: #121212;
       font-weight: 700;
       background: linear-gradient(130deg, #FFDD3C, #FF9500);
     }
-
     .btn-soft {
       background: rgba(255, 255, 255, 0.06);
     }
-
     .btn-danger {
       background: rgba(255, 126, 117, 0.2);
       border-color: rgba(255, 126, 117, 0.36);
       color: #ffdcd9;
     }
-
     .status {
       margin-top: 10px;
       min-height: 24px;
       color: var(--muted);
       white-space: pre-wrap;
     }
-
     .status.good { color: var(--good); }
     .status.warn { color: var(--warn); }
     .status.danger { color: var(--danger); }
-
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
       margin-top: 24px;
     }
-
     .mode-card {
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -166,50 +144,42 @@
       min-height: 250px;
       transition: border-color 300ms ease, background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
     }
-
     .mode-card:hover {
       border-color: rgba(255, 204, 0, 0.35);
       background: rgba(255, 255, 255, 0.05);
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
-
     .mode-card h3 {
       margin: 0 0 10px;
       font-size: 1.45rem;
     }
-
     .mode-card .muted {
       font-size: 1.02rem;
       line-height: 1.5;
       margin-bottom: 24px;
       flex-grow: 1;
     }
-
     .mode-card button {
       padding: 12px 20px;
       font-size: 1.05rem;
       border-radius: 10px;
       width: 100%;
     }
-
     /* Start screen spacious welcome layout styling */
     .wrap > section:first-child.panel {
       padding: 36px 32px;
     }
-
     .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
-
     .header-text {
       display: flex;
       flex-direction: column;
     }
-
     .header-logo {
       height: 80px;
       width: auto;
@@ -218,39 +188,32 @@
       border-radius: 14px;
       filter: drop-shadow(0 2px 10px rgba(255, 204, 0, 0.3));
     }
-
     .wrap > section:first-child.panel h1 {
       font-size: 2.4rem;
       margin: 0 0 4px 0;
     }
-
     .wrap > section:first-child.panel .sub {
       font-size: 1.12rem;
       line-height: 1.5;
       margin: 0;
     }
-
     #startScreen.panel {
       padding: 44px 38px;
     }
-
     #startScreen h2 {
       font-size: 1.75rem;
       margin-bottom: 10px;
     }
-
     #startScreen .sub {
       font-size: 1.08rem;
       margin-bottom: 18px;
     }
-
     .template-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       margin-top: 12px;
     }
-
     .template-card {
       border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 12px;
@@ -259,13 +222,11 @@
       display: grid;
       gap: 8px;
     }
-
     .template-actions {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
     }
-
     .template-title {
       display: flex;
       justify-content: space-between;
@@ -275,20 +236,16 @@
       border-radius: 8px;
       padding: 6px 8px;
     }
-
     .template-name {
       font-weight: 700;
     }
-
     .template-title a {
       color: #FFD54F;
       text-decoration: none;
     }
-
     .template-title a:hover {
       text-decoration: underline;
     }
-
     .template-preview {
       border: 1px solid var(--line);
       border-radius: 10px;
@@ -299,20 +256,17 @@
       display: grid;
       gap: 10px;
     }
-
     .template-group {
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
       padding: 8px;
       background: rgba(255, 255, 255, 0.02);
     }
-
     .template-category-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
     }
-
     .template-group-name {
       font-size: 0.76rem;
       color: var(--muted);
@@ -324,7 +278,6 @@
       align-items: center;
       gap: 6px;
     }
-
     .template-more-badges {
       color: #fffae6;
       font-size: 0.72rem;
@@ -333,13 +286,11 @@
       text-transform: none;
       white-space: nowrap;
     }
-
     .chip-wrap {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-
     .chip {
       display: inline-flex;
       align-items: center;
@@ -349,7 +300,6 @@
       border-radius: 8px;
       max-width: 100%;
     }
-
     .chip img {
       width: auto;
       height: auto;
@@ -360,17 +310,14 @@
       background: rgba(255, 255, 255, 0.08);
       display: block;
     }
-
     .template-group .chip {
       padding: 3px 4px;
       border-radius: 6px;
     }
-
     .template-group .chip img {
       max-height: 20px;
       max-width: 90px;
     }
-
     .preview-link {
       border: 1px dashed rgba(255, 255, 255, 0.2);
       border-radius: 8px;
@@ -381,21 +328,18 @@
       line-height: 1.4;
       word-break: break-word;
     }
-
     .editor-top {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
       align-items: center;
     }
-
     .editor-actions {
       display: inline-flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
-
     .screen-nav {
       margin-top: 12px;
       display: flex;
@@ -403,20 +347,17 @@
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .export-actions {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .btn-highlight {
       border: none;
       color: #121212;
       font-weight: 700;
       background: linear-gradient(135deg, #FFE033, #FFAA00);
     }
-
     .json-code {
       width: 100%;
       min-height: 260px;
@@ -424,41 +365,34 @@
       font-family: "Consolas", "Courier New", monospace;
       line-height: 1.35;
     }
-
     .import-code {
       min-height: 120px;
       resize: vertical;
       font-family: "Consolas", "Courier New", monospace;
       line-height: 1.35;
     }
-
     .health-list {
       margin: 8px 0 0;
       padding-left: 18px;
       display: grid;
       gap: 4px;
     }
-
     .health-list li {
       color: #F5F5F7;
     }
-
     .health-list li.good { color: var(--good); }
     .health-list li.warn { color: var(--warn); }
     .health-list li.danger { color: var(--danger); }
-
     .export-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       margin-top: 12px;
     }
-
     .export-stack {
       display: grid;
       gap: 12px;
     }
-
     .help-box {
       margin-top: 10px;
       border: 1px solid rgba(255, 204, 0, 0.3);
@@ -469,7 +403,6 @@
       font-size: 1rem;
       line-height: 1.45;
     }
-
     .help-steps {
       margin: 8px 0 0;
       padding-left: 18px;
@@ -477,35 +410,29 @@
       gap: 6px;
       font-size: 1rem;
     }
-
     .health-compact .health-list li {
       font-size: 0.85rem;
     }
-
     .health-compact #healthSummary {
       font-size: 0.82rem;
     }
-
     .group-list {
       display: grid;
       gap: 10px;
       margin-top: 10px;
     }
-
     .group-card {
       border: 1px solid var(--line);
       border-radius: 12px;
       background: rgba(0, 0, 0, 0.16);
       padding: 10px;
     }
-
     .group-head {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
       align-items: center;
     }
-
     .group-actions {
       display: inline-flex;
       gap: 6px;
@@ -513,13 +440,11 @@
       justify-content: flex-end;
       flex-wrap: wrap;
     }
-
     .group-actions .btn-soft {
       padding: 8px 10px;
       min-height: 34px;
       white-space: nowrap;
     }
-
     .btn-icon {
       width: 36px;
       min-width: 36px;
@@ -530,7 +455,6 @@
       font-size: 1rem;
       line-height: 1;
     }
-
     .group-toggle {
       text-align: left;
       background: rgba(255, 255, 255, 0.03);
@@ -540,7 +464,6 @@
       width: 100%;
       font-weight: 700;
     }
-
     .group-title-wrap {
       display: inline-flex;
       align-items: center;
@@ -548,20 +471,17 @@
       min-width: 0;
       overflow: hidden;
     }
-
     .group-title-text {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
     .group-mini-badges {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       flex-shrink: 0;
     }
-
     .group-mini-badge {
       width: 34px;
       height: 24px;
@@ -571,20 +491,17 @@
       background: rgba(255, 255, 255, 0.05);
       padding: 2px;
     }
-
     .group-mini-more {
       color: var(--muted);
       font-size: 0.78rem;
       font-weight: 600;
     }
-
     .group-meta {
       color: var(--muted);
       font-size: 0.86rem;
       font-weight: 500;
       margin-left: 8px;
     }
-
     .group-body {
       margin-top: 10px;
       border-top: 1px solid var(--line);
@@ -594,11 +511,9 @@
       gap: 8px;
       align-items: start;
     }
-
     .group-empty {
       grid-column: 1 / -1;
     }
-
     .filter-row {
       border: 1px solid rgba(255, 255, 255, 0.11);
       border-radius: 10px;
@@ -610,19 +525,22 @@
       align-items: start;
       min-height: 112px;
     }
-
     .filter-row.is-disabled {
       opacity: 0.45;
       background: rgba(255, 255, 255, 0.01);
     }
-
     .filter-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 8px;
     }
-
+    .filter-header-actions {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
     .filter-name-heading {
       font-size: 0.9rem;
       font-weight: 700;
@@ -631,14 +549,12 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
     .filter-main {
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 8px;
       align-items: start;
     }
-
     .filter-info {
       display: flex;
       width: 68px;
@@ -650,7 +566,6 @@
       justify-content: flex-end;
       overflow: hidden;
     }
-
     .filter-info img {
       width: 64px;
       height: 36px;
@@ -658,23 +573,22 @@
       border-radius: 4px;
       flex: 0 0 auto;
     }
-
     .control-stack {
       display: grid;
       gap: 8px;
     }
-
+    .use-line {
+      margin-top: -2px;
+    }
     .control-line {
       display: grid;
       grid-template-columns: minmax(118px, 1fr) minmax(150px, 1fr);
       gap: 8px;
       align-items: center;
     }
-
     .use-line .use-group {
       grid-column: 2;
     }
-
     .control-group {
       display: flex;
       gap: 6px;
@@ -687,21 +601,39 @@
       width: 100%;
       min-height: 30px;
     }
-
     .toggle-group {
       min-width: 118px;
     }
-
     .color-group {
       min-width: 150px;
       margin-left: 0;
     }
-
+    .image-link-group {
+      grid-column: 1 / -1;
+      border-radius: 10px;
+      justify-content: flex-start;
+      gap: 8px;
+      min-height: 32px;
+      padding: 5px 8px;
+    }
+    .image-link-input {
+      flex: 1;
+      min-width: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      border-radius: 6px;
+      padding: 3px 8px;
+      color: var(--text);
+      font-size: 0.82rem;
+      line-height: 1.2;
+    }
+    .image-link-input:focus {
+      outline: none;
+    }
     .field-label {
       color: #E5E5EA;
       font-size: 0.82rem;
     }
-
     input[type="checkbox"] {
       width: 16px;
       height: 16px;
@@ -709,35 +641,29 @@
       accent-color: #FFCC00;
       cursor: pointer;
     }
-
     input[type="color"] {
       width: 40px;
       height: 28px;
       padding: 3px;
       cursor: pointer;
     }
-
     .badge-color {
       width: 38px;
       height: 22px;
       padding: 2px;
     }
-
     .credit {
       margin-top: 10px;
       color: var(--muted);
       font-size: 0.88rem;
     }
-
     .credit a {
       color: #FFD54F;
     }
-
     #startScreen {
       position: relative;
       padding-bottom: 32px;
     }
-
     .site-credit {
       position: absolute;
       left: 10px;
@@ -746,7 +672,52 @@
       font-size: 0.72rem;
       letter-spacing: 0.02em;
     }
-
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 20;
+    }
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: 85vh;
+      overflow: auto;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .example-code {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      color: #E5E5EA;
+      padding: 10px;
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      overflow: auto;
+    }
+    .modal-textarea {
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+      font-family: "Consolas", "Courier New", monospace;
+      line-height: 1.35;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
     /* Clean animation wrappers for subpanels */
     .collapsible-wrapper {
       display: grid;
@@ -759,7 +730,6 @@
         visibility 350ms step-end;
       overflow: hidden;
     }
-
     .collapsible-wrapper.is-open {
       grid-template-rows: 1fr;
       opacity: 1;
@@ -769,17 +739,14 @@
         opacity 350ms cubic-bezier(0.4, 0, 0.2, 1), 
         visibility 0s step-start;
     }
-
     .collapsible-inner {
       min-height: 0;
     }
-
     .btn-main.active {
       background: linear-gradient(130deg, #FF9500, #FFDD3C);
       box-shadow: 0 0 14px rgba(255, 204, 0, 0.35);
       transform: scale(1.02);
     }
-
     /* Screen transitions */
     @keyframes screenFadeIn {
       from {
@@ -791,7 +758,6 @@
         transform: translateY(0) scale(1);
       }
     }
-
     @keyframes screenFadeOut {
       from {
         opacity: 1;
@@ -802,26 +768,21 @@
         transform: translateY(-15px) scale(0.995);
       }
     }
-
     .screen-animate-in {
       animation: screenFadeIn 350ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
-
     .screen-animate-out {
       animation: screenFadeOut 200ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-
     /* Category card smooth toggle styles */
     .group-card {
       transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
     }
-
     .group-card.is-open {
       border-color: rgba(255, 204, 0, 0.4);
       box-shadow: 0 4px 20px rgba(255, 204, 0, 0.08);
       background: rgba(0, 0, 0, 0.24);
     }
-
     .group-mini-badges {
       display: inline-flex;
       align-items: center;
@@ -830,34 +791,34 @@
       max-width: 300px;
       transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .group-mini-badges.hidden-fade {
       opacity: 0;
       max-width: 0px;
       overflow: hidden;
       pointer-events: none;
     }
-
     .group-action-buttons {
       display: inline-flex;
       gap: 6px;
       opacity: 1;
-      max-width: 400px;
+      max-width: 900px;
       transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .group-action-buttons.hidden-fade {
       opacity: 0;
       max-width: 0px;
       overflow: hidden;
       pointer-events: none;
     }
-
     .toggle-icon {
       font-family: monospace;
       font-weight: bold;
     }
-
+    .btn-copy {
+      background: rgba(79, 217, 134, 0.22);
+      border-color: rgba(79, 217, 134, 0.45);
+      color: #e9fff2;
+    }
     @media (max-width: 920px) {
       .wrap {
         padding-top: 8vh;
@@ -865,37 +826,29 @@
       .wrap.shifted-up {
         padding-top: 0vh;
       }
-
       .wrap > section:first-child.panel,
       #startScreen.panel {
         padding: 24px 20px;
       }
-
       .wrap > section:first-child.panel h1 {
         font-size: 1.8rem;
       }
-
       .header-logo {
         height: 56px;
       }
-
       #startScreen h2 {
         font-size: 1.4rem;
       }
-
       .mode-card {
         padding: 24px 20px;
         min-height: 180px;
       }
-
       .mode-card h3 {
         font-size: 1.25rem;
       }
-
       .mode-card .muted {
         font-size: 0.95rem;
       }
-
       .mode-grid,
       .template-grid,
       .template-category-grid,
@@ -908,24 +861,19 @@
       .filter-main {
         grid-template-columns: 1fr;
       }
-
       .editor-actions,
       .control-line {
         justify-content: flex-start;
       }
-
       .control-line {
         grid-template-columns: 1fr;
       }
-
       .use-line .use-group {
         grid-column: 1;
       }
-
       .color-group {
         margin-left: 0;
       }
-
       .row {
         grid-template-columns: 1fr;
       }
@@ -943,11 +891,9 @@
         <img class="header-logo" src="https://raw.githubusercontent.com/Nintle/Badger/main/badger.png" alt="Badger Logo" />
       </div>
     </section>
-
     <section id="startScreen" class="panel">
       <h2>How Do You Want To Start?</h2>
       <p class="sub">Pick one option first. You can switch later.</p>
-
       <div class="mode-grid">
         <div class="mode-card">
           <h3>Import My JSON</h3>
@@ -960,11 +906,11 @@
           <button id="choosePremade" class="btn-main">Community Templates</button>
         </div>
       </div>
-
       <div id="importWrapper" class="collapsible-wrapper">
         <div class="collapsible-inner">
           <div id="importPanel" class="panel" style="margin-top: 12px; padding: 12px;">
             <h3 style="margin: 0 0 8px;">Import JSON</h3>
+            <p class="muted" style="margin: 0 0 10px;">Supports regular Badger JSON.</p>
             <div class="row">
               <input id="jsonUrl" type="url" placeholder="Paste JSON URL (GitHub links are auto-fixed)" />
               <button id="loadFromUrl" class="btn-main">Load URL</button>
@@ -981,7 +927,6 @@
           </div>
         </div>
       </div>
-
       <div id="premadeWrapper" class="collapsible-wrapper">
         <div class="collapsible-inner">
           <div id="premadePanel" class="panel" style="margin-top: 12px; padding: 12px;">
@@ -994,7 +939,6 @@
       </div>
       <div class="site-credit">Made with ❤ by ATL and Codex</div>
     </section>
-
     <section id="editorScreen" class="panel hidden">
       <div class="editor-top">
         <div>
@@ -1006,27 +950,25 @@
           <button id="pasteCopiedGroup" class="btn-soft">Paste Copied Category</button>
         </div>
       </div>
-
       <div id="editorStatus" class="status"></div>
-
       <div class="panel" style="margin-top: 12px; padding: 12px;">
         <h3 style="margin: 0;">Categories</h3>
         <p class="muted" style="margin-top: 6px;">All categories start closed. Open a category and adjust each badge with `Use`, `Fill` + fill color, and `Border` + border color.</p>
+        <div class="screen-nav" style="margin-top: 0;">
+          <button id="addCategoryBtn" class="btn-main">Add New Category</button>
+        </div>
         <div id="groupList" class="group-list"></div>
       </div>
-
       <div class="panel" style="margin-top: 12px; padding: 12px;">
         <h3 style="margin: 0;">Live Preview</h3>
         <p class="muted" style="margin-top: 6px;">Edit the release/file title here to update this preview.</p>
         <input id="previewLinkInput" type="text" placeholder="Paste or type a release title/link to preview badges" style="margin-top: 8px;" />
         <div id="livePreview" class="template-preview" style="margin-top: 10px;"></div>
       </div>
-
       <div class="screen-nav">
         <button id="goToExport" class="btn-main">Next: Export</button>
       </div>
     </section>
-
     <section id="exportScreen" class="panel hidden">
       <div class="editor-top">
         <div>
@@ -1037,9 +979,7 @@
           <button id="backToEditor" class="btn-soft">Back To Editor</button>
         </div>
       </div>
-
       <div id="exportStatus" class="status"></div>
-
       <div class="export-grid">
         <div class="export-stack">
           <div class="panel" style="padding: 12px;">
@@ -1049,32 +989,64 @@
             </div>
             <textarea id="jsonCodeOutput" class="json-code" readonly></textarea>
           </div>
-
           <div class="panel health-compact" style="padding: 10px;">
             <h3 style="margin: 0;">Health Check</h3>
             <div id="healthSummary" class="muted" style="margin-top: 6px;"></div>
             <ul id="healthList" class="health-list"></ul>
           </div>
         </div>
-
         <div class="panel" style="padding: 12px;">
           <h3 style="margin: 0;">Import Instructions</h3>
           <div class="help-box" style="margin-top: 8px;">
             <strong>Quick publish:</strong>
             <ol class="help-steps">
               <li>Click <strong>Copy JSON Code</strong>.</li>
-              <li>Paste it at <a href="https://hastebin.com" target="_blank" rel="noopener noreferrer">hastebin.com</a> and save.</li>
-              <li>Change URL from <code>https://hastebin.com/KEY</code> to <code>https://hastebin.com/raw/KEY</code>.</li>
+              <li>Paste it at <a href="https://pastebin.com" target="_blank" rel="noopener noreferrer">pastebin.com</a> and save.</li>
+              <li>Convert your Pastebin URL to raw using the converter below (or manually change:
+                <br><code>https://pastebin.com/ABC123&nbsp;&nbsp;&nbsp;&nbsp;-> normal</code>
+                <br><code>https://pastebin.com/raw/ABC123 -> raw</code>
+              ).</li>
               <li>Use that raw link in your app.</li>
             </ol>
+            <div class="row" style="margin-top: 10px;">
+              <input id="pastebinConvertInput" type="text" placeholder="Paste a Pastebin URL or key (example: https://pastebin.com/ABC123)" />
+              <button id="convertPastebinBtn" class="btn-soft">Convert To Raw</button>
+            </div>
+            <div class="row" style="margin-top: 8px;">
+              <input id="pastebinConvertOutput" type="text" placeholder="Raw Pastebin URL will appear here" readonly />
+              <button id="copyPastebinRawBtn" class="btn-soft">Copy Raw URL</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
+  <div id="badgeImportModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="badgeImportTitle">
+    <div class="modal-card">
+      <h3 id="badgeImportTitle" style="margin: 0;">Import Single Badge JSON</h3>
+      <p id="badgeImportTarget" class="muted" style="margin: 0;">Category: </p>
+      <p class="muted" style="margin: 0;">Example single badge JSON:</p>
+      <pre class="example-code">{
+  "id": "badge-example",
+  "name": "WEB-DL",
+  "pattern": "(?i)\\bweb[ ._-]?dl\\b",
+  "imageURL": "https://example.com/webdl.png",
+  "isEnabled": true,
+  "tagColor": "#00000000",
+  "textColor": "#FFFFFF",
+  "borderColor": "#00000000",
+  "tagStyle": "filled"
+}</pre>
+      <textarea id="singleBadgeJsonInput" class="modal-textarea" placeholder="Paste one badge JSON object here"></textarea>
+      <div class="modal-actions">
+        <button id="cancelBadgeImport" class="btn-soft">Cancel</button>
+        <button id="confirmBadgeImport" class="btn-main">Import Badge</button>
+      </div>
+      <div id="badgeImportStatus" class="status"></div>
+    </div>
+  </div>
   <script>
     const byId = (id) => document.getElementById(id);
-
     const CLEAN_MINIMALIST_FALLBACK = {
     "groups":  [
                    {
@@ -1637,14 +1609,14 @@
                     }
                 ]
 };
-
     const premadeTemplates = [
       {
-        id: "minimalistic",
-        name: "Minimalistic",
-        creator: "nobnobz",
-        creatorUrl: "https://github.com/nobnobz/Omni-Template-Bot-Bid-Raiser",
-        url: "https://raw.githubusercontent.com/nobnobz/Omni-Template-Bot-Bid-Raiser/refs/heads/main/Other/fusion-tags-ume-minimalistic.json"
+        id: "minimalist-v2",
+        name: "Minimalist V2",
+        creator: "starkles",
+        creatorUrl: "https://gist.github.com/starkles",
+        fallbackInlineJson: CLEAN_MINIMALIST_FALLBACK,
+        url: "https://gist.githubusercontent.com/starkles/76b38680b9580e05ca8348206b3ebba2/raw/3ecb64ac6661a5dca55574a2dec7797438e3d1b1/badges.json"
       },
       {
         id: "colored",
@@ -1668,22 +1640,20 @@
         url: "https://raw.githubusercontent.com/leonevz/Elite-Badges/main/badges.json"
       },
       {
-        id: "pastebin-preview",
-        name: "Clean Minimalist",
-        creator: "",
-        creatorUrl: "",
-        fallbackInlineJson: CLEAN_MINIMALIST_FALLBACK,
-        url: "https://hastebin.com/share/nunuvawoge.swift"
-      },
-      {
         id: "gold-badges",
         name: "Gold Badges",
         creator: "k45sle",
         creatorUrl: "https://www.reddit.com/r/Nuvio/comments/1tv65a5/gold_badges_v25/",
         url: "https://raw.githubusercontent.com/k45sle/NUVIO_BADGES/refs/heads/main/GOLD-NONAMES.json"
+      },
+      {
+        id: "minimalistic",
+        name: "Minimalistic",
+        creator: "nobnobz",
+        creatorUrl: "https://github.com/nobnobz/Omni-Template-Bot-Bid-Raiser",
+        url: "https://raw.githubusercontent.com/nobnobz/Omni-Template-Bot-Bid-Raiser/refs/heads/main/Other/fusion-tags-ume-minimalistic.json"
       }
     ];
-
     let state = { groups: [], filters: [] };
     let openGroupIds = new Set();
     let sourceInfo = { type: "none", name: "None" };
@@ -1695,16 +1665,15 @@
     const imageHealthCache = new Map();
     const GROUP_CLIPBOARD_KEY = "badgeTemplateEditor.groupClipboard.v1";
     let copiedGroupPayload = null;
+    let badgeImportTargetGroupId = null;
     let healthCheckRunId = 0;
     let lastUploadedJson = "";
     let lastUploadedLink = "";
-
     function setStatus(elementId, message, tone = "") {
       const el = byId(elementId);
       el.textContent = message;
       el.className = tone ? `status ${tone}` : "status";
     }
-
     function escapeHtml(value) {
       return String(value)
         .replaceAll("&", "&amp;")
@@ -1712,7 +1681,6 @@
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;");
     }
-
     function toRawGitHubUrl(input) {
       let url;
       try {
@@ -1720,7 +1688,6 @@
       } catch {
         return input;
       }
-
       if (url.hostname === "github.com") {
         const parts = url.pathname.split("/").filter(Boolean);
         if (parts.length >= 5 && parts[2] === "blob") {
@@ -1731,7 +1698,6 @@
           return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
         }
       }
-
       if (url.hostname === "raw.githubusercontent.com") {
         const parts = url.pathname.split("/").filter(Boolean);
         if (parts.length >= 5 && parts[2] === "refs" && parts[3] === "heads") {
@@ -1742,10 +1708,8 @@
           return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
         }
       }
-
       return input;
     }
-
     function parseRawGitHubParts(input) {
       let url;
       try {
@@ -1753,16 +1717,13 @@
       } catch {
         return null;
       }
-
       if (url.hostname !== "raw.githubusercontent.com") {
         return null;
       }
-
       const parts = url.pathname.split("/").filter(Boolean);
       if (parts.length < 4) {
         return null;
       }
-
       if (parts[2] === "refs" && parts[3] === "heads" && parts.length >= 6) {
         return {
           owner: parts[0],
@@ -1771,7 +1732,6 @@
           path: parts.slice(5).join("/")
         };
       }
-
       return {
         owner: parts[0],
         repo: parts[1],
@@ -1779,7 +1739,6 @@
         path: parts.slice(3).join("/")
       };
     }
-
     function buildCandidateUrls(input) {
       const normalized = toRawGitHubUrl(input);
       const candidates = [];
@@ -1788,14 +1747,11 @@
           candidates.push(url);
         }
       };
-
       add(normalized);
-
       const rawParts = parseRawGitHubParts(normalized);
       if (rawParts) {
         add(`https://cdn.jsdelivr.net/gh/${rawParts.owner}/${rawParts.repo}@${rawParts.branch}/${rawParts.path}`);
       }
-
       // Pastebin can fail direct CORS in some browsers; this mirror often works for JSON text fetch.
       try {
         const parsed = new URL(normalized);
@@ -1820,40 +1776,33 @@
       } catch {
         // Ignore URL parsing issues and keep existing candidates.
       }
-
       return candidates;
     }
-
     function looksLikeHtml(text) {
       const trimmed = text.trim().slice(0, 300).toLowerCase();
       return trimmed.startsWith("<!doctype") || trimmed.startsWith("<html");
     }
-
     function tryParsePossiblyWrappedJson(text) {
       const raw = String(text || "").trim();
       if (!raw) {
         throw new Error("Empty response.");
       }
-
       try {
         return JSON.parse(raw);
       } catch {
         // Continue to wrapped extraction below.
       }
-
       const candidates = [];
       const firstObj = raw.indexOf("{");
       const lastObj = raw.lastIndexOf("}");
       if (firstObj >= 0 && lastObj > firstObj) {
         candidates.push(raw.slice(firstObj, lastObj + 1));
       }
-
       const firstArr = raw.indexOf("[");
       const lastArr = raw.lastIndexOf("]");
       if (firstArr >= 0 && lastArr > firstArr) {
         candidates.push(raw.slice(firstArr, lastArr + 1));
       }
-
       for (const candidate of candidates) {
         try {
           return JSON.parse(candidate);
@@ -1861,14 +1810,11 @@
           // Try next candidate.
         }
       }
-
       throw new Error("Response did not contain valid JSON.");
     }
-
     async function loadJsonWithFallback(url) {
       const candidates = buildCandidateUrls(url);
       let lastError = null;
-
       for (const candidate of candidates) {
         try {
           const res = await fetch(candidate, { cache: "no-store" });
@@ -1885,15 +1831,12 @@
           lastError = error;
         }
       }
-
       throw new Error(lastError?.message || "Failed to load JSON from URL.");
     }
-
     function normalize(input, options = {}) {
       const rememberColors = options.rememberColors !== false;
       const groupsRaw = Array.isArray(input?.groups) ? input.groups : [];
       const filtersRaw = Array.isArray(input?.filters) ? input.filters : [];
-
       const groups = groupsRaw.map((g, idx) => ({
         ...g,
         id: String(g?.id || `g-${idx + 1}`),
@@ -1902,7 +1845,6 @@
         borderColor: String(g?.borderColor || "#00000000"),
         isExpanded: Boolean(g?.isExpanded)
       }));
-
       const firstGroupId = groups[0]?.id || "";
       const filters = filtersRaw.map((f, idx) => {
         const id = String(f?.id || `f-${idx + 1}`);
@@ -1912,7 +1854,6 @@
           rememberedBgColorByFilterId.set(id, extractHexColor(tagColor));
           rememberedBorderColorByFilterId.set(id, isTransparentColor(borderColor) ? "#FFFFFF" : extractHexColor(borderColor));
         }
-
         return {
           ...f,
           id,
@@ -1926,10 +1867,8 @@
           imageURL: String(f?.imageURL || "")
         };
       });
-
       return { groups, filters };
     }
-
     function setState(newState, source) {
       rememberedBgColorByFilterId.clear();
       rememberedBorderColorByFilterId.clear();
@@ -1941,12 +1880,10 @@
       showEditor();
       renderEditor();
     }
-
     function loadCopiedGroupFromStorage() {
       if (copiedGroupPayload?.group && Array.isArray(copiedGroupPayload?.filters)) {
         return copiedGroupPayload;
       }
-
       try {
         const raw = localStorage.getItem(GROUP_CLIPBOARD_KEY);
         if (!raw) return null;
@@ -1960,7 +1897,6 @@
         return null;
       }
     }
-
     function saveCopiedGroupToStorage(payload) {
       copiedGroupPayload = payload;
       try {
@@ -1969,11 +1905,9 @@
         // Ignore storage failures and keep in-memory copy.
       }
     }
-
     function buildCopiedGroupPayload(groupId) {
       const group = state.groups.find((g) => g.id === groupId);
       if (!group) return null;
-
       const filters = state.filters.filter((f) => f.groupId === groupId);
       return {
         version: 1,
@@ -1983,7 +1917,6 @@
         filters: filters.map((f) => ({ ...f }))
       };
     }
-
     function makeUniqueId(seed, existingIds, fallbackPrefix) {
       const normalizedSeed = String(seed || "")
         .trim()
@@ -2001,26 +1934,146 @@
       existingIds.add(candidate);
       return candidate;
     }
-
+    function addCategory() {
+      const name = window.prompt("Enter a name for the new category:", "New Category");
+      if (name === null) {
+        return;
+      }
+      const trimmedName = String(name).trim();
+      if (!trimmedName) {
+        setStatus("editorStatus", "Category name cannot be empty.", "warn");
+        return;
+      }
+      const existingGroupIds = new Set(state.groups.map((g) => g.id));
+      const newGroupId = makeUniqueId(trimmedName, existingGroupIds, "group");
+      state.groups.push({
+        id: newGroupId,
+        name: trimmedName,
+        color: "#FFCC00",
+        borderColor: "#00000000",
+        isExpanded: false
+      });
+      openGroupIds.add(newGroupId);
+      renderEditor();
+      setStatus("editorStatus", `Added category "${trimmedName}".`, "good");
+    }
+    function normalizeSingleBadge(input, groupId) {
+      const source = input && typeof input === "object" ? input : null;
+      if (!source) {
+        throw new Error("Badge JSON must be an object.");
+      }
+      const existingFilterIds = new Set(state.filters.map((f) => f.id));
+      const badgeName = String(source.name || source.label || source.title || "Imported Badge").trim() || "Imported Badge";
+      const badgeId = makeUniqueId(String(source.id || badgeName), existingFilterIds, "badge");
+      return {
+        id: badgeId,
+        name: badgeName,
+        groupId,
+        imageURL: String(source.imageURL || source.imageUrl || source.icon || source.url || ""),
+        isEnabled: source.isEnabled !== false,
+        pattern: String(source.pattern || source.regex || ""),
+        tagColor: String(source.tagColor || source.fillColor || "#00000000"),
+        textColor: String(source.textColor || "#FFFFFF"),
+        borderColor: String(source.borderColor || "#00000000"),
+        tagStyle: String(source.tagStyle || "filled")
+      };
+    }
+    function closeBadgeImportModal() {
+      byId("badgeImportModal").classList.add("hidden");
+      byId("singleBadgeJsonInput").value = "";
+      setStatus("badgeImportStatus", "");
+    }
+    function openBadgeImportModal(groupId) {
+      const group = state.groups.find((g) => g.id === groupId);
+      if (!group) {
+        setStatus("editorStatus", "Category was not found for badge import.", "danger");
+        return;
+      }
+      badgeImportTargetGroupId = groupId;
+      byId("badgeImportTarget").textContent = `Category: ${group.name}`;
+      byId("singleBadgeJsonInput").value = "";
+      setStatus("badgeImportStatus", "");
+      byId("badgeImportModal").classList.remove("hidden");
+      byId("singleBadgeJsonInput").focus();
+    }
+    function importSingleBadgeIntoCategory() {
+      if (!badgeImportTargetGroupId) {
+        setStatus("badgeImportStatus", "Choose a category first.", "warn");
+        return;
+      }
+      const raw = byId("singleBadgeJsonInput").value.trim();
+      if (!raw) {
+        setStatus("badgeImportStatus", "Paste one badge JSON object first.", "warn");
+        return;
+      }
+      try {
+        const parsed = tryParsePossiblyWrappedJson(raw);
+        if (Array.isArray(parsed)) {
+          throw new Error("Please paste one badge object, not an array.");
+        }
+        if (Array.isArray(parsed?.filters) && parsed.filters.length !== 1) {
+          throw new Error("If using a filters wrapper, include exactly one filter.");
+        }
+        const sourceBadge = Array.isArray(parsed?.filters) && parsed.filters.length === 1
+          ? parsed.filters[0]
+          : parsed;
+        const badge = normalizeSingleBadge(sourceBadge, badgeImportTargetGroupId);
+        state.filters.push(badge);
+        rememberedBgColorByFilterId.set(badge.id, extractHexColor(badge.tagColor));
+        rememberedBorderColorByFilterId.set(badge.id, isTransparentColor(badge.borderColor) ? "#FFFFFF" : extractHexColor(badge.borderColor));
+        openGroupIds.add(badgeImportTargetGroupId);
+        renderEditor();
+        closeBadgeImportModal();
+        setStatus("editorStatus", `Imported badge "${badge.name}".`, "good");
+      } catch (error) {
+        setStatus("badgeImportStatus", `Could not import badge JSON: ${error.message}`, "danger");
+      }
+    }
+    async function copyBadgeJson(filterId) {
+      const filter = state.filters.find((f) => f.id === filterId);
+      if (!filter) {
+        setStatus("editorStatus", "Badge not found for copy.", "danger");
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(filter, null, 2));
+        setStatus("editorStatus", `Copied badge JSON for "${filter.name}".`, "good");
+      } catch {
+        setStatus("editorStatus", "Clipboard was blocked. Try again after allowing clipboard access.", "warn");
+      }
+    }
+    function deleteBadge(filterId) {
+      const filter = state.filters.find((f) => f.id === filterId);
+      if (!filter) {
+        setStatus("editorStatus", "Badge not found for delete.", "danger");
+        return;
+      }
+      const confirmed = window.confirm(`Delete badge "${filter.name}"?`);
+      if (!confirmed) {
+        return;
+      }
+      state.filters = state.filters.filter((f) => f.id !== filterId);
+      rememberedBgColorByFilterId.delete(filterId);
+      rememberedBorderColorByFilterId.delete(filterId);
+      renderEditor();
+      setStatus("editorStatus", `Deleted badge "${filter.name}".`, "good");
+    }
     function copyGroupToClipboard(groupId) {
       const payload = buildCopiedGroupPayload(groupId);
       if (!payload) {
         setStatus("editorStatus", "Could not copy this category.", "danger");
         return;
       }
-
       saveCopiedGroupToStorage(payload);
       const groupName = payload.group?.name || "Category";
       setStatus("editorStatus", `Copied category "${groupName}". You can now paste it into another JSON in this editor.`, "good");
     }
-
     function pasteCopiedGroupIntoState() {
       const payload = loadCopiedGroupFromStorage();
       if (!payload?.group || !Array.isArray(payload?.filters)) {
         setStatus("editorStatus", "No copied category found yet. Copy a category first.", "warn");
         return;
       }
-
       const existingGroupIds = new Set(state.groups.map((g) => g.id));
       const existingFilterIds = new Set(state.filters.map((f) => f.id));
       const newGroupId = makeUniqueId(payload.group.id || payload.group.name, existingGroupIds, "group");
@@ -2029,7 +2082,6 @@
         id: newGroupId,
         isExpanded: false
       };
-
       const newFilters = payload.filters.map((filter) => {
         const newFilterId = makeUniqueId(filter.id || filter.name, existingFilterIds, "filter");
         const next = {
@@ -2041,16 +2093,13 @@
         rememberedBorderColorByFilterId.set(newFilterId, isTransparentColor(next.borderColor) ? "#FFFFFF" : extractHexColor(next.borderColor));
         return next;
       });
-
       state.groups.push(newGroup);
       state.filters.push(...newFilters);
       openGroupIds.add(newGroupId);
       renderEditor();
-
       const source = payload.source ? ` from ${payload.source}` : "";
       setStatus("editorStatus", `Pasted category "${newGroup.name}"${source}.`, "good");
     }
-
     function updateLayoutSpacing() {
       const wrap = document.querySelector(".wrap");
       const isStartActive = !byId("startScreen").classList.contains("hidden");
@@ -2067,7 +2116,6 @@
         wrap.classList.add("shifted-up");
       }
     }
-
     function transitionToScreen(targetScreenId, onComplete = null) {
       const screens = ["startScreen", "editorScreen", "exportScreen"];
       const activeScreenId = screens.find(id => !byId(id).classList.contains("hidden"));
@@ -2085,7 +2133,6 @@
       } else {
         wrap.classList.add("shifted-up");
       }
-
       if (!activeScreenId || activeScreenId === targetScreenId) {
         screens.forEach(id => {
           if (id === targetScreenId) {
@@ -2115,68 +2162,53 @@
         if (onComplete) onComplete();
       }, 200);
     }
-
     function showEditor() {
       transitionToScreen("editorScreen");
     }
-
     function showExport() {
       transitionToScreen("exportScreen", renderExportScreen);
     }
-
     function showStart() {
       transitionToScreen("startScreen");
     }
-
     function isTransparentColor(input) {
       if (typeof input !== "string") return true;
       const v = input.trim().toLowerCase();
       if (!v || v === "transparent" || v === "#00000000") return true;
-
       const hex8 = v.match(/^#([0-9a-f]{8})$/i);
       if (hex8 && hex8[1].slice(6, 8) === "00") {
         return true;
       }
-
       const rgba = v.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*\.?\d+)\)$/i);
       if (rgba && Number(rgba[4]) <= 0) {
         return true;
       }
-
       return false;
     }
-
     function isFilterFilled(filter) {
       return !isTransparentColor(filter.tagColor);
     }
-
     function isFilterBordered(filter) {
       return !isTransparentColor(filter.borderColor);
     }
-
     function extractHexColor(input) {
       if (typeof input !== "string") return "#FFCC00";
       const v = input.trim();
-
       const hex3 = v.match(/^#([0-9a-f]{3})$/i);
       if (hex3) {
         const [r, g, b] = hex3[1].split("");
         return `#${r}${r}${g}${g}${b}${b}`.toUpperCase();
       }
-
       const hex6 = v.match(/^#([0-9a-f]{6})$/i);
       if (hex6) {
         return `#${hex6[1]}`.toUpperCase();
       }
-
       const hex8 = v.match(/^#([0-9a-f]{8})$/i);
       if (hex8) {
         return `#${hex8[1].slice(0, 6)}`.toUpperCase();
       }
-
       return "#FFCC00";
     }
-
     function syncFilterTagStyleFromVisuals(filter) {
       if (!filter) return;
       const filled = isFilterFilled(filter);
@@ -2191,10 +2223,8 @@
         filter.tagStyle = "filled";
       }
     }
-
     function setFilterFilled(filter, filled) {
       if (!filter) return;
-
       if (filled) {
         const remembered = rememberedBgColorByFilterId.get(filter.id) || extractHexColor(filter.tagColor);
         filter.tagColor = remembered;
@@ -2204,7 +2234,6 @@
       }
       syncFilterTagStyleFromVisuals(filter);
     }
-
     function setFilterColor(filter, color) {
       if (!filter) return;
       rememberedBgColorByFilterId.set(filter.id, color);
@@ -2213,10 +2242,8 @@
       }
       syncFilterTagStyleFromVisuals(filter);
     }
-
     function setFilterBorder(filter, bordered) {
       if (!filter) return;
-
       if (bordered) {
         const remembered = rememberedBorderColorByFilterId.get(filter.id) || extractHexColor(filter.borderColor) || "#FFFFFF";
         filter.borderColor = remembered;
@@ -2226,7 +2253,6 @@
       }
       syncFilterTagStyleFromVisuals(filter);
     }
-
     function setFilterBorderColor(filter, color) {
       if (!filter) return;
       rememberedBorderColorByFilterId.set(filter.id, color);
@@ -2235,17 +2261,14 @@
       }
       syncFilterTagStyleFromVisuals(filter);
     }
-
     function normalizePatternToRegex(pattern) {
       if (typeof pattern !== "string" || !pattern.trim()) return null;
       let source = pattern.trim();
       let flags = "";
-
       if (/^\(\?i\)/i.test(source)) {
         flags = "i";
         source = source.replace(/^\(\?i\)/i, "");
       }
-
       try {
         return new RegExp(source, flags);
       } catch {
@@ -2257,11 +2280,9 @@
         }
       }
     }
-
     function filterMatchesPreviewText(filter, previewText) {
       if (!filter?.isEnabled) return false;
       if (!filter?.imageURL) return false;
-
       const text = String(previewText || "");
       const textLower = text.toLowerCase();
       const textLoose = textLower.replace(/[^a-z0-9]+/g, " ");
@@ -2274,7 +2295,6 @@
           // Ignore invalid regex runtime edge cases and fallback below.
         }
       }
-
       const name = String(filter.name || "").toLowerCase();
       const compactName = name.replace(/[^a-z0-9+]/g, "");
       const hasHdr10PlusHint = /(hdr10\+|hdr10plus|hdr10p)/i.test(textLower);
@@ -2282,14 +2302,12 @@
       if (!shouldSkipHdr10Fallback && name && textLower.includes(name)) {
         return true;
       }
-
       // Heuristic so generic preview text containing "dolby" still lights up Dolby-family audio badges.
       if (textLower.includes("dolby")) {
         if (/(dolby|truehd|atmos|ddp|dd\+|eac-?3|ac-?3|\bdd\b)/i.test(filterDescriptor)) {
           return true;
         }
       }
-
       // Heuristic so MultiLanguage/Multi Language/Dual Audio previews can light up multi-audio badges.
       const hasMultiHint = /(multilanguage|multi language|\bmulti\b|dual[\s._-]?audio)/i.test(textLower) || /\bmulti\b|\blanguage\b/.test(textLoose);
       if (hasMultiHint) {
@@ -2297,17 +2315,14 @@
           return true;
         }
       }
-
       return false;
     }
-
     function groupedPreviewFilters(data, previewText) {
       return data.groups.map((group) => {
         const filters = data.filters.filter((f) => f.groupId === group.id && filterMatchesPreviewText(f, previewText));
         return { group, filters };
       });
     }
-
     function chipHtml(filter) {
       const bg = isTransparentColor(filter.tagColor) ? "rgba(255,255,255,0.08)" : filter.tagColor;
       const border = filter.borderColor || "transparent";
@@ -2317,7 +2332,6 @@
       const icon = `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" />`;
       return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
     }
-
     function previewHtml(data, previewText) {
       const grouped = groupedPreviewFilters(data, previewText);
       const badges = grouped.flatMap((entry) => entry.filters);
@@ -2327,13 +2341,11 @@
           <div class="muted">No matching badge images for this preview link.</div>
         `;
       }
-
       return `
         <div class="preview-link">${escapeHtml(previewText)}</div>
         <div class="chip-wrap">${badges.map(chipHtml).join("")}</div>
       `;
     }
-
     function templateOverviewHtml(data) {
       const grouped = data.groups
         .map((group) => {
@@ -2343,11 +2355,9 @@
           return { group, filters, hiddenCount };
         })
         .filter((entry) => entry.filters.length > 0);
-
       if (!grouped.length) {
         return '<div class="muted">No badge images available in this template.</div>';
       }
-
       return `
         <div class="template-category-grid">
           ${grouped
@@ -2364,7 +2374,6 @@
         </div>
       `;
     }
-
     function renderPremadeCards() {
       const grid = byId("premadeGrid");
       grid.innerHTML = premadeTemplates
@@ -2376,13 +2385,11 @@
           const creatorMarkup = template.creator
             ? `<span class="muted">by <a href="${escapeHtml(template.creatorUrl || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(template.creator)}</a></span>`
             : "";
-
           const preview = hasData
             ? templateOverviewHtml(normalize(cached.json, { rememberColors: false }))
             : error
               ? `<div class="muted">Preview could not load: ${escapeHtml(error)}</div>`
               : '<div class="muted">Loading preview...</div>';
-
           return `
             <article class="template-card">
               <div class="template-title">
@@ -2398,15 +2405,12 @@
           `;
         })
         .join("");
-
       grid.querySelectorAll("[data-use-template]").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const id = btn.getAttribute("data-use-template");
           if (!id) return;
-
           const template = premadeTemplates.find((t) => t.id === id);
           if (!template) return;
-
           try {
             setStatus("startStatus", `Loading template: ${template.name}...`);
             const payload = await ensureTemplateLoaded(template);
@@ -2418,38 +2422,46 @@
           }
         });
       });
-
       grid.querySelectorAll("[data-copy-template]").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const id = btn.getAttribute("data-copy-template");
           if (!id) return;
-
           const template = premadeTemplates.find((t) => t.id === id);
           if (!template) return;
-
           const cached = templateCache.get(id);
           const link = cached?.usedUrl || toRawGitHubUrl(template.url);
-
+          const isInlineOnly = !link || link === "inline-template" || link === "fallback-inline-template";
           try {
+            if (isInlineOnly) {
+              const payload = await ensureTemplateLoaded(template);
+              await navigator.clipboard.writeText(JSON.stringify(payload.json, null, 2));
+              setStatus("startStatus", `Copied ${template.name} JSON code.`, "good");
+              return;
+            }
             await navigator.clipboard.writeText(link);
             setStatus("startStatus", `Copied ${template.name} JSON link.`, "good");
           } catch {
+            if (isInlineOnly) {
+              setStatus("startStatus", "Clipboard was blocked. Load the template and use Export > Copy JSON Code.", "warn");
+              return;
+            }
             setStatus("startStatus", `Clipboard was blocked. JSON link: ${link}`, "warn");
           }
         });
       });
     }
-
     async function ensureTemplateLoaded(template) {
       const existing = templateCache.get(template.id);
       if (existing?.json) {
         return existing;
       }
-
       if (template.inlineJson) {
+        const finalInlineJson = template.id === "minimalist-v2"
+          ? stripTemplateBorders(template.inlineJson)
+          : template.inlineJson;
         const payload = {
           loading: false,
-          json: template.inlineJson,
+          json: finalInlineJson,
           usedUrl: "inline-template",
           error: null
         };
@@ -2457,13 +2469,11 @@
         renderPremadeCards();
         return payload;
       }
-
       templateCache.set(template.id, { loading: true });
       renderPremadeCards();
-
       try {
         const loaded = await loadJsonWithFallback(template.url);
-        const finalJson = template.id === "pastebin-preview"
+        const finalJson = template.id === "minimalist-v2"
           ? stripTemplateBorders(loaded.json)
           : loaded.json;
         const payload = {
@@ -2477,7 +2487,7 @@
         return payload;
       } catch (error) {
         if (template.fallbackInlineJson) {
-          const finalFallbackJson = template.id === "pastebin-preview"
+          const finalFallbackJson = template.id === "minimalist-v2"
             ? stripTemplateBorders(template.fallbackInlineJson)
             : template.fallbackInlineJson;
           const fallbackPayload = {
@@ -2490,7 +2500,6 @@
           renderPremadeCards();
           return fallbackPayload;
         }
-
         const payload = {
           loading: false,
           json: null,
@@ -2502,7 +2511,6 @@
         throw error;
       }
     }
-
     function stripTemplateBorders(inputJson) {
       const cloned = JSON.parse(JSON.stringify(inputJson || {}));
       if (Array.isArray(cloned.groups)) {
@@ -2520,18 +2528,15 @@
       }
       return cloned;
     }
-
     function renderEditor() {
       byId("sourceLabel").textContent = `Source: ${sourceInfo.name}`;
       byId("previewLinkInput").value = previewLinkText;
       renderGroupList();
       byId("livePreview").innerHTML = previewHtml(state, previewLinkText);
     }
-
     function renderGroupList() {
       const wrap = byId("groupList");
       wrap.innerHTML = "";
-
       state.groups.forEach((group) => {
         const filters = state.filters.filter((f) => f.groupId === group.id);
         const isOpen = openGroupIds.has(group.id);
@@ -2547,7 +2552,6 @@
             </span>
           `
           : "";
-
         const filterRows = filters.length
           ? filters
               .map((filter) => {
@@ -2560,17 +2564,26 @@
                 const icon = filter.imageURL
                   ? `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" />`
                   : "";
-
                 return `
                   <div class="filter-row ${filter.isEnabled ? "" : "is-disabled"}">
                     <div class="filter-header">
                       <div class="filter-name-heading">${escapeHtml(filter.name)}</div>
+                      <div class="filter-header-actions">
+                        <button class="btn-copy btn-icon" data-filter-id="${filter.id}" data-badge-action="copy-badge" title="Copy Badge JSON" aria-label="Copy Badge JSON">&#128203;</button>
+                        <button class="btn-danger btn-icon" data-filter-id="${filter.id}" data-badge-action="delete-badge" title="Delete Badge" aria-label="Delete Badge">&#128465;</button>
+                      </div>
                     </div>
                     <div class="filter-main">
                       <div class="filter-info" style="background:${escapeHtml(iconBg)};border-color:${escapeHtml(iconBorder)};">${icon}</div>
                       <div class="control-stack">
                         <div class="control-line use-line">
                           <label class="control-group color-group use-group"><span class="field-label">Use</span><input type="checkbox" data-filter-id="${filter.id}" data-action="enabled" ${filter.isEnabled ? "checked" : ""}></label>
+                        </div>
+                        <div class="control-line image-line">
+                          <label class="control-group image-link-group">
+                            <span class="field-label">Image Link:</span>
+                            <input class="image-link-input" type="text" data-filter-id="${filter.id}" data-action="image-url" value="${escapeHtml(filter.imageURL || "")}" placeholder="https://example.com/badge.png">
+                          </label>
                         </div>
                         <div class="control-line">
                           <label class="control-group toggle-group"><span class="field-label">Fill</span><input type="checkbox" data-filter-id="${filter.id}" data-action="filled" ${filled ? "checked" : ""}></label>
@@ -2587,7 +2600,6 @@
               })
               .join("")
           : '<div class="muted group-empty">No filters in this category.</div>';
-
         const card = document.createElement("article");
         card.className = `group-card ${isOpen ? "is-open" : ""}`;
         card.innerHTML = `
@@ -2605,6 +2617,7 @@
             <div class="group-actions">
               <div class="group-action-buttons ${isOpen ? "" : "hidden-fade"}">
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="copy-group">Copy Category</button>
+                <button class="btn-soft" data-group-id="${group.id}" data-group-action="import-badge">Paste Badge JSON</button>
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="enable-all">Enable All</button>
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="disable-all">Disable All</button>
               </div>
@@ -2617,10 +2630,8 @@
             </div>
           </div>
         `;
-
         wrap.appendChild(card);
       });
-
       wrap.querySelectorAll("[data-toggle-group]").forEach((el) => {
         el.addEventListener("click", () => {
           const id = el.getAttribute("data-toggle-group");
@@ -2653,16 +2664,16 @@
           }
         });
       });
-
       wrap.querySelectorAll("[data-filter-id]").forEach((el) => {
         el.addEventListener("change", (event) => {
           const id = event.target.getAttribute("data-filter-id");
           const action = event.target.getAttribute("data-action");
           const filter = state.filters.find((f) => f.id === id);
           if (!filter || !action) return;
-
           if (action === "enabled") {
             filter.isEnabled = event.target.checked;
+          } else if (action === "image-url") {
+            filter.imageURL = String(event.target.value || "").trim();
           } else if (action === "filled") {
             setFilterFilled(filter, event.target.checked);
           } else if (action === "color") {
@@ -2672,29 +2683,28 @@
           } else if (action === "border-color") {
             setFilterBorderColor(filter, event.target.value);
           }
-
           renderEditor();
         });
       });
-
       wrap.querySelectorAll("[data-group-action]").forEach((el) => {
         el.addEventListener("click", (event) => {
           const target = event.currentTarget;
           const groupId = target.getAttribute("data-group-id");
           const action = target.getAttribute("data-group-action");
           if (!groupId || !action) return;
-
           if (action === "copy-group") {
             copyGroupToClipboard(groupId);
             return;
           }
-
+          if (action === "import-badge") {
+            openBadgeImportModal(groupId);
+            return;
+          }
           if (action === "delete-group") {
             const group = state.groups.find((g) => g.id === groupId);
             const groupName = group?.name || "this category";
             const confirmed = window.confirm(`Delete "${groupName}" and all badges inside this category?`);
             if (!confirmed) return;
-
             state.groups = state.groups.filter((g) => g.id !== groupId);
             state.filters = state.filters.filter((f) => f.groupId !== groupId);
             openGroupIds.delete(groupId);
@@ -2702,7 +2712,6 @@
             setStatus("editorStatus", `Deleted category "${groupName}".`, "good");
             return;
           }
-
           const enabled = action === "enable-all";
           if (action === "enable-all" || action === "disable-all") {
             state.filters.forEach((filter) => {
@@ -2711,16 +2720,28 @@
               }
             });
           }
-
           renderEditor();
         });
       });
+      wrap.querySelectorAll("[data-badge-action]").forEach((el) => {
+        el.addEventListener("click", (event) => {
+          const target = event.currentTarget;
+          const filterId = target.getAttribute("data-filter-id");
+          const action = target.getAttribute("data-badge-action");
+          if (!filterId || !action) return;
+          if (action === "copy-badge") {
+            copyBadgeJson(filterId);
+            return;
+          }
+          if (action === "delete-badge") {
+            deleteBadge(filterId);
+          }
+        });
+      });
     }
-
     function exportJsonText() {
       return JSON.stringify({ groups: state.groups, filters: state.filters }, null, 2);
     }
-
     function checkImageUrlHealth(url, timeoutMs = 8000) {
       return new Promise((resolve) => {
         const value = String(url || "").trim();
@@ -2728,7 +2749,6 @@
           resolve("dead");
           return;
         }
-
         let completed = false;
         const img = new Image();
         const finish = (status) => {
@@ -2739,7 +2759,6 @@
           img.onerror = null;
           resolve(status);
         };
-
         const timer = setTimeout(() => finish("timeout"), timeoutMs);
         img.onload = () => finish("alive");
         img.onerror = () => finish("dead");
@@ -2748,20 +2767,16 @@
         img.src = value;
       });
     }
-
     function getCachedImageHealth(url) {
       const key = String(url || "").trim();
       if (!key) {
         return Promise.resolve("dead");
       }
-
       if (!imageHealthCache.has(key)) {
         imageHealthCache.set(key, checkImageUrlHealth(key));
       }
-
       return imageHealthCache.get(key);
     }
-
     async function runHealthCheck() {
       const checks = [];
       const groupIds = state.groups.map((group) => group.id);
@@ -2770,52 +2785,42 @@
       const filterIdSet = new Set(filterIds);
       const uniqueGroupCount = groupIdSet.size;
       const uniqueFilterCount = filterIdSet.size;
-
       if (!state.groups.length) {
         checks.push({ tone: "danger", message: "No categories found. Add at least one category." });
       } else {
         checks.push({ tone: "good", message: `${state.groups.length} categories found.` });
       }
-
       if (!state.filters.length) {
         checks.push({ tone: "warn", message: "No filters found. No badges will display." });
       } else {
         checks.push({ tone: "good", message: `${state.filters.length} filters found.` });
       }
-
       if (uniqueGroupCount !== groupIds.length) {
         checks.push({ tone: "danger", message: `Duplicate category IDs detected (${groupIds.length - uniqueGroupCount} duplicates).` });
       }
-
       if (uniqueFilterCount !== filterIds.length) {
         checks.push({ tone: "danger", message: `Duplicate filter IDs detected (${filterIds.length - uniqueFilterCount} duplicates).` });
       }
-
       const orphanFilters = state.filters.filter((filter) => !groupIdSet.has(filter.groupId));
       if (orphanFilters.length) {
         checks.push({ tone: "danger", message: `${orphanFilters.length} filters point to missing categories.` });
       }
-
       const emptyGroups = state.groups.filter((group) => !state.filters.some((filter) => filter.groupId === group.id));
       if (emptyGroups.length) {
         checks.push({ tone: "warn", message: `${emptyGroups.length} categories have no filters.` });
       }
-
       const enabledWithoutImage = state.filters.filter((filter) => filter.isEnabled && !String(filter.imageURL || "").trim());
       if (enabledWithoutImage.length) {
         checks.push({ tone: "warn", message: `${enabledWithoutImage.length} enabled filters have no image URL.` });
       }
-
       const badPatterns = state.filters.filter((filter) => String(filter.pattern || "").trim() && !normalizePatternToRegex(filter.pattern));
       if (badPatterns.length) {
         checks.push({ tone: "warn", message: `${badPatterns.length} filters have invalid regex patterns.` });
       }
-
       const enabledWithImage = state.filters.filter((filter) => filter.isEnabled && String(filter.imageURL || "").trim());
       const checkedUrlCount = new Set(enabledWithImage.map((filter) => String(filter.imageURL || "").trim())).size;
       const deadFilters = [];
       const timeoutFilters = [];
-
       if (enabledWithImage.length) {
         const linkResults = await Promise.all(
           enabledWithImage.map(async (filter) => {
@@ -2823,7 +2828,6 @@
             return { filter, status };
           })
         );
-
         linkResults.forEach(({ filter, status }) => {
           if (status === "dead") {
             deadFilters.push(filter);
@@ -2831,13 +2835,11 @@
             timeoutFilters.push(filter);
           }
         });
-
         if (deadFilters.length || timeoutFilters.length) {
           [...deadFilters, ...timeoutFilters].forEach((filter) => {
             filter.isEnabled = false;
           });
         }
-
         if (deadFilters.length) {
           checks.push({ tone: "danger", message: `${deadFilters.length} badges had dead image links and were turned off.` });
         }
@@ -2850,42 +2852,33 @@
       } else {
         checks.push({ tone: "warn", message: "No enabled image links to dead-link test." });
       }
-
       if (!checks.some((check) => check.tone === "danger" || check.tone === "warn")) {
         checks.push({ tone: "good", message: "No major issues detected." });
       }
-
       return { checks, deadCount: deadFilters.length, timeoutCount: timeoutFilters.length };
     }
-
     async function renderExportScreen() {
       const runId = ++healthCheckRunId;
       byId("healthSummary").textContent = "Health summary: checking links and validating JSON...";
       byId("healthList").innerHTML = "";
-
       const result = await runHealthCheck();
       if (runId !== healthCheckRunId) {
         return;
       }
-
       const { checks, deadCount, timeoutCount } = result;
       const jsonText = exportJsonText();
       byId("jsonCodeOutput").value = jsonText;
       byId("healthList").innerHTML = checks
         .map((check) => `<li class="${check.tone}">${escapeHtml(check.message)}</li>`)
         .join("");
-
       const dangerCount = checks.filter((check) => check.tone === "danger").length;
       const warnCount = checks.filter((check) => check.tone === "warn").length;
       const goodCount = checks.filter((check) => check.tone === "good").length;
       byId("healthSummary").textContent = `Health summary: ${dangerCount} errors, ${warnCount} warnings, ${goodCount} passes.`;
-
       if (deadCount || timeoutCount) {
         setStatus("exportStatus", `Health check turned off ${deadCount + timeoutCount} badges with dead/timed-out image links.`, "warn");
       }
     }
-
-
 
     async function createLinkWithJsonBlob(json, useProxy = false) {
       const url = useProxy 
@@ -2902,16 +2895,13 @@
       if (!response.ok) {
         throw new Error(`jsonblob HTTP ${response.status}`);
       }
-
       const location = response.headers.get("Location") || response.headers.get("location");
       if (!location) {
         throw new Error("jsonblob returned no location header");
       }
-
       const rawUrl = location.startsWith("http") ? location : `https://jsonblob.com${location}`;
       return { url: rawUrl, provider: "jsonblob" };
     }
-
     async function createLinkWithHastebin(json, useProxy = false) {
       const url = useProxy 
         ? "https://corsproxy.io/?url=https://hastebin.com/documents" 
@@ -2924,15 +2914,12 @@
       if (!response.ok) {
         throw new Error(`hastebin HTTP ${response.status}`);
       }
-
       const payload = await response.json();
       if (!payload?.key) {
         throw new Error("hastebin returned no key");
       }
-
       return { url: `https://hastebin.com/raw/${payload.key}`, provider: "hastebin" };
     }
-
     async function createLinkWithPasteRs(json, useProxy = false) {
       const url = useProxy 
         ? "https://corsproxy.io/?url=https://paste.rs" 
@@ -2945,15 +2932,12 @@
       if (!response.ok) {
         throw new Error(`paste.rs HTTP ${response.status}`);
       }
-
       const linkText = (await response.text()).trim();
       if (!/^https?:\/\//i.test(linkText)) {
         throw new Error("paste.rs returned an invalid URL");
       }
-
       return { url: linkText, provider: "paste.rs" };
     }
-
     async function copyJsonCode() {
       const json = exportJsonText();
       byId("jsonCodeOutput").value = json;
@@ -2967,61 +2951,206 @@
         setStatus("exportStatus", "Clipboard was blocked. JSON code is selected for manual copy.", "warn");
       }
     }
-
+    function convertPastebinToRawUrl(input) {
+      const raw = String(input || "").trim();
+      if (!raw) {
+        throw new Error("Paste a Pastebin URL or key first.");
+      }
+      const keyPattern = /^[a-zA-Z0-9]{6,12}$/;
+      if (keyPattern.test(raw)) {
+        return `https://pastebin.com/raw/${raw}`;
+      }
+      let parsed;
+      try {
+        parsed = new URL(raw);
+      } catch {
+        throw new Error("That doesn't look like a valid URL or Pastebin key.");
+      }
+      if (!/pastebin\.com$/i.test(parsed.hostname)) {
+        throw new Error("Please use a pastebin.com URL.");
+      }
+      const parts = parsed.pathname.split("/").filter(Boolean);
+      if (!parts.length) {
+        throw new Error("Pastebin URL is missing the key.");
+      }
+      if (parts[0].toLowerCase() === "raw" && parts[1]) {
+        return `https://pastebin.com/raw/${parts[1]}`;
+      }
+      return `https://pastebin.com/raw/${parts[0]}`;
+    }
+    function handlePastebinConvert() {
+      try {
+        const rawUrl = convertPastebinToRawUrl(byId("pastebinConvertInput").value);
+        byId("pastebinConvertOutput").value = rawUrl;
+        setStatus("exportStatus", "Converted Pastebin URL to raw format.", "good");
+      } catch (error) {
+        byId("pastebinConvertOutput").value = "";
+        setStatus("exportStatus", error.message, "warn");
+      }
+    }
+    async function copyPastebinRawUrl() {
+      const output = byId("pastebinConvertOutput").value.trim();
+      if (!output) {
+        setStatus("exportStatus", "Convert a Pastebin URL first.", "warn");
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(output);
+        setStatus("exportStatus", "Raw Pastebin URL copied.", "good");
+      } catch {
+        setStatus("exportStatus", "Clipboard was blocked. Copy the raw URL manually.", "warn");
+      }
+    }
+    function slugifyId(value, fallback) {
+      const cleaned = String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+      return cleaned || fallback;
+    }
+    function buildCompatibleTemplate(input) {
+      const root = input && typeof input === "object" ? input : null;
+      if (!root) {
+        throw new Error("Invalid JSON structure.");
+      }
+      if (Array.isArray(root.groups) && Array.isArray(root.filters)) {
+        return { json: root, note: "" };
+      }
+      if (Array.isArray(root.filters)) {
+        const groups = [];
+        const groupMap = new Map();
+        const normalizedFilters = root.filters.map((filter, idx) => {
+          const originalGroupId = String(filter?.groupId || "").trim();
+          const groupNameGuess = String(filter?.group || filter?.category || filter?.section || originalGroupId || "Imported").trim() || "Imported";
+          const resolvedGroupId = originalGroupId || slugifyId(groupNameGuess, `g-${groupMap.size + 1}`);
+          if (!groupMap.has(resolvedGroupId)) {
+            groupMap.set(resolvedGroupId, {
+              id: resolvedGroupId,
+              name: groupNameGuess,
+              color: "#FFCC00",
+              borderColor: "#00000000",
+              isExpanded: false
+            });
+            groups.push(groupMap.get(resolvedGroupId));
+          }
+          return {
+            ...filter,
+            id: String(filter?.id || `f-${idx + 1}`),
+            name: String(filter?.name || filter?.label || `Badge ${idx + 1}`),
+            groupId: resolvedGroupId,
+            imageURL: String(filter?.imageURL || filter?.imageUrl || filter?.icon || filter?.url || ""),
+            isEnabled: filter?.isEnabled !== false,
+            pattern: String(filter?.pattern || filter?.regex || "")
+          };
+        });
+        return { json: { groups, filters: normalizedFilters }, note: "Converted imported filters into editor categories." };
+      }
+      const badgeList = Array.isArray(root.badges)
+        ? root.badges
+        : Array.isArray(root.items)
+          ? root.items
+          : null;
+      if (badgeList) {
+        const groups = [];
+        const groupMap = new Map();
+        const filters = badgeList
+          .map((badge, idx) => {
+            if (!badge || typeof badge !== "object") {
+              return null;
+            }
+            const name = String(badge.name || badge.label || badge.title || `Badge ${idx + 1}`).trim() || `Badge ${idx + 1}`;
+            const categoryName = String(badge.group || badge.category || badge.section || "Imported").trim() || "Imported";
+            const groupId = slugifyId(categoryName, `g-${groupMap.size + 1}`);
+            if (!groupMap.has(groupId)) {
+              const groupObj = {
+                id: groupId,
+                name: categoryName,
+                color: "#FFCC00",
+                borderColor: "#00000000",
+                isExpanded: false
+              };
+              groupMap.set(groupId, groupObj);
+              groups.push(groupObj);
+            }
+            const filterId = slugifyId(String(badge.id || name), `f-${idx + 1}`);
+            return {
+              id: filterId,
+              name,
+              groupId,
+              imageURL: String(badge.imageURL || badge.imageUrl || badge.image || badge.icon || badge.url || ""),
+              isEnabled: badge.enabled !== false && badge.isEnabled !== false,
+              pattern: String(badge.pattern || badge.regex || badge.match || ""),
+              tagColor: String(badge.tagColor || badge.fillColor || badge.color || "#00000000"),
+              textColor: String(badge.textColor || "#FFFFFF"),
+              borderColor: String(badge.borderColor || "#00000000"),
+              tagStyle: String(badge.tagStyle || "filled")
+            };
+          })
+          .filter(Boolean);
+        if (!filters.length) {
+          throw new Error("Badge Studio data was found, but no badges could be imported.");
+        }
+        return { json: { groups, filters }, note: "Converted Badge Studio export into Badger template format." };
+      }
+      throw new Error("JSON is not in a supported import format.");
+    }
+    function importAnyJson(inputJson, sourceName) {
+      const prepared = buildCompatibleTemplate(inputJson);
+      setState(prepared.json, { type: "import", name: sourceName });
+      const message = prepared.note
+        ? `${sourceName} loaded. ${prepared.note}`
+        : `${sourceName} loaded.`;
+      setStatus("editorStatus", message, "good");
+    }
     async function handleImportUrl() {
       const input = byId("jsonUrl").value.trim();
       if (!input) {
         setStatus("startStatus", "Paste a JSON URL first.", "warn");
         return;
       }
-
       try {
         setStatus("startStatus", "Loading JSON from URL...");
         const loaded = await loadJsonWithFallback(input);
         byId("jsonUrl").value = loaded.usedUrl;
-        setState(loaded.json, { type: "import", name: "Imported JSON" });
-        setStatus("editorStatus", `Imported JSON loaded from: ${loaded.usedUrl}`, "good");
+        importAnyJson(loaded.json, "Imported JSON");
+        setStatus("startStatus", `Imported JSON loaded from: ${loaded.usedUrl}`, "good");
       } catch (error) {
         setStatus("startStatus", `Could not load URL JSON: ${error.message}`, "danger");
       }
     }
-
     function handleImportFile() {
       const file = byId("jsonFile").files?.[0];
       if (!file) {
         setStatus("startStatus", "Choose a JSON file first.", "warn");
         return;
       }
-
       const reader = new FileReader();
       reader.onload = () => {
         try {
           const parsed = JSON.parse(String(reader.result || ""));
-          setState(parsed, { type: "import", name: `Imported file: ${file.name}` });
-          setStatus("editorStatus", `Loaded file: ${file.name}`, "good");
+          importAnyJson(parsed, `Imported file: ${file.name}`);
+          setStatus("startStatus", `Loaded file: ${file.name}`, "good");
         } catch (error) {
           setStatus("startStatus", `Invalid JSON file: ${error.message}`, "danger");
         }
       };
       reader.readAsText(file);
     }
-
     function handleImportCode() {
       const input = byId("jsonCodeInput").value.trim();
       if (!input) {
         setStatus("startStatus", "Paste JSON code first.", "warn");
         return;
       }
-
       try {
         const parsed = tryParsePossiblyWrappedJson(input);
-        setState(parsed, { type: "import", name: "Imported JSON code" });
-        setStatus("editorStatus", "Loaded JSON code.", "good");
+        importAnyJson(parsed, "Imported JSON code");
+        setStatus("startStatus", "Loaded JSON code.", "good");
       } catch (error) {
         setStatus("startStatus", `Invalid JSON code: ${error.message}`, "danger");
       }
     }
-
     function showImportMode() {
       const importWrap = byId("importWrapper");
       const premadeWrap = byId("premadeWrapper");
@@ -3041,7 +3170,6 @@
       }
       updateLayoutSpacing();
     }
-
     function showPremadeMode() {
       const importWrap = byId("importWrapper");
       const premadeWrap = byId("premadeWrapper");
@@ -3061,7 +3189,6 @@
       }
       updateLayoutSpacing();
     }
-
     async function initPremadePreviews() {
       renderPremadeCards();
       await Promise.all(
@@ -3074,19 +3201,28 @@
         })
       );
     }
-
     byId("chooseImport").addEventListener("click", showImportMode);
     byId("choosePremade").addEventListener("click", showPremadeMode);
     byId("loadFromUrl").addEventListener("click", handleImportUrl);
     byId("loadFile").addEventListener("click", handleImportFile);
     byId("loadFromCode").addEventListener("click", handleImportCode);
+    byId("addCategoryBtn").addEventListener("click", addCategory);
     byId("pasteCopiedGroup").addEventListener("click", pasteCopiedGroupIntoState);
+    byId("cancelBadgeImport").addEventListener("click", closeBadgeImportModal);
+    byId("confirmBadgeImport").addEventListener("click", importSingleBadgeIntoCategory);
+    byId("badgeImportModal").addEventListener("click", (event) => {
+      if (event.target.id === "badgeImportModal") {
+        closeBadgeImportModal();
+      }
+    });
     byId("goToExport").addEventListener("click", showExport);
     byId("backToEditor").addEventListener("click", () => {
       showEditor();
       renderEditor();
     });
     byId("copyJsonCode").addEventListener("click", copyJsonCode);
+    byId("convertPastebinBtn").addEventListener("click", handlePastebinConvert);
+    byId("copyPastebinRawBtn").addEventListener("click", copyPastebinRawUrl);
     byId("previewLinkInput").addEventListener("input", (event) => {
       previewLinkText = String(event.target.value || "").trim() || "https://stream.example/files/My.Movie.2026.BluRay.REMUX.2160p.HDR10Plus.Dolby.Atmos.TrueHD.7.1.Multi.Language.Dual.Audio.mkv";
       if (!byId("editorScreen").classList.contains("hidden")) {
@@ -3104,12 +3240,10 @@
       showStart();
       setStatus("startStatus", "Choose Import or Premade to continue.");
     });
-
     showStart();
     setStatus("startStatus", "Choose Import or Premade to continue.");
     initPremadePreviews();
   </script>
 </body>
 </html>
-
 
