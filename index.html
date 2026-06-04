@@ -429,9 +429,35 @@
     }
     .group-head {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto 1fr auto;
       gap: 10px;
       align-items: center;
+    }
+    .group-reorder {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .btn-reorder {
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      padding: 0 !important;
+      font-size: 0.7rem !important;
+      border-radius: 6px !important;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-reorder:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .btn-reorder:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
     .group-actions {
       display: inline-flex;
@@ -754,6 +780,11 @@
     }
     .collapsible-inner {
       min-height: 0;
+      transform: translateY(-10px);
+      transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .collapsible-wrapper.is-open .collapsible-inner {
+      transform: translateY(0);
     }
     .btn-main.active {
       background: linear-gradient(130deg, #FF9500, #FFDD3C);
@@ -801,12 +832,16 @@
       align-items: center;
       gap: 6px;
       opacity: 1;
-      max-width: 300px;
-      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 250px;
+      transition: 
+        opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), 
+        max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     }
     .group-mini-badges.hidden-fade {
       opacity: 0;
       max-width: 0px;
+      transform: scale(0.9) translateX(-10px);
       overflow: hidden;
       pointer-events: none;
     }
@@ -814,12 +849,16 @@
       display: inline-flex;
       gap: 6px;
       opacity: 1;
-      max-width: 900px;
-      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), max-width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 600px;
+      transition: 
+        opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), 
+        max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     }
     .group-action-buttons.hidden-fade {
       opacity: 0;
       max-width: 0px;
+      transform: scale(0.9) translateX(10px);
       overflow: hidden;
       pointer-events: none;
     }
@@ -867,12 +906,19 @@
       .template-category-grid,
       .export-grid,
       .row-2,
-      .group-head,
       .editor-top,
       .group-body,
       .filter-row,
       .filter-main {
         grid-template-columns: 1fr;
+      }
+      .group-head {
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+      }
+      .group-head .group-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
       }
       .editor-actions,
       .control-line {
@@ -1894,21 +1940,22 @@
       renderEditor();
     }
     function loadCopiedGroupFromStorage() {
+      try {
+        const raw = localStorage.getItem(GROUP_CLIPBOARD_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed?.group && Array.isArray(parsed?.filters)) {
+            copiedGroupPayload = parsed;
+            return parsed;
+          }
+        }
+      } catch {
+        // Fallback to in-memory below
+      }
       if (copiedGroupPayload?.group && Array.isArray(copiedGroupPayload?.filters)) {
         return copiedGroupPayload;
       }
-      try {
-        const raw = localStorage.getItem(GROUP_CLIPBOARD_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        if (!parsed?.group || !Array.isArray(parsed?.filters)) {
-          return null;
-        }
-        copiedGroupPayload = parsed;
-        return parsed;
-      } catch {
-        return null;
-      }
+      return null;
     }
     function saveCopiedGroupToStorage(payload) {
       copiedGroupPayload = payload;
@@ -1969,6 +2016,20 @@
       openGroupIds.add(newGroupId);
       renderEditor();
       setStatus("editorStatus", `Added category "${trimmedName}".`, "good");
+    }
+    function moveGroup(groupId, direction) {
+      const index = state.groups.findIndex((g) => g.id === groupId);
+      if (index === -1) return;
+      if (direction === "up" && index > 0) {
+        const temp = state.groups[index];
+        state.groups[index] = state.groups[index - 1];
+        state.groups[index - 1] = temp;
+      } else if (direction === "down" && index < state.groups.length - 1) {
+        const temp = state.groups[index];
+        state.groups[index] = state.groups[index + 1];
+        state.groups[index + 1] = temp;
+      }
+      renderEditor();
     }
     function normalizeSingleBadge(input, groupId) {
       const source = input && typeof input === "object" ? input : null;
@@ -2559,23 +2620,58 @@
         const miniBorder = bordered ? borderColor : "transparent";
         return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" /></span>`;
       };
-      state.groups.forEach((group) => {
+      state.groups.forEach((group, index) => {
         const filters = state.filters.filter((f) => f.groupId === group.id);
         const isOpen = openGroupIds.has(group.id);
+        const isFirst = index === 0;
+        const isLast = index === state.groups.length - 1;
         const preferredBadges = filters.filter((f) => f.isEnabled && f.imageURL);
         const fallbackBadges = preferredBadges.length ? preferredBadges : filters.filter((f) => f.imageURL);
         const headerBadges = fallbackBadges.slice(0, 5);
         const headerBadgeCountExtra = Math.max(fallbackBadges.length - headerBadges.length, 0);
-        const headerBadgesHtml = !isOpen
-          ? `
-            <span class="group-mini-badges">
-              ${headerBadges.map((f) => miniBadgeHtml(f)).join("")}
-              ${headerBadgeCountExtra > 0 ? `<span class="group-mini-more">+${headerBadgeCountExtra}</span>` : ""}
-            </span>
-          `
-          : "";
-        const filterRows = filters.length
-          ? filters
+        const filtersInGroup = state.filters.filter((f) => f.groupId === group.id);
+        const allFilled = filtersInGroup.length > 0 && filtersInGroup.every((f) => isFilterFilled(f));
+        const allBordered = filtersInGroup.length > 0 && filtersInGroup.every((f) => isFilterBordered(f));
+        let filterRows = "";
+        if (filters.length) {
+          const bulkControlCardHtml = `
+            <div class="filter-row bulk-control-card" style="border-color: rgba(255, 204, 0, 0.4); background: rgba(255, 204, 0, 0.08);">
+              <div class="filter-header">
+                <div class="filter-name-heading" style="color: #FFCC00; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; display: flex; align-items: center; min-height: 36px;">Bulk Controls</div>
+                <div class="filter-header-actions" style="visibility: hidden;">
+                  <button class="btn-icon">&#128203;</button>
+                </div>
+              </div>
+              <div class="filter-main">
+                <div class="filter-info" style="background: rgba(255, 204, 0, 0.12); border-color: rgba(255, 204, 0, 0.3); justify-content: center; align-items: center; font-size: 1.3rem; display: flex;">⚡</div>
+                <div class="control-stack">
+                  <div class="control-line use-line">
+                    <label class="control-group color-group use-group" style="grid-column: 1 / -1; justify-content: space-between; padding: 4px 8px; width: 100%;">
+                      <span class="field-label" style="font-weight: 700; color: #FFCC00;">Bulk Status</span>
+                      <div style="display: flex; gap: 6px;">
+                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${group.id}" data-bulk-action="enable-all">Enable All</button>
+                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${group.id}" data-bulk-action="disable-all">Disable All</button>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="control-line image-line">
+                    <div class="control-group image-link-group" style="border-style: dashed; border-color: rgba(255, 204, 0, 0.25); background: transparent; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 32px; padding: 5px 8px;">
+                      <span class="field-label" style="font-size: 0.78rem; color: var(--muted); text-align: center;">Click toggles below to apply to all</span>
+                    </div>
+                  </div>
+                  <div class="control-line">
+                    <label class="control-group toggle-group"><span class="field-label">Fill All</span><input type="checkbox" data-group-id="${group.id}" data-bulk-action="fill-toggle" ${allFilled ? "checked" : ""}></label>
+                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${group.id}" data-bulk-action="fill-color" value="${escapeHtml(group.color || "#FFCC00")}"></label>
+                  </div>
+                  <div class="control-line">
+                    <label class="control-group toggle-group"><span class="field-label">Border All</span><input type="checkbox" data-group-id="${group.id}" data-bulk-action="border-toggle" ${allBordered ? "checked" : ""}></label>
+                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${group.id}" data-bulk-action="border-color" value="#FFFFFF"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          filterRows = bulkControlCardHtml + filters
               .map((filter) => {
                 const filled = isFilterFilled(filter);
                 const bordered = isFilterBordered(filter);
@@ -2620,12 +2716,18 @@
                   </div>
                 `;
               })
-              .join("")
-          : '<div class="muted group-empty">No filters in this category.</div>';
+              .join("");
+        } else {
+          filterRows = '<div class="muted group-empty">No filters in this category.</div>';
+        }
         const card = document.createElement("article");
         card.className = `group-card ${isOpen ? "is-open" : ""}`;
         card.innerHTML = `
           <div class="group-head">
+            <div class="group-reorder">
+              <button class="btn-reorder" data-group-id="${group.id}" data-direction="up" title="Move Up" ${isFirst ? "disabled" : ""}>▲</button>
+              <button class="btn-reorder" data-group-id="${group.id}" data-direction="down" title="Move Down" ${isLast ? "disabled" : ""}>▼</button>
+            </div>
             <button class="group-toggle" data-toggle-group="${group.id}" aria-expanded="${isOpen ? "true" : "false"}">
               <span class="group-title-wrap">
                 <span class="group-title-text">${escapeHtml(group.name)}</span>
@@ -2640,8 +2742,6 @@
               <div class="group-action-buttons ${isOpen ? "" : "hidden-fade"}">
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="copy-group">Copy Category</button>
                 <button class="btn-soft" data-group-id="${group.id}" data-group-action="import-badge">Paste Badge JSON</button>
-                <button class="btn-soft" data-group-id="${group.id}" data-group-action="enable-all">Enable All</button>
-                <button class="btn-soft" data-group-id="${group.id}" data-group-action="disable-all">Disable All</button>
               </div>
               <button class="btn-danger btn-icon" data-group-id="${group.id}" data-group-action="delete-group" title="Delete Category" aria-label="Delete Category">&#128465;</button>
             </div>
@@ -2653,6 +2753,14 @@
           </div>
         `;
         wrap.appendChild(card);
+      });
+      wrap.querySelectorAll(".btn-reorder").forEach((el) => {
+        el.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const groupId = el.getAttribute("data-group-id");
+          const direction = el.getAttribute("data-direction");
+          moveGroup(groupId, direction);
+        });
       });
       wrap.querySelectorAll("[data-toggle-group]").forEach((el) => {
         el.addEventListener("click", () => {
@@ -2708,6 +2816,39 @@
           renderEditor();
         });
       });
+      wrap.querySelectorAll("[data-bulk-action]").forEach((el) => {
+        const action = el.getAttribute("data-bulk-action");
+        const groupId = el.getAttribute("data-group-id");
+        if (action === "enable-all" || action === "disable-all") {
+          el.addEventListener("click", () => {
+            const enabled = action === "enable-all";
+            state.filters.forEach((filter) => {
+              if (filter.groupId === groupId) {
+                filter.isEnabled = enabled;
+              }
+            });
+            renderEditor();
+          });
+        } else {
+          el.addEventListener("change", (event) => {
+            const val = event.target.value;
+            const checked = event.target.checked;
+            state.filters.forEach((filter) => {
+              if (filter.groupId !== groupId) return;
+              if (action === "fill-toggle") {
+                setFilterFilled(filter, checked);
+              } else if (action === "fill-color") {
+                setFilterColor(filter, val);
+              } else if (action === "border-toggle") {
+                setFilterBorder(filter, checked);
+              } else if (action === "border-color") {
+                setFilterBorderColor(filter, val);
+              }
+            });
+            renderEditor();
+          });
+        }
+      });
       wrap.querySelectorAll("[data-group-action]").forEach((el) => {
         el.addEventListener("click", (event) => {
           const target = event.currentTarget;
@@ -2733,14 +2874,6 @@
             renderEditor();
             setStatus("editorStatus", `Deleted category "${groupName}".`, "good");
             return;
-          }
-          const enabled = action === "enable-all";
-          if (action === "enable-all" || action === "disable-all") {
-            state.filters.forEach((filter) => {
-              if (filter.groupId === groupId) {
-                filter.isEnabled = enabled;
-              }
-            });
           }
           renderEditor();
         });
