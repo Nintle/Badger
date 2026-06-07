@@ -2266,6 +2266,12 @@
         creator: "Voidxo's",
         creatorUrl: "https://www.reddit.com/user/_voidxo/",
         url: "https://jsonkeeper.com/b/6JWL4"
+      },
+      {
+        id: "colorful-concise-badges",
+        name: "Colorful and Concise Badges",
+        creator: "sterzeck",
+        url: "https://pastebin.com/raw/bAmmJZZ3"
       }
     ];
     let state = { groups: [], filters: [] };
@@ -3036,7 +3042,7 @@
           const hasData = Boolean(cached?.json);
           const error = cached?.error;
           const creatorMarkup = template.creator
-            ? `<span class="muted">by <a href="${escapeHtml(template.creatorUrl || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(template.creator)}</a></span>`
+            ? `<span class="muted">by ${template.creatorUrl ? `<a href="${escapeHtml(template.creatorUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(template.creator)}</a>` : escapeHtml(template.creator)}</span>`
             : "";
           const preview = hasData
             ? templateOverviewHtml(normalize(cached.json, { rememberColors: false }))
