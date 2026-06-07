@@ -251,26 +251,49 @@
       border-radius: 10px;
       background: rgba(0, 0, 0, 0.16);
       padding: 8px;
-      max-height: 280px;
-      overflow: auto;
-      display: grid;
-      gap: 10px;
+      height: 200px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #livePreview {
+      height: 120px;
+    }
+    .template-preview::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .template-preview::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+    .template-preview::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 3px;
+    }
+    .template-preview::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
     }
     .template-group {
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      padding: 8px;
+      padding: 6px 8px;
       background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
     .template-category-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
+      width: 100%;
     }
     .template-group-name {
       font-size: 0.76rem;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       display: flex;
@@ -311,12 +334,13 @@
       display: block;
     }
     .template-group .chip {
-      padding: 3px 4px;
-      border-radius: 6px;
+      padding: 2px 4px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     .template-group .chip img {
-      max-height: 20px;
-      max-width: 90px;
+      max-height: 15px;
+      max-width: 54px;
     }
     .preview-link {
       border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -679,6 +703,63 @@
       margin: 0;
       accent-color: #FFCC00;
       cursor: pointer;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      outline: none;
+      padding: 0 !important;
+      border: none !important;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFCC00;
+      cursor: pointer;
+      border: none !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      transition: transform 0.1s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFCC00;
+      cursor: pointer;
+      border: none !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      transition: transform 0.1s ease;
+    }
+    input[type="range"]::-moz-range-thumb:hover {
+      transform: scale(1.25);
+    }
+    .slider-val-box {
+      display: inline-block;
+      padding: 1px 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #FF9500;
+      background: rgba(255, 149, 0, 0.12);
+      border: 1px solid rgba(255, 149, 0, 0.35);
+      border-radius: 5px;
+      min-width: 38px;
+      text-align: center;
+      line-height: 1.2;
     }
     input[type="color"] {
       width: 40px;
@@ -937,6 +1018,132 @@
         grid-template-columns: 1fr;
       }
     }
+    
+    /* Badge Studio integrated styles */
+    .badge-editor-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .voidxo-credit {
+      position: absolute;
+      right: 8px;
+      bottom: 2px;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      opacity: 0.8;
+      transition: color 150ms ease;
+    }
+    .btn-soft .voidxo-credit {
+      color: #ffffff !important;
+    }
+    .btn-main.active .voidxo-credit {
+      color: #121212 !important;
+    }
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+    .badge-tile {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      cursor: pointer;
+      min-height: 80px;
+      transition: border-color 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+    }
+    .badge-tile:hover, .badge-tile.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .badge-tile.is-disabled {
+      opacity: 0.4;
+    }
+    .badge-tile-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .badge-tile-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      color: var(--text);
+    }
+    .nBadge {
+      height: 30px;
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      max-width: 180px;
+    }
+    .nBadge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      box-sizing: border-box;
+    }
+    .nBadge.snapshotBadge {
+      border-radius: 0!important;
+      overflow: visible;
+    }
+    .nBadge.snapshotBadge img {
+      object-fit: fill;
+    }
+    .nBadge.autoDarkBg {
+      background: #090b10 !important;
+    }
+    .cleanImg, .tintImg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      box-sizing: border-box;
+    }
+    .nBadge.textOnly {
+      width: auto;
+      min-width: 38px;
+    }
+    .editor-panel.hidden {
+      display: none !important;
+    }
+    .editor-panel {
+      display: block;
+    }
+    
+    @media (max-width: 920px) {
+      .badge-editor-layout {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -996,33 +1203,352 @@
           </div>
         </div>
       </div>
-      <div class="site-credit">Made with ❤ by ATL and Codex</div>
+      <div class="site-credit">Made with ❤ by Nint and Codex</div>
     </section>
     <section id="editorScreen" class="panel hidden">
       <div class="editor-top">
         <div>
-          <h2 style="margin-bottom: 4px;">Template Editor</h2>
+          <h2 style="margin-bottom: 4px;" id="editorScreenTitle">Template Editor</h2>
           <div id="sourceLabel" class="muted">No template loaded yet.</div>
         </div>
         <div class="editor-actions">
           <button id="backToStart" class="btn-soft">Back To Start</button>
-          <button id="pasteCopiedGroup" class="btn-soft">Paste Copied Category</button>
         </div>
       </div>
-      <div id="editorStatus" class="status"></div>
-      <div class="panel" style="margin-top: 12px; padding: 12px;">
-        <h3 style="margin: 0;">Categories</h3>
-        <p class="muted" style="margin-top: 6px;">All categories start closed. Open a category and adjust each badge with `Use`, `Fill` + fill color, and `Border` + border color.</p>
-        <div class="screen-nav" style="margin-top: 0;">
-          <button id="addCategoryBtn" class="btn-main">Add New Category</button>
-        </div>
-        <div id="groupList" class="group-list"></div>
+      
+      <!-- Editor Mode Switcher Tabs -->
+      <div class="editor-tabs" style="display: flex; gap: 8px; margin-top: 12px; margin-bottom: 6px;">
+        <button id="toggleTemplateEditorBtn" class="btn-main active" style="flex: 1; padding: 10px; font-weight: 700; border-radius: 10px;">Template Editor</button>
+        <button id="toggleBadgeEditorBtn" class="btn-soft" style="flex: 1; padding: 10px; font-weight: 700; border-radius: 10px; position: relative;">Badge Editor<span class="voidxo-credit">Thanks to Voidxo's</span></button>
       </div>
-      <div class="panel" style="margin-top: 12px; padding: 12px;">
-        <h3 style="margin: 0;">Live Preview</h3>
-        <p class="muted" style="margin-top: 6px;">Edit the release/file title here to update this preview.</p>
-        <input id="previewLinkInput" type="text" placeholder="Paste or type a release title/link to preview badges" style="margin-top: 8px;" />
-        <div id="livePreview" class="template-preview" style="margin-top: 10px;"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; min-height: 24px; margin-bottom: 10px;">
+        <div id="editorStatus" class="status" style="margin-top: 0; min-height: auto;"></div>
+        <div id="badgeEditorAttribution" class="muted hidden" style="font-size: 0.8rem; color: var(--muted);">
+          Badge Editor made possible by <a href="https://itsvoidog.github.io/nuvio-badge-studio/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline; font-weight: 700;">Voidxo</a>
+        </div>
+      </div>
+      
+      <!-- Template Editor Section (Original Categories list) -->
+      <div id="templateEditorPanel" class="editor-panel">
+        <div class="panel" style="margin-top: 12px; padding: 12px;">
+          <h3 style="margin: 0;">Categories</h3>
+          <p class="muted" style="margin-top: 6px;">All categories start closed. Open a category and adjust each badge with `Use`, `Fill` + fill color, and `Border` + border color.</p>
+          <div class="screen-nav" style="margin-top: 0;">
+            <button id="pasteCopiedGroup" class="btn-soft">Paste Copied Category</button>
+            <button id="addCategoryBtn" class="btn-main">Add New Category</button>
+          </div>
+          <div id="groupList" class="group-list"></div>
+        </div>
+      </div>
+      
+      <!-- Badge Editor Section (Visual Badge Editor) -->
+      <div id="badgeEditorPanel" class="editor-panel hidden">
+        <div class="badge-editor-layout">
+          <!-- Left Column: Gallery & Live Preview Wrapper -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Gallery Panel -->
+            <div class="panel" style="padding: 12px; margin-bottom: 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                <h3 style="margin: 0;">Badge Gallery <span class="muted" id="badgeGalleryCount" style="font-size: 0.85rem; font-weight: 400; margin-left: 6px;"></span></h3>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                  <input id="badgeSearchInput" placeholder="Search badges..." style="padding: 6px 10px; font-size: 0.85rem; width: 180px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);" />
+                </div>
+              </div>
+              <div id="badgeGalleryContainer" style="max-height: 480px; overflow-y: auto; padding-right: 4px;"></div>
+            </div>
+            
+            <!-- Live Preview Placeholder inside Left Column -->
+            <div id="badgeEditorLivePreviewPlaceholder"></div>
+          </div>
+          
+          <!-- Right Column: Editor & Creator -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- Single Badge Editor Panel -->
+            <div class="panel" style="padding: 12px;">
+              <h3 style="margin: 0 0 10px;" id="badgeEditTitle">Badge Editor</h3>
+              <div id="badgeEditorNoSelection" class="muted" style="padding: 24px; text-align: center; border: 1px dashed var(--line); border-radius: 10px;">
+                Click any badge in the gallery to edit it.
+              </div>
+              <div id="badgeEditorForm" class="hidden" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; min-height: 60px;" id="badgeEditorPreviewContainer">
+                  <!-- Badge preview renders here -->
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: -4px;">
+                  <button id="restoreSelectedBadgeDefaultBtn" class="btn-soft" style="font-size: 0.75rem; padding: 6px 10px;">Reset to Default</button>
+                </div>
+                
+                <div class="row-2">
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Badge Name</label>
+                    <input id="badgeEditName" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                  </div>
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Category</label>
+                    <select id="badgeEditGroupSelect" style="width:100%; padding: 6px 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);"></select>
+                  </div>
+                </div>
+                
+                <div class="row-2">
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Status</label>
+                    <select id="badgeEditEnabledSelect" style="width:100%; padding: 6px 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);">
+                      <option value="true">Enabled</option>
+                      <option value="false">Disabled</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Type</label>
+                    <input value="filter" disabled style="width:100%; padding: 6px 10px; font-size: 0.85rem; opacity: 0.5;" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="field-label" style="display:block; margin-bottom:4px;">Match Pattern / Regex</label>
+                  <input id="badgeEditPattern" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                </div>
+                
+                <div>
+                  <label class="field-label" style="display:block; margin-bottom:4px;">Image URL (leave blank for text badge)</label>
+                  <input id="badgeEditImageUrl" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                </div>
+                
+                <!-- Colors -->
+                <div style="border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: rgba(255,255,255,0.01);">
+                  <h4 style="margin: 0 0 8px; font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em;">Badge Colors</h4>
+                  <div class="row-2">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label class="field-label" style="margin: 0;">Tag/Background</label>
+                        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                          <input id="badgeEditTagColorCheckbox" type="checkbox" /> Fill
+                        </label>
+                      </div>
+                      <div style="display: flex; gap: 6px;">
+                        <input id="badgeEditTagColor" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                        <input id="badgeEditTagColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label class="field-label" style="margin: 0;">Border</label>
+                        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                          <input id="badgeEditBorderColorCheckbox" type="checkbox" /> Border
+                        </label>
+                      </div>
+                      <div style="display: flex; gap: 6px;">
+                        <input id="badgeEditBorderColor" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                        <input id="badgeEditBorderColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div style="margin-top: 10px;" id="badgeEditTextColorBlock">
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Text Color (text-only badges)</label>
+                    <div style="display: flex; gap: 6px; max-width: 50%;">
+                      <input id="badgeEditTextColor" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                      <input id="badgeEditTextColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Logo Tint -->
+                <div id="badgeEditLogoTintBlock" style="border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: rgba(255,255,255,0.01);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h4 style="margin: 0; font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em;">Logo Tint</h4>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                        <input id="badgeEditLogoTintCheckbox" type="checkbox" /> Enabled
+                      </label>
+                      <span class="muted" style="font-size: 0.75rem; background: rgba(56, 217, 150, 0.15); color: var(--good); padding: 2px 6px; border-radius: 999px;">icon badge</span>
+                    </div>
+                  </div>
+                  <div class="row-2">
+                    <div>
+                      <label class="field-label" style="display:block; margin-bottom:4px;">Tint Color</label>
+                      <div style="display: flex; gap: 6px;">
+                        <input id="badgeEditLogoColor" placeholder="Original color" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                        <input id="badgeEditLogoColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                      </div>
+                    </div>
+                    <div>
+                      <label class="field-label" style="display:block; margin-bottom:4px;">Brightness</label>
+                      <input id="badgeEditLogoBrightness" type="range" min="0" max="2" step="0.05" style="width: 100%; margin-top: 8px;" />
+                      <div style="display:flex; justify-content:space-between; align-items: center; font-size: 0.7rem; color: var(--muted); margin-top: 2px;">
+                        <span>Dim</span>
+                        <span id="badgeEditLogoBrightnessVal" class="slider-val-box">100%</span>
+                        <span>Bright</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Advanced Fit Controls -->
+                <details class="panel" style="border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: rgba(0,0,0,0.15);">
+                  <summary style="cursor: pointer; font-size: 0.85rem; font-weight: 700; color: var(--accent);">Advanced Fit Controls</summary>
+                  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+                    <div>
+                      <label class="field-label" style="display:block; margin-bottom:2px;">Badge Width (0 = auto)</label>
+                      <input id="badgeEditWidthSlider" type="range" min="0" max="150" step="1" style="width: 100%;" />
+                      <div style="display:flex; justify-content:space-between; align-items: center; font-size: 0.7rem; color: var(--muted); margin-top: 2px;">
+                        <span>Auto</span>
+                        <span id="badgeEditWidthVal" class="slider-val-box">Auto</span>
+                        <span>150px</span>
+                      </div>
+                    </div>
+                    <div class="row-2">
+                      <div>
+                        <label class="field-label" style="display:block; margin-bottom:2px;">Logo Padding X</label>
+                        <input id="badgeEditPadXSlider" type="range" min="0" max="14" step="1" style="width: 100%;" />
+                        <div style="display:flex; justify-content:space-between; align-items: center; font-size: 0.7rem; color: var(--muted); margin-top: 2px;">
+                          <span>0px</span>
+                          <span id="badgeEditPadXVal" class="slider-val-box">0px</span>
+                          <span>14px</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label class="field-label" style="display:block; margin-bottom:2px;">Logo Padding Y</label>
+                        <input id="badgeEditPadYSlider" type="range" min="0" max="10" step="1" style="width: 100%;" />
+                        <div style="display:flex; justify-content:space-between; align-items: center; font-size: 0.7rem; color: var(--muted); margin-top: 2px;">
+                          <span>0px</span>
+                          <span id="badgeEditPadYVal" class="slider-val-box">0px</span>
+                          <span>10px</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button id="badgeEditResetFitBtn" class="btn-soft" style="width: 100%; font-size: 0.8rem; padding: 6px;">Reset Fit / Tint</button>
+                  </div>
+                </details>
+                
+                <!-- Actions -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px;">
+                  <button id="badgeEditDuplicateBtn" class="btn-soft" style="padding: 8px 4px; font-size: 0.78rem;">Duplicate</button>
+                  <button id="badgeEditCopyBtn" class="btn-main" style="padding: 8px 4px; font-size: 0.78rem; background: rgba(56, 217, 150, 0.15); border: 1px solid rgba(56, 217, 150, 0.3); color: #38d996; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">📋 Copy Badge</button>
+                  <button id="badgeEditDeleteBtn" class="btn-danger" style="padding: 8px 4px; font-size: 0.78rem;">Delete</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Build new badge panel -->
+            <details class="panel" style="padding: 10px; background: var(--panel-2);">
+              <summary style="cursor: pointer; font-size: 0.95rem; font-weight: 700;">Build Your Own Badge</summary>
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                <div class="row-2">
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Badge Name</label>
+                    <input id="badgeCreateName" placeholder="CAM, AV1, WEBRip" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                  </div>
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Category</label>
+                    <select id="badgeCreateGroupSelect" style="width:100%; padding: 6px 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);"></select>
+                  </div>
+                </div>
+                
+                <div class="row-2">
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Known Regex Preset</label>
+                    <select id="badgeCreatePresetSelect" style="width:100%; padding: 6px 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);"></select>
+                  </div>
+                  <div>
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Match Pattern / Regex</label>
+                    <input id="badgeCreatePattern" placeholder="Auto-generated regex" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="field-label" style="display:block; margin-bottom:4px;">Image URL (optional)</label>
+                  <input id="badgeCreateImageUrl" placeholder="Leave blank for text-only" style="width:100%; padding: 6px 10px; font-size: 0.85rem;" />
+                </div>
+                
+                <div style="border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: rgba(255,255,255,0.01);">
+                  <div class="row-2">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label class="field-label" style="margin: 0;">Tag/Background</label>
+                        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                          <input id="badgeCreateTagColorCheckbox" type="checkbox" checked /> Fill
+                        </label>
+                      </div>
+                      <div style="display: flex; gap: 6px;">
+                        <input id="badgeCreateTagColor" value="#1A1A1A" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                        <input id="badgeCreateTagColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label class="field-label" style="margin: 0;">Border</label>
+                        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                          <input id="badgeCreateBorderColorCheckbox" type="checkbox" checked /> Border
+                        </label>
+                      </div>
+                      <div style="display: flex; gap: 6px;">
+                        <input id="badgeCreateBorderColor" value="#FF858283" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                        <input id="badgeCreateBorderColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px;" id="badgeCreateTextColorBlock">
+                    <label class="field-label" style="display:block; margin-bottom:4px;">Text Color (text-only)</label>
+                    <div style="display: flex; gap: 6px; max-width: 50%;">
+                      <input id="badgeCreateTextColor" value="#FFFFFF" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                      <input id="badgeCreateTextColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                    </div>
+                  </div>
+                  
+                  <!-- Logo Tint for Builder -->
+                  <div id="badgeCreateLogoTintBlock" style="border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: rgba(255,255,255,0.01); margin-top: 10px;" class="hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                      <h4 style="margin: 0; font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em;">Logo Tint</h4>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 0.8rem; cursor: pointer;">
+                          <input id="badgeCreateLogoTintCheckbox" type="checkbox" /> Enabled
+                        </label>
+                        <span class="muted" style="font-size: 0.75rem; background: rgba(56, 217, 150, 0.15); color: var(--good); padding: 2px 6px; border-radius: 999px;">icon badge</span>
+                      </div>
+                    </div>
+                    <div class="row-2">
+                      <div>
+                        <label class="field-label" style="display:block; margin-bottom:4px;">Tint Color</label>
+                        <div style="display: flex; gap: 6px;">
+                          <input id="badgeCreateLogoColor" placeholder="Original color" style="flex: 1; min-width: 0; padding: 4px 8px; font-size: 0.8rem;" />
+                          <input id="badgeCreateLogoColorPicker" type="color" style="width: 34px; height: 30px; padding: 2px;" />
+                        </div>
+                      </div>
+                      <div>
+                        <label class="field-label" style="display:block; margin-bottom:4px;">Brightness</label>
+                        <input id="badgeCreateLogoBrightness" type="range" min="0" max="2" step="0.05" style="width: 100%; margin-top: 8px;" value="1" />
+                        <div style="display:flex; justify-content:space-between; align-items: center; font-size: 0.7rem; color: var(--muted); margin-top: 2px;">
+                          <span>Dim</span>
+                          <span id="badgeCreateLogoBrightnessVal" class="slider-val-box">100%</span>
+                          <span>Bright</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; min-height: 60px;" id="badgeCreatePreviewContainer">
+                  <!-- New badge preview renders here -->
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap;">
+                  <button id="badgeCreateClearBtn" class="btn-soft" style="padding: 8px 16px; font-size: 0.85rem;">Clear</button>
+                  <button id="badgeCreateCopyBtn" class="btn-main" style="padding: 8px 16px; font-size: 0.85rem; background: rgba(56, 217, 150, 0.15); border: 1px solid rgba(56, 217, 150, 0.3); color: #38d996; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">📋 Copy Badge</button>
+                  <button id="badgeCreateAddBtn" class="btn-main" style="padding: 8px 16px; font-weight: 700; font-size: 0.85rem;">Add Badge to Pack</button>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Live Preview (Shared) -->
+      <div id="templateEditorLivePreviewPlaceholder">
+        <div id="livePreviewContainer" class="panel" style="margin-top: 12px; padding: 12px;">
+          <h3 style="margin: 0;">Live Preview</h3>
+          <p class="muted" style="margin-top: 6px;">Edit the release/file title here to update this preview.</p>
+          <input id="previewLinkInput" type="text" placeholder="Paste or type a release title/link to preview badges" style="margin-top: 8px;" />
+          <div id="livePreview" class="template-preview" style="margin-top: 10px;"></div>
+        </div>
       </div>
       <div class="screen-nav">
         <button id="goToExport" class="btn-main">Next: Export</button>
@@ -1106,6 +1632,14 @@
   </div>
   <script>
     const byId = (id) => document.getElementById(id);
+
+    // Visual editor state variables (integrated from Nuvio Badge Studio v1.43)
+    let selectedBadgeId = null;
+    let onlyMatches = false;
+    const tintCache = new Map();
+    const lastTintRenderCache = new Map();
+    const cleanImageCache = new Map();
+    const logoLumCache = new Map();
     const CLEAN_MINIMALIST_FALLBACK = {
     "groups":  [
                    {
@@ -1711,6 +2245,27 @@
         creator: "nobnobz",
         creatorUrl: "https://github.com/nobnobz/Omni-Template-Bot-Bid-Raiser",
         url: "https://raw.githubusercontent.com/nobnobz/Omni-Template-Bot-Bid-Raiser/refs/heads/main/Other/fusion-tags-ume-minimalistic.json"
+      },
+      {
+        id: "black-white-badges",
+        name: "Black and white Badges",
+        creator: "BringerOfRainX1",
+        creatorUrl: "https://github.com/BringerOfRainX1",
+        url: "https://gist.githubusercontent.com/BringerOfRainX1/91203014c5d32c1ca7d5b51870a19786/raw/d41e7a3c857d391e983ca8e7f721582cb77468f0/Badges%2520json"
+      },
+      {
+        id: "golden-by-haz",
+        name: "Haz's Golden and Animated Badges",
+        creator: "Haz",
+        creatorUrl: "https://www.reddit.com/r/Nuvio/comments/1tyjmb7/comment/oq418r3/?context=3",
+        url: "https://pastebin.com/raw/2eLMtapq"
+      },
+      {
+        id: "voidxo-tinted-badges",
+        name: "Voidxo's tinted badges",
+        creator: "Voidxo's",
+        creatorUrl: "https://www.reddit.com/user/_voidxo/",
+        url: "https://jsonkeeper.com/b/6JWL4"
       }
     ];
     let state = { groups: [], filters: [] };
@@ -1922,16 +2477,37 @@
           tagColor,
           textColor: String(f?.textColor || "#FFFFFF"),
           borderColor,
-          tagStyle: String(f?.tagStyle || "filled"),
-          imageURL: String(f?.imageURL || "")
+          tagStyle: String(f?.tagStyle || "filled") === "filled and bordered" ? "filled" : String(f?.tagStyle || "filled"),
+          imageURL: String(f?.imageURL || ""),
+          _badgeWidth: parseInt(f?._badgeWidth || 0, 10) || 0,
+          _padX: parseInt(f?._padX || 0, 10) || 0,
+          _padY: parseInt(f?._padY || 0, 10) || 0,
+          _logoColor: String(f?._logoColor || ""),
+          _logoBrightness: parseFloat(f?._logoBrightness || 1) || 1,
+          _manualTagColor: Boolean(f?._manualTagColor),
+          _innerFaceSnapshotBake: Boolean(f?._innerFaceSnapshotBake)
         };
       });
       return { groups, filters };
+    }
+    function sortFiltersByGroupOrder() {
+      const groupOrder = {};
+      state.groups.forEach((g, index) => {
+        groupOrder[g.id] = index;
+      });
+      state.filters.sort((a, b) => {
+        const orderA = groupOrder[a.groupId] ?? 9999;
+        const orderB = groupOrder[b.groupId] ?? 9999;
+        return orderA - orderB;
+      });
     }
     function setState(newState, source) {
       rememberedBgColorByFilterId.clear();
       rememberedBorderColorByFilterId.clear();
       state = normalize(newState);
+      sortFiltersByGroupOrder();
+      selectedBadgeId = state.filters[0]?.id || null;
+      initBadgeBuilder();
       sourceInfo = source || { type: "import", name: "Imported JSON" };
       openGroupIds = new Set();
       generatedJsonLink = "";
@@ -2029,6 +2605,7 @@
         state.groups[index] = state.groups[index + 1];
         state.groups[index + 1] = temp;
       }
+      sortFiltersByGroupOrder();
       renderEditor();
     }
     function normalizeSingleBadge(input, groupId) {
@@ -2049,7 +2626,7 @@
         tagColor: String(source.tagColor || source.fillColor || "#00000000"),
         textColor: String(source.textColor || "#FFFFFF"),
         borderColor: String(source.borderColor || "#00000000"),
-        tagStyle: String(source.tagStyle || "filled")
+        tagStyle: String(source.tagStyle || "filled") === "filled and bordered" ? "filled" : String(source.tagStyle || "filled")
       };
     }
     function closeBadgeImportModal() {
@@ -2093,6 +2670,7 @@
           : parsed;
         const badge = normalizeSingleBadge(sourceBadge, badgeImportTargetGroupId);
         state.filters.push(badge);
+        sortFiltersByGroupOrder();
         rememberedBgColorByFilterId.set(badge.id, extractHexColor(badge.tagColor));
         rememberedBorderColorByFilterId.set(badge.id, isTransparentColor(badge.borderColor) ? "#FFFFFF" : extractHexColor(badge.borderColor));
         openGroupIds.add(badgeImportTargetGroupId);
@@ -2169,6 +2747,7 @@
       });
       state.groups.push(newGroup);
       state.filters.push(...newFilters);
+      sortFiltersByGroupOrder();
       openGroupIds.add(newGroupId);
       renderEditor();
       const source = payload.source ? ` from ${payload.source}` : "";
@@ -2288,7 +2867,7 @@
       const filled = isFilterFilled(filter);
       const bordered = isFilterBordered(filter);
       if (filled && bordered) {
-        filter.tagStyle = "filled and bordered";
+        filter.tagStyle = "filled";
       } else if (filled) {
         filter.tagStyle = "filled";
       } else if (bordered) {
@@ -2401,9 +2980,9 @@
       const bg = isFilterFilled(filter) ? filter.tagColor : "transparent";
       const border = isFilterBordered(filter) ? (filter.borderColor || "transparent") : "transparent";
       if (!filter.imageURL) {
-        return "";
+        return `<span class="chip textOnly" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};color:${escapeHtml(filter.textColor || '#fff')};font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">${escapeHtml(filter.name)}</span>`;
       }
-      const icon = `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" />`;
+      const icon = `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.chip'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='bold'; p.style.padding='2px 6px'; p.style.color=p.style.color || '#fff';}}" />`;
       return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
     }
     function previewHtml(data, previewText) {
@@ -2417,7 +2996,7 @@
       }
       return `
         <div class="preview-link">${escapeHtml(previewText)}</div>
-        <div class="chip-wrap">${badges.map(chipHtml).join("")}</div>
+        <div class="chip-wrap">${badges.map(f => makeBadgeHTML(f)).join("")}</div>
       `;
     }
     function templateOverviewHtml(data) {
@@ -2472,7 +3051,7 @@
               </div>
               <div class="template-preview">${preview}</div>
               <div class="template-actions">
-                <button class="btn-main" data-use-template="${template.id}" ${loading ? "disabled" : ""}>Use This Template</button>
+                <button class="btn-main" data-use-template="${template.id}" ${loading ? "disabled" : ""}>Edit This Template</button>
                 <button class="btn-soft" data-copy-template="${template.id}">Copy JSON Link</button>
               </div>
             </article>
@@ -2490,7 +3069,7 @@
             const payload = await ensureTemplateLoaded(template);
             const sourceName = template.creator ? `${template.name} (by ${template.creator})` : template.name;
             setState(payload.json, { type: "premade", name: sourceName });
-            setStatus("editorStatus", `${template.name} loaded. Edit badges, fill colors, and border colors.`, "good");
+            setStatus("editorStatus", `${template.name} loaded.`, "good");
           } catch (error) {
             setStatus("startStatus", `Could not load template ${template.name}: ${error.message}`, "danger");
           }
@@ -2602,11 +3181,48 @@
       }
       return cloned;
     }
+    function updateLivePreviewPosition() {
+      const container = byId("livePreviewContainer");
+      if (!container) return;
+      const isBadgeEditorActive = byId("badgeEditorPanel") && !byId("badgeEditorPanel").classList.contains("hidden");
+      if (isBadgeEditorActive) {
+        const placeholder = byId("badgeEditorLivePreviewPlaceholder");
+        if (placeholder && placeholder.firstElementChild !== container) {
+          placeholder.appendChild(container);
+          container.style.marginTop = "0";
+        }
+      } else {
+        const placeholder = byId("templateEditorLivePreviewPlaceholder");
+        if (placeholder && placeholder.firstElementChild !== container) {
+          placeholder.appendChild(container);
+          container.style.marginTop = "12px";
+        }
+      }
+    }
     function renderEditor() {
+      updateLivePreviewPosition();
       byId("sourceLabel").textContent = `Source: ${sourceInfo.name}`;
       byId("previewLinkInput").value = previewLinkText;
-      renderGroupList();
+      
+      const isBadgeEditorActive = byId("badgeEditorPanel") && !byId("badgeEditorPanel").classList.contains("hidden");
+      const attrib = byId("badgeEditorAttribution");
+      if (attrib) {
+        if (isBadgeEditorActive) {
+          attrib.classList.remove("hidden");
+        } else {
+          attrib.classList.add("hidden");
+        }
+      }
+      
+      if (isBadgeEditorActive) {
+        renderBadgeGallery();
+        renderSelectedBadgeDetails();
+      } else {
+        renderGroupList();
+      }
+      
       byId("livePreview").innerHTML = previewHtml(state, previewLinkText);
+      processRenderedBadgeImages();
     }
     function renderGroupList() {
       const wrap = byId("groupList");
@@ -2618,15 +3234,18 @@
         const borderColor = extractHexColor(filter.borderColor || "#FFFFFF");
         const miniBg = filled ? fillColor : "transparent";
         const miniBorder = bordered ? borderColor : "transparent";
-        return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" /></span>`;
+        if (!filter.imageURL) {
+          return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)}; font-size: 8px; font-weight: 950; display: inline-flex; align-items: center; justify-content: center; color: ${escapeHtml(filter.textColor || '#fff')};">${escapeHtml(filter.name)}</span>`;
+        }
+        return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.group-mini-chip'); if(p){p.textContent=this.alt; p.style.fontSize='8px'; p.style.fontWeight='950'; p.style.display='inline-flex'; p.style.alignItems='center'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" /></span>`;
       };
       state.groups.forEach((group, index) => {
         const filters = state.filters.filter((f) => f.groupId === group.id);
         const isOpen = openGroupIds.has(group.id);
         const isFirst = index === 0;
         const isLast = index === state.groups.length - 1;
-        const preferredBadges = filters.filter((f) => f.isEnabled && f.imageURL);
-        const fallbackBadges = preferredBadges.length ? preferredBadges : filters.filter((f) => f.imageURL);
+        const preferredBadges = filters.filter((f) => f.isEnabled);
+        const fallbackBadges = preferredBadges.length ? preferredBadges : filters;
         const headerBadges = fallbackBadges.slice(0, 5);
         const headerBadgeCountExtra = Math.max(fallbackBadges.length - headerBadges.length, 0);
         const filtersInGroup = state.filters.filter((f) => f.groupId === group.id);
@@ -2680,8 +3299,8 @@
                 const iconBg = filled ? fillColor : "rgba(255, 255, 255, 0.04)";
                 const iconBorder = bordered ? borderColor : "rgba(255, 255, 255, 0.12)";
                 const icon = filter.imageURL
-                  ? `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" />`
-                  : "";
+                  ? `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.filter-info'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='900'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" />`
+                  : `<span style="font-size:9px; font-weight:900; width:100%; text-align:center; color:${escapeHtml(filter.textColor || '#fff')}; display:flex; align-items:center; justify-content:center;">${escapeHtml(filter.name)}</span>`;
                 return `
                   <div class="filter-row ${filter.isEnabled ? "" : "is-disabled"}">
                     <div class="filter-header">
@@ -2695,6 +3314,7 @@
                       <div class="filter-info" style="background:${escapeHtml(iconBg)};border-color:${escapeHtml(iconBorder)};">${icon}</div>
                       <div class="control-stack">
                         <div class="control-line use-line">
+                          <button class="btn-soft" data-filter-id="${filter.id}" data-badge-action="edit-in-badge-editor" style="grid-column: 1; padding: 4px 8px; font-size: 0.72rem; border-radius: 6px; font-weight: 700; background: rgba(255, 149, 0, 0.12); border: 1px solid rgba(255, 149, 0, 0.3); color: #FF9500; cursor: pointer; text-align: center;" title="Edit in Badge Editor">Edit in Badge Editor</button>
                           <label class="control-group color-group use-group"><span class="field-label">Use</span><input type="checkbox" data-filter-id="${filter.id}" data-action="enabled" ${filter.isEnabled ? "checked" : ""}></label>
                         </div>
                         <div class="control-line image-line">
@@ -2890,12 +3510,32 @@
           }
           if (action === "delete-badge") {
             deleteBadge(filterId);
+            return;
+          }
+          if (action === "edit-in-badge-editor") {
+            selectedBadgeId = filterId;
+            byId("templateEditorPanel").classList.add("hidden");
+            byId("badgeEditorPanel").classList.remove("hidden");
+            byId("toggleTemplateEditorBtn").className = "btn-soft";
+            byId("toggleBadgeEditorBtn").className = "btn-main active";
+            renderEditor();
+            return;
           }
         });
       });
     }
     function exportJsonText() {
-      return JSON.stringify({ groups: state.groups, filters: state.filters }, null, 2);
+      sortFiltersByGroupOrder();
+      
+      // Create a clean copy of filters without editor-specific fields
+      const cleanFilters = state.filters.map(f => {
+        const {
+          _badgeWidth, _padX, _padY, _logoColor, _logoBrightness, _manualTagColor, _innerFaceSnapshotBake, ...rest
+        } = f;
+        return rest;
+      });
+      
+      return JSON.stringify({ groups: state.groups, filters: cleanFilters }, null, 2);
     }
     function checkImageUrlHealth(url, timeoutMs = 8000) {
       return new Promise((resolve) => {
@@ -3016,6 +3656,14 @@
       const runId = ++healthCheckRunId;
       byId("healthSummary").textContent = "Health summary: checking links and validating JSON...";
       byId("healthList").innerHTML = "";
+      
+      // Auto-bake pending icon changes before running health check and export
+      try {
+        await bakePendingForPublish();
+      } catch (e) {
+        console.error("Auto-baking failed: ", e);
+      }
+      
       const result = await runHealthCheck();
       if (runId !== healthCheckRunId) {
         return;
@@ -3239,7 +3887,7 @@
               tagColor: String(badge.tagColor || badge.fillColor || badge.color || "#00000000"),
               textColor: String(badge.textColor || "#FFFFFF"),
               borderColor: String(badge.borderColor || "#00000000"),
-              tagStyle: String(badge.tagStyle || "filled")
+              tagStyle: String(badge.tagStyle || "filled") === "filled and bordered" ? "filled" : String(badge.tagStyle || "filled")
             };
           })
           .filter(Boolean);
@@ -3398,7 +4046,1442 @@
     showStart();
     setStatus("startStatus", "Choose Import or Premade to continue.");
     initPremadePreviews();
+
+    // =========================================================================
+    // VISUAL BADGE EDITOR INTEGRATION (Nuvio Badge Studio v1.43 Mechanics)
+    // =========================================================================
+
+    // State variables moved to script top
+
+    const KNOWN_REGEX_PRESETS = [
+      ["", "Custom / type your own"],
+      ["(?i)\\bremux\\b", "Remux"],
+      ["(?i)^(?=.*\\b(?:blu[-_. ]?ray|b[rd][-_. ]?rip)\\b)(?!.*\\bremux\\b)", "BluRay / BDRip, excluding Remux"],
+      ["(?i)\\bweb[-_. ]?dl\\b", "WEB-DL"],
+      ["(?i)\\bweb[-_. ]?rip\\b", "WEBRip"],
+      ["(?i)\\bhdtv\\b", "HDTV"],
+      ["(?i)\\bhd[-_. ]?rip\\b", "HDRip"],
+      ["(?i)\\bzdvd[-_. ]?rip\\b", "DVDRip"],
+      ["(?i)^(?=.*(?:\\b2160[pi]?\\b|\\b4k\\b|\\buhd\\b))(?!.*(?:\\b1080[pi]?\\b|\\b720[pi]?\\b))", "4K / 2160p"],
+      ["(?i)\\b1080[pi]?\\b", "1080p"],
+      ["(?i)\\b720[pi]?\\b", "720p"],
+      ["(?i)\\b(?:dv|dovi|dolby[\\s._-]?vision)\\b", "Dolby Vision / DV"],
+      ["(?i)^(?!.*\\b(?:dv|dovi|dolby[\\s._-]?vision)\\b)(?=.*\\bhdr[\\s._-]?10[\\s._-]?(?:\\+|plus|p)(?:\\b|[^a-z0-9]))", "HDR10+"],
+      ["(?i)^(?!.*\\b(?:dv|dovi|dolby[\\s._-]?vision)\\b)(?=.*\\bhdr[\\s._-]?10\\b)(?!.*\\bhdr[\\s._-]?10[\\s._-]?(?:\\+|plus|p)(?:\\b|[^a-z0-9]))", "HDR10 only"],
+      ["(?i)^(?!.*\\b(?:dv|dovi|dolby[\\s._-]?vision)\\b)(?=.*\\bhdr\\b)(?!.*\\bhdr[\\s._-]?10)", "HDR only"],
+      ["(?i)\\bimax[\\s._-]?enhanced\\b", "IMAX Enhanced"],
+      ["(?i)^(?=.*\\bimax\\b)(?!.*\\benhanced\\b)", "IMAX"],
+      ["(?i)\\batmos\\b", "Atmos"],
+      ["(?i)\\btrue[\\s._-]?hd\\b", "TrueHD"],
+      ["(?i)\\bdts[-_.: ]?x\\b", "DTS:X"],
+      ["(?i)^(?=.*\\bdts[-_. ]?(?:hd[-_. ]?)?ma\\b)(?!.*\\bdts[-_.: ]?x\\b)", "DTS-HD MA"],
+      ["(?i)^(?=.*\\bdts[-_. ]?hd\\b)(?!.*\\bdts[-_. ]?(?:hd[-_. ]?)?ma\\b)(?!.*\\bdts[-_.: ]?x\\b)", "DTS-HD"],
+      ["(?i)^(?=.*\\bdts\\b)(?!.*\\bdts[-_. ]?(?:hd|ma|xll|x)\\b)", "DTS"],
+      ["(?i)^(?=.*\\b(?:ddp|dd\\+|eac-?3|e-?ac-?3)\\b)(?!.*\\btrue[\\s._-]?hd\\b)", "DD+"],
+      ["(?i)^(?=.*\\b(?:dd[25][. ][01]|ac-?3)\\b)(?!.*\\b(?:ddp|dd\\+|eac-?3|e-?ac-?3)\\b)(?!.*\\batmos\\b)(?!.*\\btrue[\\s._-]?hd\\b)", "DD"],
+      ["(?i)(?:^|[^0-9])[7-8][. ][01](?![0-9])", "7.1 channels"],
+      ["(?i)^(?=.*(?:^|[^0-9])5[. ][01](?![0-9]))(?!.*(?:^|[^0-9])[7-8][. ][01](?![0-9]))", "5.1 channels"],
+      ["(?i)\\b(?:x265|h[._-]?265|hevc)\\b", "H.265 / HEVC"],
+      ["(?i)\\b(?:x264|h[._-]?264|avc)\\b", "H.264 / AVC"],
+      ["(?i)\\b(?:nflx|netflix)\\b", "Netflix"],
+      ["(?i)\\b(?:amzn|amazon|prime[\\s._-]?video)\\b", "Prime Video"],
+      ["(?i)\\b(?:atvp|apple[\\s._-]?tv\\+?|appletv)\\b", "Apple TV+"],
+      ["(?i)\\b(?:dsnp|dsny|disney\\+?|disney[\\s._-]?plus)\\b", "Disney+"],
+      ["(?i)(?:\\b(?:hmax|hbomax|hbo[\\s._-]?max)\\b|(?:^|[\\s._-])max(?:[\\s._-]|$))", "HBO Max / Max"],
+      ["(?i)\\bhulu\\b", "Hulu"],
+      ["(?i)\\b(?:pcok|peacock)\\b", "Peacock"],
+      ["(?i)\\b(?:pmtp|pamp|paramount\\+?|paramount[\\s._-]?plus)\\b", "Paramount+"],
+      ["(?i)\\b(?:crunchyroll|crunch)\\b", "Crunchyroll"]
+    ];
+
+    function clone(x) {
+      return JSON.parse(JSON.stringify(x));
+    }
+
+    function esc(s) {
+      return (s ?? '').toString().replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+    }
+
+    function cssColor(v, fallback = '#000000') {
+      v = (v || '').trim();
+      if (/^#[0-9a-f]{8}$/i.test(v)) {
+        const a = parseInt(v.slice(1, 3), 16) / 255;
+        const r = parseInt(v.slice(3, 5), 16);
+        const g = parseInt(v.slice(5, 7), 16);
+        const b = parseInt(v.slice(7, 9), 16);
+        return `rgba(${r},${g},${b},${Math.round(a * 1000) / 1000})`;
+      }
+      if (/^#[0-9a-f]{6}$/i.test(v) || /^#[0-9a-f]{3}$/i.test(v)) return v;
+      return fallback;
+    }
+
+    function isWhiteishColor(v) {
+      v = (v || '').trim();
+      return /^#(?:fff|ffffff)$/i.test(v) || /^#ff(?:fff|ffffff)$/i.test(v);
+    }
+
+    function streamKey(n) {
+      return (n || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function autoWidth(f, big = false) {
+      const mult = big ? 1.18 : 1;
+      if (f._badgeWidth && +f._badgeWidth > 0) return Math.round(+f._badgeWidth * mult);
+      const key = streamKey(f.name).replace(/^\s+/, '');
+      if (f.groupId === 'gs') {
+        const map = {
+          'netflix': 78, 'prime video': 78, 'apple tv+': 66, 'disney+': 62, 'max': 82,
+          'hulu': 72, 'peacock': 62, 'paramount+': 66, 'crave': 112, 'crunchy roll': 70
+        };
+        return Math.round((map[key] || 82) * mult);
+      }
+      if (f.groupId === 'gr') return Math.round(({ '4k': 42, '1080p': 56, '720p': 50 }[key] || 52) * mult);
+      if (f.groupId === 'gc') return Math.round(44 * mult);
+      if (f.groupId === 'ga') return Math.round((/dts-hd ma/i.test(f.name) ? 86 : /dts|dolby|truehd|atmos|dd/i.test(f.name) ? 68 : 64) * mult);
+      if (f.groupId === 'gv') return Math.round((/imax enhanced/i.test(f.name) ? 92 : /dolby|dv/i.test(f.name) ? 70 : 76) * mult);
+      if (f.groupId === 'ge') return Math.round(62 * mult);
+      if (f.groupId === 'gl') return Math.round(48 * mult);
+      return Math.round(74 * mult);
+    }
+
+    function autoPadX(f) {
+      if (f._padX && +f._padX > 0) return +f._padX;
+      const key = streamKey(f.name).replace(/^\s+/, '');
+      if (f.groupId === 'gs') {
+        const map = { 'apple tv+': 2, 'disney+': 2, 'peacock': 2, 'paramount+': 2, 'crave': 2, 'crunchy roll': 2, 'netflix': 4, 'prime video': 4, 'max': 4, 'hulu': 4 };
+        return map[key] ?? 4;
+      }
+      if (f.groupId === 'ga') return 3;
+      if (f.groupId === 'gv') return 4;
+      return 5;
+    }
+
+    function autoPadY(f) {
+      if (f._padY && +f._padY > 0) return +f._padY;
+      if (f.groupId === 'ga') return 4;
+      return 3;
+    }
+
+    function isTransparentBadgeColor(v) {
+      const s = String(v || '').trim().toLowerCase();
+      if (!s || s === 'transparent' || s === '#00000000' || s === '#0000') return true;
+      if (/^rgba\([^)]*,\s*0(?:\.0+)?\s*\)$/i.test(s)) return true;
+      return false;
+    }
+
+    function isFullBadgeSnapshot(f) {
+      return !!(
+        f &&
+        typeof f.imageURL === 'string' &&
+        f.imageURL.startsWith('data:image/png') &&
+        isTransparentBadgeColor(f.tagColor) &&
+        isTransparentBadgeColor(f.borderColor)
+      );
+    }
+
+    function isInnerFaceSnapshotBadge(f) {
+      return !!(f && f._innerFaceSnapshotBake && typeof f.imageURL === 'string' && /^data:image\/png/i.test(f.imageURL));
+    }
+
+    function makeBadgeHTML(f, big = false) {
+      if (isInnerFaceSnapshotBadge(f)) {
+        const hasImg = !!f.imageURL;
+        const h = big ? 36 : 30;
+        const w = hasImg ? autoWidth(f, big) : 0;
+        const style = `height:${h}px;${w ? `width:${w}px;` : ''}background:transparent;color:${cssColor(f.textColor || '#fff', '#fff')};border:1px solid ${cssColor(f.borderColor || '#858283', '#858283')};padding:0;`;
+        return `<span class="nBadge innerFaceSnapshot" style="${style}" title="${esc(f.name)}"><img class="cleanImg" src="${esc(f.imageURL)}" data-src="${esc(f.imageURL)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
+      }
+
+      const hasImg = !!f.imageURL;
+      const isSnapshotBadge = hasImg && isFullBadgeSnapshot(f);
+      const rawBg = f.tagColor || '#1A1A1A';
+      const bg = cssColor(rawBg, '#1A1A1A');
+      const manuallySetWhite = !!f._manualTagColor && isWhiteishColor(rawBg);
+      const needsAutoBg = hasImg && !manuallySetWhite && (isWhiteishColor(rawBg) || (/^#[0-9a-f]{8}$/i.test(rawBg || '') && /^#00/i.test(rawBg || '')) || /rgba\([^)]*,\s*0\)/i.test(bg));
+      const h = big ? 36 : 30;
+      const w = hasImg ? autoWidth(f, big) : ((f._badgeWidth && +f._badgeWidth > 0) ? Math.round(+f._badgeWidth * (big ? 1.18 : 1)) : 0);
+      const px = isSnapshotBadge ? 0 : (hasImg ? autoPadX(f) : 10);
+      const py = isSnapshotBadge ? 0 : (hasImg ? autoPadY(f) : 0);
+      const wrapperBg = isSnapshotBadge ? 'transparent' : bg;
+      const wrapperBorder = isSnapshotBadge ? 'transparent' : cssColor(f.borderColor || 'transparent', 'transparent');
+      const style = `height:${h}px;${w ? `width:${w}px;` : ''}background:${wrapperBg};color:${cssColor(f.textColor || '#fff', '#fff')};border:${isSnapshotBadge ? '0' : `1px solid ${wrapperBorder}`};padding:${hasImg ? `${py}px ${px}px` : '0 10px'};`;
+      const autoAttr = needsAutoBg ? ` data-auto-bg="1"` : '';
+      if (hasImg && f._logoColor) {
+        const tintBaseKey = `${f.imageURL}|${f._logoColor}`;
+        const immediateSrc = lastTintRenderCache.get(tintBaseKey) || f.imageURL;
+        return `<span class="nBadge${isSnapshotBadge ? ' snapshotBadge' : ''}" ${autoAttr} style="${style}" title="${esc(f.name)}"><img class="tintImg" src="${esc(immediateSrc)}" data-src="${esc(f.imageURL)}" data-tint="${esc(f._logoColor)}" data-brightness="${esc(f._logoBrightness || 1)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
+      }
+      if (hasImg) return `<span class="nBadge${isSnapshotBadge ? ' snapshotBadge' : ''}" ${autoAttr} style="${style}" title="${esc(f.name)}"><img class="cleanImg" src="${esc(f.imageURL)}" data-src="${esc(f.imageURL)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
+      return `<span class="nBadge textOnly" style="${style}">${esc(f.name)}</span>`;
+    }
+
+    function hex(v, f = '#000000') {
+      v = (v || '').trim();
+      if (/^#[0-9a-f]{6}$/i.test(v)) return v;
+      if (/^#[0-9a-f]{3}$/i.test(v)) return '#' + v[1] + v[1] + v[2] + v[2] + v[3] + v[3];
+      if (/^#[0-9a-f]{8}$/i.test(v)) return '#' + v.slice(3, 9);
+      return f;
+    }
+
+    function hexToRgb(hexStr) {
+      hexStr = (hexStr || '#ffffff').replace('#', '').trim();
+      if (hexStr.length === 3) hexStr = hexStr.split('').map(x => x + x).join('');
+      const nVal = parseInt(hexStr, 16);
+      return { r: (nVal >> 16) & 255, g: (nVal >> 8) & 255, b: nVal & 255 };
+    }
+
+    function loadCanvasImage(src, triedProxy = false) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => {
+          if (!triedProxy && !String(src || '').startsWith('data:')) {
+            loadCanvasImage(proxyImageUrl(src), true).then(resolve).catch(reject);
+          } else {
+            reject(new Error('Could not load image.'));
+          }
+        };
+        img.src = src;
+      });
+    }
+
+    function proxyImageUrl(src) {
+      try {
+        const u = new URL(src, window.location.href);
+        if (u.protocol !== 'http:' && u.protocol !== 'https:') return src;
+        return 'https://images.weserv.nl/?url=' + encodeURIComponent(u.href.replace(/^https?:\/\//, ''));
+      } catch (e) {
+        return src;
+      }
+    }
+
+    function tintLogoToDataURL(src, tint, brightness = 1, triedProxy = false) {
+      brightness = Math.max(0, Math.min(2, parseFloat(brightness || 1)));
+      const key = src + '|' + tint + '|b:' + brightness + '|proxy:' + triedProxy;
+      if (tintCache.has(key)) return tintCache.get(key);
+
+      const promise = new Promise(resolve => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(img, 0, 0);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const d = imageData.data;
+            const w = canvas.width, h = canvas.height;
+            const c = hexToRgb(tint);
+
+            let transparentPixels = 0;
+            let edgeTransparent = 0;
+            let edgeTotal = 0;
+            for (let i = 0; i < d.length; i += 4) {
+              if (d[i + 3] < 24) transparentPixels++;
+            }
+            const checkEdge = (x, y) => {
+              const i = (y * w + x) * 4;
+              edgeTotal++;
+              if (d[i + 3] < 24) edgeTransparent++;
+            };
+            for (let x = 0; x < w; x++) { checkEdge(x, 0); checkEdge(x, h - 1); }
+            for (let y = 0; y < h; y++) { checkEdge(0, y); checkEdge(w - 1, y); }
+            const transparentRatio = transparentPixels / (w * h);
+            const edgeTransparentRatio = edgeTotal ? edgeTransparent / edgeTotal : 0;
+
+            if (transparentRatio > 0.20 && edgeTransparentRatio > 0.55) {
+              const boost = Math.max(0, Math.min(2, brightness));
+              let remaining = 0;
+              for (let i = 0; i < d.length; i += 4) {
+                const a = d[i + 3];
+                if (a < 8) continue;
+                remaining++;
+                d[i] = Math.min(255, Math.round(c.r * boost));
+                d[i + 1] = Math.min(255, Math.round(c.g * boost));
+                d[i + 2] = Math.min(255, Math.round(c.b * boost));
+                d[i + 3] = a;
+              }
+              if (remaining >= 8) {
+                ctx.putImageData(imageData, 0, 0);
+                resolve(canvas.toDataURL('image/png'));
+                return;
+              }
+            }
+
+            const samples = [];
+            const samplePoint = (x, y) => {
+              const i = (y * w + x) * 4;
+              if (d[i + 3] > 40) samples.push([d[i], d[i + 1], d[i + 2], d[i + 3]]);
+            };
+            const pts = [
+              [0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1],
+              [Math.floor(w / 2), 0], [Math.floor(w / 2), h - 1],
+              [0, Math.floor(h / 2)], [w - 1, Math.floor(h / 2)]
+            ];
+            pts.forEach(p => samplePoint(p[0], p[1]));
+
+            let bg = null;
+            if (samples.length >= 2) {
+              bg = samples.reduce((a, p) => [a[0] + p[0], a[1] + p[1], a[2] + p[2], a[3] + p[3]], [0, 0, 0, 0]).map(v => v / samples.length);
+            }
+
+            const visited = new Uint8Array(w * h);
+            const isBg = (idx) => {
+              if (d[idx + 3] < 24) return true;
+              if (!bg) return false;
+              const bgLum = 0.2126 * bg[0] + 0.7152 * bg[1] + 0.0722 * bg[2];
+              const threshold = bgLum > 210 ? 55 : 48;
+              return Math.hypot(d[idx] - bg[0], d[idx + 1] - bg[1], d[idx + 2] - bg[2]) < threshold;
+            };
+
+            const queue = [];
+            const push = (x, y) => {
+              if (x < 0 || y < 0 || x >= w || y >= h) return;
+              const pos = y * w + x;
+              if (visited[pos]) return;
+              const idx = pos * 4;
+              if (!isBg(idx)) return;
+              visited[pos] = 1;
+              queue.push(pos);
+            };
+
+            for (let x = 0; x < w; x++) { push(x, 0); push(x, h - 1); }
+            for (let y = 0; y < h; y++) { push(0, y); push(w - 1, y); }
+
+            let qi = 0;
+            while (qi < queue.length) {
+              const pos = queue[qi++];
+              const x = pos % w, y = Math.floor(pos / w);
+              const idx = pos * 4;
+              d[idx + 3] = 0;
+              push(x + 1, y); push(x - 1, y); push(x, y + 1); push(x, y - 1);
+            }
+
+            let remaining = 0;
+            for (let i = 0; i < d.length; i += 4) {
+              const a = d[i + 3];
+              if (a < 8) continue;
+              remaining++;
+              const lum = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+              const chromaBoost = Math.max(d[i], d[i + 1], d[i + 2]) / 255;
+              const strength = Math.min(2, Math.max(0, Math.max(lum / 255, chromaBoost) * brightness));
+              d[i] = Math.min(255, Math.round(c.r * strength));
+              d[i + 1] = Math.min(255, Math.round(c.g * strength));
+              d[i + 2] = Math.min(255, Math.round(c.b * strength));
+              d[i + 3] = a;
+            }
+
+            if (remaining < 8) {
+              resolve(src);
+              return;
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+            resolve(canvas.toDataURL('image/png'));
+          } catch (err) {
+            if (!triedProxy) {
+              tintLogoToDataURL(proxyImageUrl(src), tint, brightness, true).then(resolve);
+            } else {
+              resolve(src);
+            }
+          }
+        };
+        img.onerror = () => {
+          if (!triedProxy) {
+            tintLogoToDataURL(proxyImageUrl(src), tint, brightness, true).then(resolve);
+          } else {
+            resolve(src);
+          }
+        };
+        img.src = src;
+      });
+
+      tintCache.set(key, promise);
+      return promise;
+    }
+
+    function cleanLogoBackgroundToDataURL(src, triedProxy = false) {
+      const key = src + '|proxy:' + triedProxy;
+      if (cleanImageCache.has(key)) return cleanImageCache.get(key);
+      const promise = new Promise(resolve => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(img, 0, 0);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const d = imageData.data;
+            const w = canvas.width, h = canvas.height;
+
+            let originalVisible = 0;
+            for (let i = 0; i < d.length; i += 4) if (d[i + 3] > 20) originalVisible++;
+
+            const samples = [];
+            const samplePoint = (x, y) => {
+              const i = (y * w + x) * 4;
+              if (d[i + 3] > 40) samples.push([d[i], d[i + 1], d[i + 2], d[i + 3]]);
+            };
+            const pts = [
+              [0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1],
+              [Math.floor(w / 2), 0], [Math.floor(w / 2), h - 1],
+              [0, Math.floor(h / 2)], [w - 1, Math.floor(h / 2)]
+            ];
+            pts.forEach(p => samplePoint(p[0], p[1]));
+
+            if (samples.length < 2) { resolve(src); return; }
+
+            const bg = samples.reduce((a, p) => [a[0] + p[0], a[1] + p[1], a[2] + p[2], a[3] + p[3]], [0, 0, 0, 0]).map(v => v / samples.length);
+            const bgLum = 0.2126 * bg[0] + 0.7152 * bg[1] + 0.0722 * bg[2];
+            const bgSat = Math.max(bg[0], bg[1], bg[2]) - Math.min(bg[0], bg[1], bg[2]);
+            const isNeutralEdgeBg = bgSat < 24;
+            const edgeVariance = samples.reduce((sum, p) => {
+              const lum = 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2];
+              return sum + Math.abs(lum - bgLum);
+            }, 0) / samples.length;
+
+            const shouldStrip = isNeutralEdgeBg && (bgLum < 45 || bgLum > 210 || edgeVariance < 8);
+            if (!shouldStrip) { resolve(src); return; }
+
+            const threshold = bgLum > 210 ? 52 : 44;
+            const similarBg = (idx) => {
+              if (d[idx + 3] < 24) return true;
+              return Math.hypot(d[idx] - bg[0], d[idx + 1] - bg[1], d[idx + 2] - bg[2]) < threshold;
+            };
+
+            const visited = new Uint8Array(w * h);
+            const queue = [];
+            const push = (x, y) => {
+              if (x < 0 || y < 0 || x >= w || y >= h) return;
+              const pos = y * w + x;
+              if (visited[pos]) return;
+              const idx = pos * 4;
+              if (!similarBg(idx)) return;
+              visited[pos] = 1;
+              queue.push(pos);
+            };
+
+            for (let x = 0; x < w; x++) { push(x, 0); push(x, h - 1); }
+            for (let y = 0; y < h; y++) { push(0, y); push(w - 1, y); }
+
+            let qi = 0, removed = 0;
+            while (qi < queue.length) {
+              const pos = queue[qi++];
+              const x = pos % w, y = Math.floor(pos / w);
+              const idx = pos * 4;
+              if (d[idx + 3] > 0) { d[idx + 3] = 0; removed++; }
+              push(x + 1, y); push(x - 1, y); push(x, y + 1); push(x, y - 1);
+            }
+
+            let remaining = 0;
+            for (let i = 0; i < d.length; i += 4) if (d[i + 3] > 20) remaining++;
+
+            const remainingRatio = originalVisible ? remaining / originalVisible : 1;
+            if (remaining < 12 || remainingRatio < 0.025 || removed < 8) {
+              resolve(src);
+              return;
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+            resolve(canvas.toDataURL('image/png'));
+          } catch (e) {
+            if (!triedProxy) {
+              cleanLogoBackgroundToDataURL(proxyImageUrl(src), true).then(resolve);
+            } else {
+              resolve(src);
+            }
+          }
+        };
+        img.onerror = () => {
+          if (!triedProxy) {
+            cleanLogoBackgroundToDataURL(proxyImageUrl(src), true).then(resolve);
+          } else {
+            resolve(src);
+          }
+        };
+        img.src = src;
+      });
+      cleanImageCache.set(key, promise);
+      return promise;
+    }
+
+    async function applyCleanImageBackgrounds() {
+      const imgs = Array.from(document.querySelectorAll('img.cleanImg'));
+      for (const img of imgs) {
+        const src = img.dataset.src;
+        if (!src || img.src.startsWith('data:image/')) continue;
+        const dataUrl = await cleanLogoBackgroundToDataURL(src);
+        if (img.dataset.src === src) img.src = dataUrl;
+      }
+    }
+
+    function imageAverageLuminance(src) {
+      if (logoLumCache.has(src)) return logoLumCache.get(src);
+      const promise = new Promise(resolve => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(img, 0, 0);
+            const d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            let sum = 0, count = 0;
+            for (let i = 0; i < d.length; i += 4) {
+              const a = d[i + 3];
+              if (a < 24) continue;
+              const lum = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+              sum += lum * (a / 255);
+              count += (a / 255);
+            }
+            resolve(count ? sum / count : 0);
+          } catch (e) {
+            resolve(null);
+          }
+        };
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+      logoLumCache.set(src, promise);
+      return promise;
+    }
+
+    async function applyAdaptiveBadgeBackgrounds() {
+      const badges = Array.from(document.querySelectorAll('.nBadge[data-auto-bg="1"]'));
+      for (const badge of badges) {
+        const img = badge.querySelector('img');
+        const src = img?.dataset?.src || img?.src;
+        if (!src) continue;
+        const lum = await imageAverageLuminance(src);
+        if (lum === null) continue;
+        if (lum > 150) badge.classList.add('autoDarkBg');
+        else badge.classList.remove('autoDarkBg');
+      }
+    }
+
+    function applyLogoTints() {
+      document.querySelectorAll('img.tintImg').forEach(async img => {
+        const src = img.dataset.src;
+        const tint = img.dataset.tint;
+        const brightness = img.dataset.brightness || 1;
+        if (!src || !tint) return;
+        const dataUrl = await tintLogoToDataURL(src, tint, brightness);
+        if (img.dataset.src === src && img.dataset.tint === tint && (img.dataset.brightness || 1) == brightness) {
+          img.src = dataUrl;
+          lastTintRenderCache.set(src + '|' + tint, dataUrl);
+        }
+      });
+    }
+
+    function processRenderedBadgeImages() {
+      applyCleanImageBackgrounds();
+      applyLogoTints();
+      applyAdaptiveBadgeBackgrounds();
+    }
+
+    async function loadInnerFaceLogoImage(f) {
+      let src = f.imageURL;
+      if (f._logoColor && typeof tintLogoToDataURL === 'function') {
+        try {
+          src = await tintLogoToDataURL(f.imageURL, f._logoColor, f._logoBrightness || 1);
+        } catch (e) {
+          src = f.imageURL;
+        }
+      }
+      return await loadCanvasImage(src);
+    }
+
+    async function bakeInnerFacePng(f) {
+      const cssW = Math.max(24, Math.round(autoWidth(f, false) || 74));
+      const cssH = 30;
+      const scale = (typeof nuvioTvUpscaleMode !== 'undefined' && nuvioTvUpscaleMode) ? 4 : 3;
+
+      const out = document.createElement('canvas');
+      out.width = cssW * scale;
+      out.height = cssH * scale;
+      const ctx = out.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.clearRect(0, 0, out.width, out.height);
+
+      const bg = cssColor(f.tagColor || '#1A1A1A', '#1A1A1A');
+
+      const faceInsetX = 1.15 * scale;
+      const faceInsetY = 1.15 * scale;
+      const faceW = Math.max(1, out.width - faceInsetX * 2);
+      const faceH = Math.max(1, out.height - faceInsetY * 2);
+      const faceRadius = Math.max(1, 6.2 * scale);
+
+      ctx.beginPath();
+      let r = faceRadius;
+      let x = faceInsetX, y = faceInsetY, w = faceW, h = faceH;
+      r = Math.max(0, Math.min(r, w / 2, h / 2));
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+
+      ctx.fillStyle = bg;
+      ctx.fill();
+
+      const img = await loadInnerFaceLogoImage(f);
+      const iw = img.naturalWidth || img.width || 1;
+      const ih = img.naturalHeight || img.height || 1;
+
+      const padX = Math.max(0, Number(autoPadX(f) || 0));
+      const padY = Math.max(0, Number(autoPadY(f) || 0));
+
+      const contentInsetX = (padX + 0.9) * scale;
+      const contentInsetY = (padY + 0.85) * scale;
+      const innerX = Math.max(faceInsetX, contentInsetX);
+      const innerY = Math.max(faceInsetY, contentInsetY);
+      const innerW = Math.max(1, out.width - innerX * 2);
+      const innerH = Math.max(1, out.height - innerY * 2);
+
+      const baseFit = Math.min(innerW / iw, innerH / ih);
+      const logoBoost = 1.18;
+      const fit = Math.min(baseFit * logoBoost, innerW / iw, innerH / ih);
+      const drawW = Math.max(1, iw * fit);
+      const drawH = Math.max(1, ih * fit);
+      const drawX = innerX + (innerW - drawW) / 2;
+      const drawY = innerY + (innerH - drawH) / 2;
+
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+      return out;
+    }
+
+    async function bakeInnerFaceForFilter(f) {
+      const canvas = await bakeInnerFacePng(f);
+      const border = cssColor(f.borderColor || '#858283', '#858283');
+
+      f.imageURL = canvas.toDataURL('image/png');
+      f.tagColor = '#00000000';
+      f.borderColor = border;
+
+      f._innerFaceSnapshotBake = true;
+      f._logoColor = '';
+      f._logoBrightness = 1;
+      f._manualTagColor = false;
+      f._badgeWidth = 0;
+      f._padX = 0;
+      f._padY = 0;
+      return true;
+    }
+
+    function needsInnerFaceBake(f) {
+      return !!(f && f.imageURL && (
+        f._manualTagColor ||
+        f._logoColor ||
+        (+f._badgeWidth || 0) > 0 ||
+        (+f._padX || 0) > 0 ||
+        (+f._padY || 0) > 0
+      ));
+    }
+
+    async function bakePendingForPublish() {
+      const targets = state.filters.filter(needsInnerFaceBake);
+      let done = 0;
+      for (const f of targets) {
+        done++;
+        await bakeInnerFaceForFilter(f);
+        await new Promise(resolve => setTimeout(resolve, 20));
+      }
+      return targets.length;
+    }
+
+    function escapeRegexLiteral(s) {
+      return (s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function matchTextToPattern(text) {
+      const raw = (text || '').trim();
+      if (!raw) return '(?i)';
+      const parts = raw.split(/[\s._-]+/).filter(Boolean).map(escapeRegexLiteral);
+      const joined = parts.join('[\\\\s._-]*');
+      return `(?i)\\\\b${joined}\\\\b`;
+    }
+
+    function looksLikeRegex(s) {
+      return /^\(\?i\)/.test(s || '') || /[\\[\]()?+*|^$]/.test(s || '');
+    }
+
+    function getGroupFallback() {
+      return state.groups.find(g => g.id === 'gq')?.id || state.groups[0]?.id || 'gq';
+    }
+
+    function initBadgeBuilder() {
+      renderRegexPresets();
+      
+      const manageSel = byId("badgeDeleteCategorySelect");
+      if (manageSel) {
+        const currentVal = manageSel.value;
+        manageSel.innerHTML = state.groups.map(g => `<option value="${escapeHtml(g.id)}">${escapeHtml(g.name)}</option>`).join("");
+        if (currentVal && state.groups.some(g => g.id === currentVal)) {
+          manageSel.value = currentVal;
+        }
+      }
+      
+      const editGroupSel = byId("badgeEditGroupSelect");
+      if (editGroupSel) {
+        const currentVal = editGroupSel.value;
+        editGroupSel.innerHTML = state.groups.map(g => `<option value="${escapeHtml(g.id)}">${escapeHtml(g.name)}</option>`).join("");
+        if (currentVal && state.groups.some(g => g.id === currentVal)) {
+          editGroupSel.value = currentVal;
+        }
+      }
+
+      const createGroupSel = byId("badgeCreateGroupSelect");
+      if (createGroupSel) {
+        const currentVal = createGroupSel.value;
+        createGroupSel.innerHTML = `<option value="">-- Choose Category --</option>` + state.groups.map(g => `<option value="${escapeHtml(g.id)}">${escapeHtml(g.name)}</option>`).join("");
+        if (currentVal !== undefined && (currentVal === "" || state.groups.some(g => g.id === currentVal))) {
+          createGroupSel.value = currentVal;
+        } else {
+          createGroupSel.value = "";
+        }
+      }
+    }
+
+    function renderRegexPresets() {
+      const el = byId("badgeCreatePresetSelect");
+      if (!el) return;
+      el.innerHTML = KNOWN_REGEX_PRESETS.map(([pattern, label]) => `<option value="${escapeHtml(pattern)}">${escapeHtml(label)}</option>`).join("");
+    }
+
+    function renderBadgeGallery() {
+      const gallery = byId("badgeGalleryContainer");
+      if (!gallery) return;
+
+      const q = byId("badgeSearchInput").value.toLowerCase().trim();
+      const filtered = state.filters.filter(f => {
+        const matchesQuery = (f.name + " " + f.pattern).toLowerCase().includes(q);
+        const matchesPreview = !onlyMatches || filterMatchesPreviewText(f, previewLinkText);
+        return matchesQuery && matchesPreview;
+      });
+
+      byId("badgeGalleryCount").textContent = `(${filtered.length} shown / ${state.filters.length} total)`;
+
+      gallery.innerHTML = `
+        <div class="badge-grid">
+          ${filtered.map(f => {
+            const isActive = f.id === selectedBadgeId;
+            return `
+              <div class="badge-tile ${isActive ? 'active' : ''} ${!f.isEnabled ? 'is-disabled' : ''}" data-badge-id="${escapeHtml(f.id)}">
+                <div class="badge-tile-preview">${makeBadgeHTML(f)}</div>
+                <div class="badge-tile-name">${escapeHtml(f.name)}</div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+
+      gallery.querySelectorAll(".badge-tile").forEach(tile => {
+        tile.addEventListener("click", () => {
+          selectedBadgeId = tile.getAttribute("data-badge-id");
+          renderEditor();
+        });
+      });
+    }
+
+    function renderSelectedBadgeDetails() {
+      const noSel = byId("badgeEditorNoSelection");
+      const form = byId("badgeEditorForm");
+      if (!noSel || !form) return;
+
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (!f) {
+        noSel.classList.remove("hidden");
+        form.classList.add("hidden");
+        byId("badgeEditTitle").textContent = "Badge Editor";
+        return;
+      }
+
+      noSel.classList.add("hidden");
+      form.classList.remove("hidden");
+      byId("badgeEditTitle").textContent = `Editing: ${f.name}`;
+
+      byId("badgeEditorPreviewContainer").innerHTML = makeBadgeHTML(f, true);
+
+      byId("badgeEditName").value = f.name || "";
+      byId("badgeEditGroupSelect").value = f.groupId || "";
+      byId("badgeEditEnabledSelect").value = f.isEnabled ? "true" : "false";
+      byId("badgeEditPattern").value = f.pattern || "";
+      byId("badgeEditImageUrl").value = f.imageURL || "";
+
+      const filled = isFilterFilled(f);
+      const bordered = isFilterBordered(f);
+
+      const fillColor = filled ? (rememberedBgColorByFilterId.get(f.id) || extractHexColor(f.tagColor)) : (rememberedBgColorByFilterId.get(f.id) || "#1A1A1A");
+      const borderColor = bordered ? (rememberedBorderColorByFilterId.get(f.id) || extractHexColor(f.borderColor)) : (rememberedBorderColorByFilterId.get(f.id) || "#FF858283");
+      const textHex = hex(f.textColor, "#FFFFFF");
+
+      byId("badgeEditTagColorCheckbox").checked = filled;
+      byId("badgeEditTagColor").value = f.tagColor || "";
+      byId("badgeEditTagColor").disabled = !filled;
+      byId("badgeEditTagColorPicker").value = hex(fillColor, "#1A1A1A");
+      byId("badgeEditTagColorPicker").disabled = !filled;
+
+      byId("badgeEditBorderColorCheckbox").checked = bordered;
+      byId("badgeEditBorderColor").value = f.borderColor || "";
+      byId("badgeEditBorderColor").disabled = !bordered;
+      byId("badgeEditBorderColorPicker").value = hex(borderColor, "#FF858283");
+      byId("badgeEditBorderColorPicker").disabled = !bordered;
+
+      byId("badgeEditTextColor").value = f.textColor || "";
+      byId("badgeEditTextColorPicker").value = textHex;
+
+      if (f.imageURL) {
+        byId("badgeEditTextColorBlock").classList.add("hidden");
+        byId("badgeEditLogoTintBlock").classList.remove("hidden");
+        
+        const tintEnabled = !!f._logoColor;
+        byId("badgeEditLogoTintCheckbox").checked = tintEnabled;
+        
+        const logoHex = hex(f._logoColor || f.textColor || "#FFFFFF", "#FFFFFF");
+        byId("badgeEditLogoColor").value = f._logoColor || "";
+        byId("badgeEditLogoColorPicker").value = logoHex;
+        
+        const brightness = f._logoBrightness || 1;
+        byId("badgeEditLogoBrightness").value = brightness;
+        byId("badgeEditLogoBrightnessVal").textContent = Math.round(brightness * 100) + "%";
+
+        // Enable/disable the tint controls based on the checkbox state
+        byId("badgeEditLogoColor").disabled = !tintEnabled;
+        byId("badgeEditLogoColorPicker").disabled = !tintEnabled;
+        byId("badgeEditLogoBrightness").disabled = !tintEnabled;
+      } else {
+        byId("badgeEditTextColorBlock").classList.remove("hidden");
+        byId("badgeEditLogoTintBlock").classList.add("hidden");
+      }
+
+      const w = f._badgeWidth || 0;
+      byId("badgeEditWidthSlider").value = w;
+      byId("badgeEditWidthVal").textContent = w > 0 ? `${w}px` : "Auto";
+
+      const px = f._padX || 0;
+      byId("badgeEditPadXSlider").value = px;
+      byId("badgeEditPadXVal").textContent = `${px}px`;
+
+      const py = f._padY || 0;
+      byId("badgeEditPadYSlider").value = py;
+      byId("badgeEditPadYVal").textContent = `${py}px`;
+    }
+
+    function syncSelectedBadgeFromUI() {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (!f) return;
+
+      f.name = byId("badgeEditName").value.trim();
+      f.groupId = byId("badgeEditGroupSelect").value;
+      f.isEnabled = byId("badgeEditEnabledSelect").value === "true";
+      f.pattern = byId("badgeEditPattern").value.trim();
+      f.imageURL = byId("badgeEditImageUrl").value.trim();
+
+      f.tagColor = byId("badgeEditTagColor").value.trim();
+      f.borderColor = byId("badgeEditBorderColor").value.trim();
+      f.textColor = byId("badgeEditTextColor").value.trim();
+
+      if (f.imageURL) {
+        const tintEnabled = byId("badgeEditLogoTintCheckbox").checked;
+        if (tintEnabled) {
+          f._logoColor = byId("badgeEditLogoColor").value.trim();
+          f._logoBrightness = parseFloat(byId("badgeEditLogoBrightness").value) || 1;
+        } else {
+          f._logoColor = "";
+          f._logoBrightness = 1;
+        }
+      }
+
+      f._badgeWidth = parseInt(byId("badgeEditWidthSlider").value, 10) || 0;
+      f._padX = parseInt(byId("badgeEditPadXSlider").value, 10) || 0;
+      f._padY = parseInt(byId("badgeEditPadYSlider").value, 10) || 0;
+
+      renderEditor();
+    }
+
+    function setupColorReciprocalSync(textId, pickerId) {
+      const textEl = byId(textId);
+      const pickerEl = byId(pickerId);
+      if (!textEl || !pickerEl) return;
+
+      textEl.addEventListener("input", () => {
+        pickerEl.value = hex(textEl.value, "#000000");
+        const f = state.filters.find(filter => filter.id === selectedBadgeId);
+        if (f) {
+          f[textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"))] = textEl.value;
+          if (textId === "badgeEditTagColor") f._manualTagColor = true;
+          renderEditor();
+        }
+      });
+
+      pickerEl.addEventListener("input", () => {
+        textEl.value = pickerEl.value;
+        const f = state.filters.find(filter => filter.id === selectedBadgeId);
+        if (f) {
+          f[textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"))] = pickerEl.value;
+          if (textId === "badgeEditTagColor") f._manualTagColor = true;
+          renderEditor();
+        }
+      });
+    }
+
+    function setupBuilderColorReciprocalSync(textId, pickerId) {
+      const textEl = byId(textId);
+      const pickerEl = byId(pickerId);
+      if (!textEl || !pickerEl) return;
+
+      textEl.addEventListener("input", () => {
+        pickerEl.value = hex(textEl.value, "#000000");
+        renderCreateBadgePreview();
+      });
+
+      pickerEl.addEventListener("input", () => {
+        textEl.value = pickerEl.value;
+        renderCreateBadgePreview();
+      });
+    }
+
+    function renderCreateBadgePreview() {
+      const name = byId("badgeCreateName").value.trim() || "New Badge";
+      const imageURL = byId("badgeCreateImageUrl").value.trim();
+      
+      const hasFill = byId("badgeCreateTagColorCheckbox") ? byId("badgeCreateTagColorCheckbox").checked : true;
+      const hasBorder = byId("badgeCreateBorderColorCheckbox") ? byId("badgeCreateBorderColorCheckbox").checked : true;
+
+      // Ensure inputs match disabled state based on checkboxes
+      if (byId("badgeCreateTagColor")) byId("badgeCreateTagColor").disabled = !hasFill;
+      if (byId("badgeCreateTagColorPicker")) byId("badgeCreateTagColorPicker").disabled = !hasFill;
+      if (byId("badgeCreateBorderColor")) byId("badgeCreateBorderColor").disabled = !hasBorder;
+      if (byId("badgeCreateBorderColorPicker")) byId("badgeCreateBorderColorPicker").disabled = !hasBorder;
+
+      const logoTintBlock = byId("badgeCreateLogoTintBlock");
+      const textColorBlock = byId("badgeCreateTextColorBlock");
+      
+      if (imageURL) {
+        if (textColorBlock) textColorBlock.classList.add("hidden");
+        if (logoTintBlock) logoTintBlock.classList.remove("hidden");
+      } else {
+        if (textColorBlock) textColorBlock.classList.remove("hidden");
+        if (logoTintBlock) logoTintBlock.classList.add("hidden");
+      }
+
+      const tintEnabled = byId("badgeCreateLogoTintCheckbox") ? byId("badgeCreateLogoTintCheckbox").checked : false;
+      if (byId("badgeCreateLogoColor")) byId("badgeCreateLogoColor").disabled = !tintEnabled;
+      if (byId("badgeCreateLogoColorPicker")) byId("badgeCreateLogoColorPicker").disabled = !tintEnabled;
+      if (byId("badgeCreateLogoBrightness")) byId("badgeCreateLogoBrightness").disabled = !tintEnabled;
+
+      const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
+      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+
+      const f = {
+        name,
+        imageURL,
+        groupId: byId("badgeCreateGroupSelect").value || state.groups[0]?.id || "gq",
+        tagColor: hasFill ? (byId("badgeCreateTagColor").value.trim() || "#1A1A1A") : "#00000000",
+        borderColor: hasBorder ? (byId("badgeCreateBorderColor").value.trim() || "#FF858283") : "#00000000",
+        textColor: byId("badgeCreateTextColor").value.trim() || "#FFFFFF",
+        isEnabled: true,
+        _badgeWidth: 0,
+        _padX: 0,
+        _padY: 0,
+        _logoColor: logoColorVal,
+        _logoBrightness: logoBrightnessVal
+      };
+      byId("badgeCreatePreviewContainer").innerHTML = makeBadgeHTML(f);
+      processRenderedBadgeImages();
+    }
+
+    function deleteGroupById(groupId, deleteBadges = false) {
+      if (!groupId) return;
+      if (state.groups.length <= 1) {
+        alert("You need to keep at least one category.");
+        return;
+      }
+      const group = state.groups.find(g => g.id === groupId);
+      if (!group) return;
+
+      const groupBadges = state.filters.filter(f => f.groupId === groupId);
+      const count = groupBadges.length;
+      const fallback = state.groups.find(g => g.id !== groupId);
+
+      let message = deleteBadges
+        ? `Delete "${group.name}" and remove ${count} badge${count === 1 ? "" : "s"}?`
+        : `Delete "${group.name}"? ${count ? `${count} badge${count === 1 ? "" : "s"} will be moved to "${fallback.name}".` : ""}`;
+
+      if (!confirm(message)) return;
+
+      if (deleteBadges) {
+        state.filters = state.filters.filter(f => f.groupId !== groupId);
+      } else if (fallback) {
+        state.filters.forEach(f => {
+          if (f.groupId === groupId) f.groupId = fallback.id;
+        });
+      }
+
+      state.groups = state.groups.filter(g => g.id !== groupId);
+
+      initBadgeBuilder();
+      renderEditor();
+      setStatus("editorStatus", `Deleted category "${group.name}".`, "good");
+    }
+
+    function findDefaultForBadge(badge) {
+      if (!badge) return null;
+      const pools = [];
+      pools.push({ name: 'built-in starter', filters: CLEAN_MINIMALIST_FALLBACK.filters });
+      pools.push({ name: 'current state', filters: state.filters });
+      for (const [tplId, payload] of templateCache.entries()) {
+        if (payload?.json?.filters) {
+          const tpl = premadeTemplates.find(t => t.id === tplId);
+          pools.unshift({ name: tpl ? tpl.name : tplId, filters: payload.json.filters });
+        }
+      }
+      for (const pool of pools) {
+        const found = pool.filters.find(x => x && badge.id && x.id === badge.id);
+        if (found) return { sourceName: pool.name, filter: found };
+      }
+      for (const pool of pools) {
+        const found = pool.filters.find(x => x && x.groupId === badge.groupId && x.name === badge.name);
+        if (found) return { sourceName: pool.name, filter: found };
+      }
+      return null;
+    }
+
+    function resetSelectedBadgeToDefault() {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (!f) return;
+
+      const found = findDefaultForBadge(f);
+      if (!found) {
+        alert("No default was found for this badge.");
+        return;
+      }
+
+      if (!confirm(`Reset "${f.name}" to its ${found.sourceName} default?`)) return;
+
+      f.tagColor = found.filter.tagColor || "#00000000";
+      f.borderColor = found.filter.borderColor || "#00000000";
+      f.textColor = found.filter.textColor || "#FFFFFF";
+      f.tagStyle = (found.filter.tagStyle || "filled") === "filled and bordered" ? "filled" : (found.filter.tagStyle || "filled");
+      f.imageURL = found.filter.imageURL || "";
+      f._logoColor = "";
+      f._logoBrightness = 1;
+      f._badgeWidth = 0;
+      f._padX = 0;
+      f._padY = 0;
+      f._manualTagColor = false;
+      f._innerFaceSnapshotBake = false;
+
+      renderEditor();
+      setStatus("editorStatus", `Reset "${f.name}" to default.`, "good");
+    }
+
+    // (moveSelectedBadge removed)
+
+    function duplicateSelectedBadge() {
+      const idx = state.filters.findIndex(f => f.id === selectedBadgeId);
+      if (idx === -1) return;
+
+      const f = JSON.parse(JSON.stringify(state.filters[idx]));
+      f.id = 'b-' + Math.random().toString(36).slice(2, 8);
+      f.name = f.name + " copy";
+      state.filters.splice(idx + 1, 0, f);
+      selectedBadgeId = f.id;
+      renderEditor();
+      setStatus("editorStatus", `Duplicate badge "${f.name}".`, "good");
+    }
+
+    function deleteSelectedBadge() {
+      const idx = state.filters.findIndex(f => f.id === selectedBadgeId);
+      if (idx === -1) return;
+
+      const f = state.filters[idx];
+      if (!confirm(`Delete badge "${f.name}"?`)) return;
+
+      state.filters.splice(idx, 1);
+      selectedBadgeId = state.filters[idx]?.id || state.filters[idx - 1]?.id || null;
+      renderEditor();
+      setStatus("editorStatus", `Deleted badge "${f.name}".`, "good");
+    }
+
+    function copySelectedBadgeToClipboard() {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (!f) return;
+      
+      const {
+        _badgeWidth, _padX, _padY, _logoColor, _logoBrightness, _manualTagColor, _innerFaceSnapshotBake, ...rest
+      } = f;
+      
+      const jsonStr = JSON.stringify(rest, null, 2);
+      navigator.clipboard.writeText(jsonStr).then(() => {
+        setStatus("editorStatus", `Copied badge "${f.name}" JSON to clipboard.`, "good");
+      }).catch(err => {
+        setStatus("editorStatus", "Failed to copy badge JSON to clipboard.", "danger");
+      });
+    }
+
+    function copyBuiltBadgeToClipboard() {
+      const name = byId("badgeCreateName").value.trim();
+      const groupId = byId("badgeCreateGroupSelect").value;
+      if (!groupId) {
+        alert("Please select a category for the badge.");
+        return;
+      }
+      const match = byId("badgeCreatePattern").value.trim() || name;
+      if (!name) {
+        alert("Give the badge a name first.");
+        return;
+      }
+      
+      const idBase = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'badge';
+      let id = `${groupId}-${idBase}`;
+      let i = 2;
+      const ids = new Set(state.filters.map(f => f.id));
+      while (ids.has(id)) {
+        id = `${groupId}-${idBase}-${i++}`;
+      }
+
+      const hasFill = byId("badgeCreateTagColorCheckbox") ? byId("badgeCreateTagColorCheckbox").checked : true;
+      const hasBorder = byId("badgeCreateBorderColorCheckbox") ? byId("badgeCreateBorderColorCheckbox").checked : true;
+
+      const tintEnabled = byId("badgeCreateLogoTintCheckbox") ? byId("badgeCreateLogoTintCheckbox").checked : false;
+      const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
+      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+
+      const badge = {
+        id,
+        name,
+        groupId: groupId,
+        isEnabled: true,
+        pattern: looksLikeRegex(match) ? match : matchTextToPattern(match),
+        imageURL: byId("badgeCreateImageUrl").value.trim(),
+        tagColor: hasFill ? (byId("badgeCreateTagColor").value.trim() || "#1A1A1A") : "#00000000",
+        borderColor: hasBorder ? (byId("badgeCreateBorderColor").value.trim() || "#FF858283") : "#00000000",
+        textColor: byId("badgeCreateTextColor").value.trim() || "#FFFFFF",
+        tagStyle: hasFill ? 'filled' : (hasBorder ? 'bordered' : 'filled'),
+        type: 'filter'
+      };
+
+      const jsonStr = JSON.stringify(badge, null, 2);
+      navigator.clipboard.writeText(jsonStr).then(() => {
+        setStatus("editorStatus", `Copied custom badge "${name}" JSON to clipboard.`, "good");
+      }).catch(err => {
+        setStatus("editorStatus", "Failed to copy badge JSON to clipboard.", "danger");
+      });
+    }
+
+    function addBuiltBadge() {
+      const name = byId("badgeCreateName").value.trim();
+      const groupId = byId("badgeCreateGroupSelect").value;
+      if (!groupId) {
+        alert("Please select a category for the badge.");
+        return;
+      }
+      const match = byId("badgeCreatePattern").value.trim() || name;
+      if (!name) {
+        alert("Give the badge a name first.");
+        return;
+      }
+      
+      const idBase = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'badge';
+      let id = `${groupId}-${idBase}`;
+      let i = 2;
+      const ids = new Set(state.filters.map(f => f.id));
+      while (ids.has(id)) {
+        id = `${groupId}-${idBase}-${i++}`;
+      }
+
+      const hasFill = byId("badgeCreateTagColorCheckbox") ? byId("badgeCreateTagColorCheckbox").checked : true;
+      const hasBorder = byId("badgeCreateBorderColorCheckbox") ? byId("badgeCreateBorderColorCheckbox").checked : true;
+
+      const tintEnabled = byId("badgeCreateLogoTintCheckbox") ? byId("badgeCreateLogoTintCheckbox").checked : false;
+      const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
+      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+
+      const badge = {
+        id,
+        name,
+        groupId: groupId,
+        isEnabled: true,
+        pattern: looksLikeRegex(match) ? match : matchTextToPattern(match),
+        imageURL: byId("badgeCreateImageUrl").value.trim(),
+        tagColor: hasFill ? (byId("badgeCreateTagColor").value.trim() || "#1A1A1A") : "#00000000",
+        borderColor: hasBorder ? (byId("badgeCreateBorderColor").value.trim() || "#FF858283") : "#00000000",
+        textColor: byId("badgeCreateTextColor").value.trim() || "#FFFFFF",
+        tagStyle: hasFill ? 'filled' : (hasBorder ? 'bordered' : 'filled'),
+        type: 'filter',
+        _badgeWidth: 0,
+        _padX: 0,
+        _padY: 0,
+        _logoColor: logoColorVal,
+        _logoBrightness: logoBrightnessVal
+      };
+
+      state.filters.unshift(badge);
+      selectedBadgeId = id;
+      
+      renderEditor();
+      
+      byId("badgeCreateName").value = "";
+      byId("badgeCreatePattern").value = "";
+      byId("badgeCreateImageUrl").value = "";
+      byId("badgeCreatePresetSelect").value = "";
+      byId("badgeCreateTagColor").value = "#1A1A1A";
+      byId("badgeCreateTagColorPicker").value = "#1A1A1A";
+      byId("badgeCreateBorderColor").value = "#FF858283";
+      byId("badgeCreateBorderColorPicker").value = "#FF858283";
+      byId("badgeCreateTextColor").value = "#FFFFFF";
+      byId("badgeCreateTextColorPicker").value = "#FFFFFF";
+      if (byId("badgeCreateTagColorCheckbox")) byId("badgeCreateTagColorCheckbox").checked = true;
+      if (byId("badgeCreateTagColor")) byId("badgeCreateTagColor").disabled = false;
+      if (byId("badgeCreateTagColorPicker")) byId("badgeCreateTagColorPicker").disabled = false;
+      if (byId("badgeCreateBorderColorCheckbox")) byId("badgeCreateBorderColorCheckbox").checked = true;
+      if (byId("badgeCreateBorderColor")) byId("badgeCreateBorderColor").disabled = false;
+      if (byId("badgeCreateBorderColorPicker")) byId("badgeCreateBorderColorPicker").disabled = false;
+
+      if (byId("badgeCreateLogoTintCheckbox")) byId("badgeCreateLogoTintCheckbox").checked = false;
+      if (byId("badgeCreateLogoColor")) {
+        byId("badgeCreateLogoColor").value = "";
+        byId("badgeCreateLogoColor").disabled = true;
+      }
+      if (byId("badgeCreateLogoColorPicker")) {
+        byId("badgeCreateLogoColorPicker").value = "#FFFFFF";
+        byId("badgeCreateLogoColorPicker").disabled = true;
+      }
+      if (byId("badgeCreateLogoBrightness")) {
+        byId("badgeCreateLogoBrightness").value = 1;
+        byId("badgeCreateLogoBrightness").disabled = true;
+      }
+      if (byId("badgeCreateLogoBrightnessVal")) byId("badgeCreateLogoBrightnessVal").textContent = "100%";
+      
+      renderCreateBadgePreview();
+      setStatus("editorStatus", `Added badge "${name}".`, "good");
+    }
+
+    function addCategoryFromManager() {
+      const name = byId("badgeCreateCategoryName").value.trim();
+      if (!name) {
+        alert("Enter a category name first.");
+        return;
+      }
+      
+      const existingGroupIds = new Set(state.groups.map(g => g.id));
+      const newGroupId = makeUniqueId(name, existingGroupIds, "group");
+      
+      state.groups.push({
+        id: newGroupId,
+        name: name,
+        color: "#FFCC00",
+        borderColor: "#00000000",
+        isExpanded: false
+      });
+      
+      byId("badgeCreateCategoryName").value = "";
+      
+      initBadgeBuilder();
+      renderEditor();
+      setStatus("editorStatus", `Added category "${name}".`, "good");
+    }
+
+    // Set up reciprocal syncs
+    setupColorReciprocalSync("badgeEditTagColor", "badgeEditTagColorPicker");
+    setupColorReciprocalSync("badgeEditBorderColor", "badgeEditBorderColorPicker");
+    setupColorReciprocalSync("badgeEditTextColor", "badgeEditTextColorPicker");
+    setupColorReciprocalSync("badgeEditLogoColor", "badgeEditLogoColorPicker");
+
+    setupBuilderColorReciprocalSync("badgeCreateTagColor", "badgeCreateTagColorPicker");
+    setupBuilderColorReciprocalSync("badgeCreateBorderColor", "badgeCreateBorderColorPicker");
+    setupBuilderColorReciprocalSync("badgeCreateTextColor", "badgeCreateTextColorPicker");
+    setupBuilderColorReciprocalSync("badgeCreateLogoColor", "badgeCreateLogoColorPicker");
+
+    // Checkbox toggles for Fill, Border and Logo Tint in Badge Editor
+    byId("badgeEditTagColorCheckbox").addEventListener("change", (e) => {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (f) {
+        setFilterFilled(f, e.target.checked);
+        renderEditor();
+      }
+    });
+
+    byId("badgeEditBorderColorCheckbox").addEventListener("change", (e) => {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (f) {
+        setFilterBorder(f, e.target.checked);
+        renderEditor();
+      }
+    });
+
+    byId("badgeEditLogoTintCheckbox").addEventListener("change", (e) => {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (f) {
+        const checked = e.target.checked;
+        if (checked) {
+          f._logoColor = byId("badgeEditLogoColor").value.trim() || byId("badgeEditLogoColorPicker").value || "#FFFFFF";
+        } else {
+          f._logoColor = "";
+        }
+        renderEditor();
+      }
+    });
+
+    // Search and filters
+    byId("badgeSearchInput").addEventListener("input", () => {
+      renderBadgeGallery();
+    });
+
+
+
+    // Form inputs change/input
+    ["badgeEditName", "badgeEditPattern", "badgeEditImageUrl", "badgeEditGroupSelect", "badgeEditEnabledSelect"].forEach(id => {
+      byId(id).addEventListener("change", syncSelectedBadgeFromUI);
+      byId(id).addEventListener("input", syncSelectedBadgeFromUI);
+    });
+
+    // Sliders
+    byId("badgeEditWidthSlider").addEventListener("input", (e) => {
+      const val = parseInt(e.target.value, 10);
+      byId("badgeEditWidthVal").textContent = val > 0 ? `${val}px` : "Auto";
+      syncSelectedBadgeFromUI();
+    });
+
+    byId("badgeEditPadXSlider").addEventListener("input", (e) => {
+      const val = parseInt(e.target.value, 10);
+      byId("badgeEditPadXVal").textContent = `${val}px`;
+      syncSelectedBadgeFromUI();
+    });
+
+    byId("badgeEditPadYSlider").addEventListener("input", (e) => {
+      const val = parseInt(e.target.value, 10);
+      byId("badgeEditPadYVal").textContent = `${val}px`;
+      syncSelectedBadgeFromUI();
+    });
+
+    byId("badgeEditLogoBrightness").addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      byId("badgeEditLogoBrightnessVal").textContent = Math.round(val * 100) + "%";
+      syncSelectedBadgeFromUI();
+    });
+
+    // Edit actions
+    byId("restoreSelectedBadgeDefaultBtn").addEventListener("click", resetSelectedBadgeToDefault);
+    // (move up/down button listeners removed)
+    byId("badgeEditDuplicateBtn").addEventListener("click", duplicateSelectedBadge);
+    byId("badgeEditDeleteBtn").addEventListener("click", deleteSelectedBadge);
+    byId("badgeEditResetFitBtn").addEventListener("click", () => {
+      const f = state.filters.find(filter => filter.id === selectedBadgeId);
+      if (f) {
+        f._badgeWidth = 0;
+        f._padX = 0;
+        f._padY = 0;
+        f._logoColor = "";
+        f._logoBrightness = 1;
+        f._manualTagColor = false;
+        f._innerFaceSnapshotBake = false;
+        renderEditor();
+      }
+    });
+
+    // Builder changes
+    ["badgeCreateName", "badgeCreateImageUrl", "badgeCreateGroupSelect", "badgeCreateTagColor", "badgeCreateBorderColor", "badgeCreateTextColor", "badgeCreateLogoColor"].forEach(id => {
+      byId(id).addEventListener("input", renderCreateBadgePreview);
+      byId(id).addEventListener("change", renderCreateBadgePreview);
+    });
+
+    // Checkbox toggles for Fill, Border and Logo Tint in Badge Builder
+    byId("badgeCreateTagColorCheckbox").addEventListener("change", (e) => {
+      const checked = e.target.checked;
+      byId("badgeCreateTagColor").disabled = !checked;
+      byId("badgeCreateTagColorPicker").disabled = !checked;
+      renderCreateBadgePreview();
+    });
+
+    byId("badgeCreateBorderColorCheckbox").addEventListener("change", (e) => {
+      const checked = e.target.checked;
+      byId("badgeCreateBorderColor").disabled = !checked;
+      byId("badgeCreateBorderColorPicker").disabled = !checked;
+      renderCreateBadgePreview();
+    });
+
+    byId("badgeCreateLogoTintCheckbox").addEventListener("change", () => {
+      renderCreateBadgePreview();
+    });
+
+    byId("badgeCreateLogoBrightness").addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      byId("badgeCreateLogoBrightnessVal").textContent = Math.round(val * 100) + "%";
+      renderCreateBadgePreview();
+    });
+
+    // Preset dropdown select
+    byId("badgeCreatePresetSelect").addEventListener("change", (e) => {
+      const val = e.target.value;
+      if (val) {
+        byId("badgeCreatePattern").value = val;
+        const option = e.target.options[e.target.selectedIndex];
+        const label = option ? option.textContent : "";
+        if (!byId("badgeCreateName").value.trim() && !label.startsWith("Custom")) {
+          byId("badgeCreateName").value = label.replace(/,.*/, "");
+        }
+      }
+      renderCreateBadgePreview();
+    });
+
+    byId("badgeCreateAddBtn").addEventListener("click", addBuiltBadge);
+    byId("badgeCreateClearBtn").addEventListener("click", () => {
+      byId("badgeCreateName").value = "";
+      byId("badgeCreatePattern").value = "";
+      byId("badgeCreateImageUrl").value = "";
+      byId("badgeCreatePresetSelect").value = "";
+      byId("badgeCreateTagColor").value = "#1A1A1A";
+      byId("badgeCreateTagColorPicker").value = "#1A1A1A";
+      byId("badgeCreateBorderColor").value = "#FF858283";
+      byId("badgeCreateBorderColorPicker").value = "#FF858283";
+      byId("badgeCreateTextColor").value = "#FFFFFF";
+      byId("badgeCreateTextColorPicker").value = "#FFFFFF";
+      if (byId("badgeCreateTagColorCheckbox")) byId("badgeCreateTagColorCheckbox").checked = true;
+      if (byId("badgeCreateTagColor")) byId("badgeCreateTagColor").disabled = false;
+      if (byId("badgeCreateTagColorPicker")) byId("badgeCreateTagColorPicker").disabled = false;
+      if (byId("badgeCreateBorderColorCheckbox")) byId("badgeCreateBorderColorCheckbox").checked = true;
+      if (byId("badgeCreateBorderColor")) byId("badgeCreateBorderColor").disabled = false;
+      if (byId("badgeCreateBorderColorPicker")) byId("badgeCreateBorderColorPicker").disabled = false;
+      renderCreateBadgePreview();
+    });
+
+    // Copy buttons listeners
+    byId("badgeEditCopyBtn").addEventListener("click", copySelectedBadgeToClipboard);
+    byId("badgeCreateCopyBtn").addEventListener("click", copyBuiltBadgeToClipboard);
+
+    // Tab switcher click handlers
+    byId("toggleTemplateEditorBtn").addEventListener("click", () => {
+      byId("templateEditorPanel").classList.remove("hidden");
+      byId("badgeEditorPanel").classList.add("hidden");
+      byId("toggleTemplateEditorBtn").className = "btn-main active";
+      byId("toggleBadgeEditorBtn").className = "btn-soft";
+      renderEditor();
+    });
+    
+    byId("toggleBadgeEditorBtn").addEventListener("click", () => {
+      byId("templateEditorPanel").classList.add("hidden");
+      byId("badgeEditorPanel").classList.remove("hidden");
+      byId("toggleTemplateEditorBtn").className = "btn-soft";
+      byId("toggleBadgeEditorBtn").className = "btn-main active";
+      renderEditor();
+    });
+
   </script>
 </body>
 </html>
-
