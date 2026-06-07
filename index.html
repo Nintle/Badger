@@ -620,16 +620,18 @@
     }
     .filter-info {
       display: flex;
-      width: 68px;
-      height: 44px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
+      width: auto;
+      min-width: 68px;
+      height: auto;
+      min-height: 44px;
+      border: none;
+      background: transparent;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       overflow: hidden;
+      flex-shrink: 0;
     }
-    .filter-info img {
+    .filter-info > img {
       width: 64px;
       height: 36px;
       object-fit: contain;
@@ -3066,6 +3068,12 @@
       if (!filter.imageURL) {
         return `<span class="chip textOnly" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};color:${escapeHtml(filter.textColor || '#fff')};font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">${escapeHtml(filter.name)}</span>`;
       }
+      if (filter._logoColor) {
+        const tintBaseKey = `${filter.imageURL}|${filter._logoColor}`;
+        const immediateSrc = lastTintRenderCache.get(tintBaseKey) || filter.imageURL;
+        const icon = `<img class="tintImg" src="${escapeHtml(immediateSrc)}" data-src="${escapeHtml(filter.imageURL)}" data-tint="${escapeHtml(filter._logoColor)}" data-brightness="${escapeHtml(filter._logoBrightness || 1)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.chip'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='bold'; p.style.padding='2px 6px'; p.style.color=p.style.color || '#fff';}}" />`;
+        return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
+      }
       const icon = `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.chip'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='bold'; p.style.padding='2px 6px'; p.style.color=p.style.color || '#fff';}}" />`;
       return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
     }
@@ -3185,6 +3193,7 @@
           }
         });
       });
+      processRenderedBadgeImages();
     }
     async function ensureTemplateLoaded(template) {
       const existing = templateCache.get(template.id);
@@ -3320,6 +3329,11 @@
         if (!filter.imageURL) {
           return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)}; font-size: 8px; font-weight: 950; display: inline-flex; align-items: center; justify-content: center; color: ${escapeHtml(filter.textColor || '#fff')};">${escapeHtml(filter.name)}</span>`;
         }
+        if (filter._logoColor) {
+          const tintBaseKey = `${filter.imageURL}|${filter._logoColor}`;
+          const immediateSrc = lastTintRenderCache.get(tintBaseKey) || filter.imageURL;
+          return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge tintImg" src="${escapeHtml(immediateSrc)}" data-src="${escapeHtml(filter.imageURL)}" data-tint="${escapeHtml(filter._logoColor)}" data-brightness="${escapeHtml(filter._logoBrightness || 1)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.group-mini-chip'); if(p){p.textContent=this.alt; p.style.fontSize='8px'; p.style.fontWeight='950'; p.style.display='inline-flex'; p.style.alignItems='center'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" /></span>`;
+        }
         return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.group-mini-chip'); if(p){p.textContent=this.alt; p.style.fontSize='8px'; p.style.fontWeight='950'; p.style.display='inline-flex'; p.style.alignItems='center'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" /></span>`;
       };
       state.groups.forEach((group, index) => {
@@ -3345,7 +3359,7 @@
                 </div>
               </div>
               <div class="filter-main">
-                <div class="filter-info" style="background: rgba(255, 204, 0, 0.12); border-color: rgba(255, 204, 0, 0.3); justify-content: center; align-items: center; font-size: 1.3rem; display: flex;">⚡</div>
+                <div class="filter-info" style="background: rgba(255, 204, 0, 0.12); border: 1px solid rgba(255, 204, 0, 0.3); border-radius: 8px; justify-content: center; align-items: center; font-size: 1.3rem; display: flex; width: 68px; height: 44px; flex-shrink: 0;">⚡</div>
                 <div class="control-stack">
                   <div class="control-line use-line">
                     <label class="control-group color-group use-group" style="grid-column: 1 / -1; justify-content: space-between; padding: 4px 8px; width: 100%;">
@@ -3379,11 +3393,7 @@
                 const bordered = isFilterBordered(filter);
                 const fillColor = rememberedBgColorByFilterId.get(filter.id) || extractHexColor(filter.tagColor);
                 const borderColor = rememberedBorderColorByFilterId.get(filter.id) || (isTransparentColor(filter.borderColor) ? "#FFFFFF" : extractHexColor(filter.borderColor));
-                const iconBg = filled ? fillColor : "rgba(255, 255, 255, 0.04)";
-                const iconBorder = bordered ? borderColor : "rgba(255, 255, 255, 0.12)";
-                const icon = filter.imageURL
-                  ? `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.filter-info'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='900'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" />`
-                  : `<span style="font-size:9px; font-weight:900; width:100%; text-align:center; color:${escapeHtml(filter.textColor || '#fff')}; display:flex; align-items:center; justify-content:center;">${escapeHtml(filter.name)}</span>`;
+                const badgeHtml = makeBadgeHTML(filter, false);
                 return `
                   <div class="filter-row ${filter.isEnabled ? "" : "is-disabled"}">
                     <div class="filter-header">
@@ -3394,7 +3404,7 @@
                       </div>
                     </div>
                     <div class="filter-main">
-                      <div class="filter-info" style="background:${escapeHtml(iconBg)};border-color:${escapeHtml(iconBorder)};">${icon}</div>
+                      <div class="filter-info">${badgeHtml}</div>
                       <div class="control-stack">
                         <div class="control-line use-line">
                           <button class="btn-soft" data-filter-id="${filter.id}" data-badge-action="edit-in-badge-editor" style="grid-column: 1; padding: 4px 8px; font-size: 0.72rem; border-radius: 6px; font-weight: 700; background: rgba(255, 149, 0, 0.12); border: 1px solid rgba(255, 149, 0, 0.3); color: #FF9500; cursor: pointer; text-align: center;" title="Edit in Badge Editor">Edit in Badge Editor</button>
@@ -4120,6 +4130,9 @@
       }
     });
     byId("backToStart").addEventListener("click", () => {
+      if (!confirm("Are you sure you want to go back to start? You will lose all of your progress.")) {
+        return;
+      }
       byId("importWrapper").classList.remove("is-open");
       byId("premadeWrapper").classList.remove("is-open");
       byId("chooseImport").classList.remove("active");
@@ -4994,6 +5007,14 @@
       f._padX = parseInt(byId("badgeEditPadXSlider").value, 10) || 0;
       f._padY = parseInt(byId("badgeEditPadYSlider").value, 10) || 0;
 
+      // Update remembered color maps to stay in sync with Template Editor view
+      if (f.tagColor && !isTransparentColor(f.tagColor)) {
+        rememberedBgColorByFilterId.set(f.id, extractHexColor(f.tagColor));
+      }
+      if (f.borderColor && !isTransparentColor(f.borderColor)) {
+        rememberedBorderColorByFilterId.set(f.id, extractHexColor(f.borderColor));
+      }
+
       renderEditor();
     }
 
@@ -5006,8 +5027,18 @@
         pickerEl.value = hex(textEl.value, "#000000");
         const f = state.filters.find(filter => filter.id === selectedBadgeId);
         if (f) {
-          f[textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"))] = textEl.value;
+          const key = textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"));
+          f[key] = textEl.value;
           if (textId === "badgeEditTagColor") f._manualTagColor = true;
+
+          // Sync with remembered color maps
+          if (textId === "badgeEditTagColor" && textEl.value && !isTransparentColor(textEl.value)) {
+            rememberedBgColorByFilterId.set(f.id, extractHexColor(textEl.value));
+          }
+          if (textId === "badgeEditBorderColor" && textEl.value && !isTransparentColor(textEl.value)) {
+            rememberedBorderColorByFilterId.set(f.id, extractHexColor(textEl.value));
+          }
+
           renderEditor();
         }
       });
@@ -5016,8 +5047,18 @@
         textEl.value = pickerEl.value;
         const f = state.filters.find(filter => filter.id === selectedBadgeId);
         if (f) {
-          f[textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"))] = pickerEl.value;
+          const key = textId === "badgeEditLogoColor" ? "_logoColor" : (textId === "badgeEditTagColor" ? "tagColor" : (textId === "badgeEditBorderColor" ? "borderColor" : "textColor"));
+          f[key] = pickerEl.value;
           if (textId === "badgeEditTagColor") f._manualTagColor = true;
+
+          // Sync with remembered color maps
+          if (textId === "badgeEditTagColor" && pickerEl.value && !isTransparentColor(pickerEl.value)) {
+            rememberedBgColorByFilterId.set(f.id, extractHexColor(pickerEl.value));
+          }
+          if (textId === "badgeEditBorderColor" && pickerEl.value && !isTransparentColor(pickerEl.value)) {
+            rememberedBorderColorByFilterId.set(f.id, extractHexColor(pickerEl.value));
+          }
+
           renderEditor();
         }
       });
@@ -5169,6 +5210,16 @@
       f._padY = 0;
       f._manualTagColor = false;
       f._innerFaceSnapshotBake = false;
+      if (f.tagColor && !isTransparentColor(f.tagColor)) {
+        rememberedBgColorByFilterId.set(f.id, extractHexColor(f.tagColor));
+      } else {
+        rememberedBgColorByFilterId.delete(f.id);
+      }
+      if (f.borderColor && !isTransparentColor(f.borderColor)) {
+        rememberedBorderColorByFilterId.set(f.id, extractHexColor(f.borderColor));
+      } else {
+        rememberedBorderColorByFilterId.delete(f.id);
+      }
 
       renderEditor();
       setStatus("editorStatus", `Reset "${f.name}" to default.`, "good");
