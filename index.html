@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Badger</title>
   <style>
     :root {
@@ -545,9 +545,16 @@
       padding: 1px;
     }
     .group-mini-more {
+      flex-shrink: 0;
       color: var(--muted);
       font-size: 0.78rem;
       font-weight: 600;
+    }
+    .group-mini-preview,
+    .template-badge-preview {
+      display: inline-flex;
+      flex: 0 0 auto;
+      zoom: .6;
     }
     .group-mini-chip {
       display: inline-flex;
@@ -918,7 +925,7 @@
       align-items: center;
       gap: 6px;
       opacity: 1;
-      max-width: 250px;
+      max-width: 600px;
       transition: 
         opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), 
         max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -1121,7 +1128,7 @@
       overflow: visible;
     }
     .nBadge.snapshotBadge img {
-      object-fit: fill;
+      object-fit: contain;
     }
     .nBadge.autoDarkBg {
       background: #090b10 !important;
@@ -1149,6 +1156,90 @@
         grid-template-columns: 1fr !important;
       }
     }
+
+    /* Responsive controls and stable layouts, including narrow phones. */
+    :root { color-scheme: dark; }
+    .wrap, .panel, .row > *, .row-2 > *, .editor-top > *,
+    .badge-editor-layout > *, .filter-main > *, .group-head > *,
+    .control-stack, .filter-row, .header-text { min-width: 0; }
+    input:not([type="checkbox"]):not([type="color"]):not([type="range"]),
+    select, textarea { min-width: 0; max-width: 100%; }
+    select { font: inherit; color: var(--text); background: var(--panel-2); }
+    #previewLinkInput { width: 100%; }
+    .status, .muted, .help-box, .template-name, #badgeEditTitle { overflow-wrap: anywhere; }
+    button, summary { touch-action: manipulation; }
+    button:disabled { opacity: .5; cursor: wait; transform: none; }
+    :is(button, input, select, textarea, summary, a):focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 3px;
+    }
+    .group-action-buttons.hidden-fade { visibility: hidden; }
+    .modal-card { max-height: 85dvh; overscroll-behavior: contain; }
+    .badge-tile { color: var(--text); font: inherit; min-width: 0; }
+    input[type="range"] {
+      height: 44px; margin: 0;
+      background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)) center / 100% 6px no-repeat !important;
+      touch-action: pan-y;
+    }
+    input[type="range"]::-webkit-slider-thumb { width: 24px; height: 24px; }
+    input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; }
+    @media (min-width: 921px) and (max-width: 1200px) {
+      .group-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .control-line { grid-template-columns: minmax(0,1fr); }
+      .use-line .use-group { grid-column: 1; }
+    }
+    @media (max-width: 920px) {
+      .badge-editor-layout { gap: 12px; }
+      #badgeGalleryContainer { max-height: 240px !important; }
+      #badgeEditorLivePreviewPlaceholder { order: -1; }
+      .badge-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); }
+      .group-actions, .group-action-buttons { flex-wrap: wrap; max-width: 100%; }
+      .group-action-buttons.hidden-fade { display: none; }
+      .group-mini-badges { max-width: 100%; flex-wrap: wrap; }
+      .editor-tabs button { min-height: 56px; }
+      .editor-tabs .voidxo-credit { position: static; display: block; font-size: 10px; margin-top: 3px; }
+      button, summary, select { min-height: 44px; }
+      summary { display: list-item; align-content: center; }
+      input:not([type="checkbox"]):not([type="range"]), textarea, select { font-size: 16px !important; }
+      input:not([type="checkbox"]):not([type="range"]) { min-height: 44px; }
+      input[type="color"] { min-width: 44px; width: 44px !important; height: 44px !important; }
+      input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; }
+      .control-group { min-height: 48px; }
+      .btn-reorder { width: 44px !important; height: 44px !important; min-width: 44px !important; }
+      .btn-icon { width: 44px; min-width: 44px; }
+      .screen-nav, .editor-actions, .template-actions { gap: 8px; flex-wrap: wrap; }
+      .filter-header-actions { flex-wrap: wrap; }
+      .control-line { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 540px) {
+      body { padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
+      .wrap { padding-top: 0; gap: 10px; }
+      .panel, .wrap > section:first-child.panel, #startScreen.panel { padding: 12px; }
+      .header-content { gap: 12px; align-items: flex-start; }
+      .header-logo { height: 44px; width: 44px; }
+      .wrap > section:first-child.panel .sub { font-size: .95rem; }
+      .mode-grid { gap: 12px; margin-top: 16px; }
+      .mode-card { padding: 18px; min-height: 0; }
+      .mode-card .muted { margin-bottom: 16px; }
+      .site-credit { position: static; margin-top: 12px; }
+      .group-toggle { flex-wrap: wrap; gap: 4px; }
+      .group-meta { margin-left: 0; font-size: .75rem; }
+      .group-actions { width: 100%; }
+      .group-action-buttons { width: 100%; }
+      .group-action-buttons button { flex: 1 1 auto; }
+      .template-actions { grid-template-columns: 1fr; }
+      .screen-nav > button { flex: 1 1 100%; }
+      .filter-header { flex-wrap: wrap; }
+      .filter-name-heading { white-space: normal; overflow-wrap: anywhere; }
+      .help-steps { padding-left: 20px; }
+      .help-box code { white-space: normal; overflow-wrap: anywhere; }
+      #badgeSearchInput { width: 100% !important; }
+    }
+    @media (hover: none) {
+      button:hover, .mode-card:hover, .btn-main.active { transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
   </style>
 </head>
 <body>
@@ -1162,7 +1253,7 @@
             <strong>Contact me:</strong> Nuvio Discord: <strong>Nint</strong>, Reddit: <strong>u/Nintle</strong>
           </div>
         </div>
-        <img class="header-logo" src="https://raw.githubusercontent.com/Nintle/Badger/main/badger.png" alt="Badger Logo" />
+        <img class="header-logo" src="https://raw.githubusercontent.com/Nintle/Badger/main/badger.png" alt="Badger Logo" onerror="this.style.display='none'" />
       </div>
     </section>
     <section id="startScreen" class="panel">
@@ -1392,7 +1483,7 @@
                 
                 <!-- Advanced Fit Controls -->
                 <details class="panel" style="border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: rgba(0,0,0,0.15);">
-                  <summary style="cursor: pointer; font-size: 0.85rem; font-weight: 700; color: var(--accent);">Advanced Fit Controls</summary>
+                  <summary style="cursor: pointer; font-size: 0.85rem; font-weight: 700; color: var(--accent);">Advanced Fit Controls</summary><p class="muted" style="margin: 8px 0; font-size: .8rem;">Padding adds space inside an image badge. Zero removes it; Reset Fit restores automatic spacing.</p>
                   <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
                     <div>
                       <label class="field-label" style="display:block; margin-bottom:2px;">Badge Width (0 = auto)</label>
@@ -1578,7 +1669,7 @@
           <div class="panel" style="padding: 12px; display: flex; flex-direction: column;">
             <div class="editor-top">
               <h3 style="margin: 0;">JSON Code</h3>
-              <button id="copyJsonCode" class="btn-highlight">Copy JSON Code</button>
+              <div class="editor-actions"><button id="copyJsonCode" class="btn-highlight">Copy JSON Code</button><button id="downloadJsonCode" class="btn-soft">Download JSON</button></div>
             </div>
             <textarea id="jsonCodeOutput" class="json-code" readonly></textarea>
           </div>
@@ -2020,10 +2111,10 @@
           tagStyle: String(f?.tagStyle || "filled") === "filled and bordered" ? "filled" : String(f?.tagStyle || "filled"),
           imageURL: String(f?.imageURL || ""),
           _badgeWidth: parseInt(f?._badgeWidth || 0, 10) || 0,
-          _padX: parseInt(f?._padX || 0, 10) || 0,
-          _padY: parseInt(f?._padY || 0, 10) || 0,
+          _padX: optionalPadding(f?._padX, 14),
+          _padY: optionalPadding(f?._padY, 10),
           _logoColor: String(f?._logoColor || ""),
-          _logoBrightness: parseFloat(f?._logoBrightness || 1) || 1,
+          _logoBrightness: brightnessValue(f?._logoBrightness),
           _manualTagColor: Boolean(f?._manualTagColor),
           _innerFaceSnapshotBake: Boolean(f?._innerFaceSnapshotBake)
         };
@@ -2169,7 +2260,11 @@
         tagStyle: String(source.tagStyle || "filled") === "filled and bordered" ? "filled" : String(source.tagStyle || "filled")
       };
     }
+    let badgeModalPreviousFocus = null;
     function closeBadgeImportModal() {
+      document.querySelector("main").inert = false;
+      document.body.style.overflow = "";
+      badgeModalPreviousFocus?.focus();
       byId("badgeImportModal").classList.add("hidden");
       byId("singleBadgeJsonInput").value = "";
       setStatus("badgeImportStatus", "");
@@ -2180,6 +2275,9 @@
         setStatus("editorStatus", "Category was not found for badge import.", "danger");
         return;
       }
+      badgeModalPreviousFocus = document.activeElement;
+      document.querySelector("main").inert = true;
+      document.body.style.overflow = "hidden";
       badgeImportTargetGroupId = groupId;
       byId("badgeImportTarget").textContent = `Category: ${group.name}`;
       byId("singleBadgeJsonInput").value = "";
@@ -2228,7 +2326,7 @@
         return;
       }
       try {
-        await navigator.clipboard.writeText(JSON.stringify(filter, null, 2));
+        await navigator.clipboard.writeText(JSON.stringify(await prepareExportFilter(filter), null, 2));
         setStatus("editorStatus", `Copied badge JSON for "${filter.name}".`, "good");
       } catch {
         setStatus("editorStatus", "Clipboard was blocked. Try again after allowing clipboard access.", "warn");
@@ -2309,51 +2407,28 @@
         wrap.classList.add("shifted-up");
       }
     }
+    let screenTransitionTimer;
     function transitionToScreen(targetScreenId, onComplete = null) {
-      const screens = ["startScreen", "editorScreen", "exportScreen"];
-      const activeScreenId = screens.find(id => !byId(id).classList.contains("hidden"));
-      
-      // Update shifted-up state
-      const wrap = document.querySelector(".wrap");
-      if (targetScreenId === "startScreen") {
-        const importOpen = byId("importWrapper").classList.contains("is-open");
-        const premadeOpen = byId("premadeWrapper").classList.contains("is-open");
-        if (importOpen || premadeOpen) {
-          wrap.classList.add("shifted-up");
-        } else {
-          wrap.classList.remove("shifted-up");
-        }
-      } else {
-        wrap.classList.add("shifted-up");
-      }
-      if (!activeScreenId || activeScreenId === targetScreenId) {
+      clearTimeout(screenTransitionTimer);
+      if (targetScreenId !== 'exportScreen') healthCheckRunId++;
+      const screens = ['startScreen', 'editorScreen', 'exportScreen'];
+      const active = screens.find(id => !byId(id).classList.contains('hidden'));
+      const finish = () => {
         screens.forEach(id => {
-          if (id === targetScreenId) {
-            byId(id).classList.remove("hidden");
-            byId(id).classList.add("screen-animate-in");
-          } else {
-            byId(id).classList.add("hidden");
-            byId(id).classList.remove("screen-animate-in");
-          }
+          byId(id).classList.toggle('hidden', id !== targetScreenId);
+          byId(id).classList.remove('screen-animate-in', 'screen-animate-out');
         });
+        byId(targetScreenId).classList.add('screen-animate-in');
+        updateLayoutSpacing();
+        if (active !== targetScreenId) window.scrollTo({top: 0, behavior: 'instant'});
         if (onComplete) onComplete();
-        return;
+      };
+      if (!active || active === targetScreenId || matchMedia('(prefers-reduced-motion: reduce)').matches) finish();
+      else {
+        byId(active).classList.remove('screen-animate-in');
+        byId(active).classList.add('screen-animate-out');
+        screenTransitionTimer = setTimeout(finish, 140);
       }
-      
-      const fromEl = byId(activeScreenId);
-      const toEl = byId(targetScreenId);
-      
-      fromEl.classList.remove("screen-animate-in");
-      fromEl.classList.add("screen-animate-out");
-      
-      setTimeout(() => {
-        fromEl.classList.add("hidden");
-        fromEl.classList.remove("screen-animate-out");
-        
-        toEl.classList.remove("hidden");
-        toEl.classList.add("screen-animate-in");
-        if (onComplete) onComplete();
-      }, 200);
     }
     function showEditor() {
       transitionToScreen("editorScreen");
@@ -2369,7 +2444,7 @@
       const v = input.trim().toLowerCase();
       if (!v || v === "transparent" || v === "#00000000") return true;
       const hex8 = v.match(/^#([0-9a-f]{8})$/i);
-      if (hex8 && hex8[1].slice(6, 8) === "00") {
+      if (hex8 && hex8[1].slice(0, 2) === "00") {
         return true;
       }
       const rgba = v.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*\.?\d+)\)$/i);
@@ -2398,7 +2473,8 @@
       }
       const hex8 = v.match(/^#([0-9a-f]{8})$/i);
       if (hex8) {
-        return `#${hex8[1].slice(0, 6)}`.toUpperCase();
+        // Badge templates store eight-digit colors as AARRGGBB, matching cssColor().
+        return `#${hex8[1].slice(2, 8)}`.toUpperCase();
       }
       return "#FFCC00";
     }
@@ -2418,6 +2494,7 @@
     }
     function setFilterFilled(filter, filled) {
       if (!filter) return;
+      filter._manualTagColor = true;
       if (filled) {
         const remembered = rememberedBgColorByFilterId.get(filter.id) || extractHexColor(filter.tagColor);
         filter.tagColor = remembered;
@@ -2429,6 +2506,7 @@
     }
     function setFilterColor(filter, color) {
       if (!filter) return;
+      filter._manualTagColor = true;
       rememberedBgColorByFilterId.set(filter.id, color);
       if (isFilterFilled(filter)) {
         filter.tagColor = color;
@@ -2475,7 +2553,6 @@
     }
     function filterMatchesPreviewText(filter, previewText) {
       if (!filter?.isEnabled) return false;
-      if (!filter?.imageURL) return false;
       const text = String(previewText || "");
       const textLower = text.toLowerCase();
       const textLoose = textLower.replace(/[^a-z0-9]+/g, " ");
@@ -2517,19 +2594,7 @@
       });
     }
     function chipHtml(filter) {
-      const bg = isFilterFilled(filter) ? filter.tagColor : "transparent";
-      const border = isFilterBordered(filter) ? (filter.borderColor || "transparent") : "transparent";
-      if (!filter.imageURL) {
-        return `<span class="chip textOnly" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};color:${escapeHtml(filter.textColor || '#fff')};font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">${escapeHtml(filter.name)}</span>`;
-      }
-      if (filter._logoColor) {
-        const tintBaseKey = `${filter.imageURL}|${filter._logoColor}`;
-        const immediateSrc = lastTintRenderCache.get(tintBaseKey) || filter.imageURL;
-        const icon = `<img class="tintImg" src="${escapeHtml(immediateSrc)}" data-src="${escapeHtml(filter.imageURL)}" data-tint="${escapeHtml(filter._logoColor)}" data-brightness="${escapeHtml(filter._logoBrightness || 1)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.chip'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='bold'; p.style.padding='2px 6px'; p.style.color=p.style.color || '#fff';}}" />`;
-        return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
-      }
-      const icon = `<img src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.chip'); if(p){p.textContent=this.alt; p.style.fontSize='9px'; p.style.fontWeight='bold'; p.style.padding='2px 6px'; p.style.color=p.style.color || '#fff';}}" />`;
-      return `<span class="chip" style="background:${escapeHtml(bg)};border-color:${escapeHtml(border)};">${icon}</span>`;
+      return `<span class="template-badge-preview">${makeBadgeHTML(filter, false)}</span>`;
     }
     function previewHtml(data, previewText) {
       const grouped = groupedPreviewFilters(data, previewText);
@@ -2537,7 +2602,7 @@
       if (!badges.length) {
         return `
           <div class="preview-link">${escapeHtml(previewText)}</div>
-          <div class="muted">No matching badge images for this preview link.</div>
+          <div class="muted">No matching badges for this preview link.</div>
         `;
       }
       return `
@@ -2548,14 +2613,14 @@
     function templateOverviewHtml(data) {
       const grouped = data.groups
         .map((group) => {
-          const allFilters = data.filters.filter((f) => f.groupId === group.id && f.imageURL);
+          const allFilters = data.filters.filter((f) => f.groupId === group.id);
           const filters = allFilters.slice(0, 4);
           const hiddenCount = Math.max(allFilters.length - filters.length, 0);
           return { group, filters, hiddenCount };
         })
         .filter((entry) => entry.filters.length > 0);
       if (!grouped.length) {
-        return '<div class="muted">No badge images available in this template.</div>';
+        return '<div class="muted">No badges available in this template.</div>';
       }
       return `
         <div class="template-category-grid">
@@ -2719,6 +2784,31 @@
         }
       }
     }
+    let badgePreviewFrame = 0;
+    function scheduleBadgePreview() {
+      if (badgePreviewFrame) return;
+      badgePreviewFrame = requestAnimationFrame(() => {
+        badgePreviewFrame = 0;
+        const f = state.filters.find(item => item.id === selectedBadgeId);
+        if (!f) return;
+        byId('badgeEditTitle').textContent = 'Editing: ' + f.name;
+        byId('badgeEditorPreviewContainer').innerHTML = makeBadgeHTML(f, true);
+        const tile = [...byId('badgeGalleryContainer').querySelectorAll('[data-badge-id]')].find(el => el.dataset.badgeId === f.id);
+        if (tile) {
+          tile.querySelector('.badge-tile-preview').innerHTML = makeBadgeHTML(f);
+          tile.querySelector('.badge-tile-name').textContent = f.name;
+          tile.classList.toggle('is-disabled', !f.isEnabled);
+          tile.setAttribute('aria-label', 'Edit ' + f.name);
+        }
+        const hasImage = !!f.imageURL;
+        byId('badgeEditTextColorBlock').classList.toggle('hidden', hasImage);
+        byId('badgeEditLogoTintBlock').classList.toggle('hidden', !hasImage);
+        byId('badgeEditPadXSlider').disabled = !hasImage;
+        byId('badgeEditPadYSlider').disabled = !hasImage;
+        byId('livePreview').innerHTML = previewHtml(state, previewLinkText);
+        processRenderedBadgeImages();
+      });
+    }
     function renderEditor() {
       updateLivePreviewPosition();
       byId("sourceLabel").textContent = `Source: ${sourceInfo.name}`;
@@ -2734,6 +2824,9 @@
         }
       }
       
+      byId('editorScreenTitle').textContent = isBadgeEditorActive ? 'Badge Editor' : 'Template Editor';
+      byId('toggleTemplateEditorBtn').setAttribute('aria-pressed', String(!isBadgeEditorActive));
+      byId('toggleBadgeEditorBtn').setAttribute('aria-pressed', String(isBadgeEditorActive));
       if (isBadgeEditorActive) {
         renderBadgeGallery();
         renderSelectedBadgeDetails();
@@ -2747,23 +2840,7 @@
     function renderGroupList() {
       const wrap = byId("groupList");
       wrap.innerHTML = "";
-      const miniBadgeHtml = (filter) => {
-        const filled = isFilterFilled(filter);
-        const bordered = isFilterBordered(filter);
-        const fillColor = extractHexColor(filter.tagColor);
-        const borderColor = extractHexColor(filter.borderColor || "#FFFFFF");
-        const miniBg = filled ? fillColor : "transparent";
-        const miniBorder = bordered ? borderColor : "transparent";
-        if (!filter.imageURL) {
-          return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)}; font-size: 8px; font-weight: 950; display: inline-flex; align-items: center; justify-content: center; color: ${escapeHtml(filter.textColor || '#fff')};">${escapeHtml(filter.name)}</span>`;
-        }
-        if (filter._logoColor) {
-          const tintBaseKey = `${filter.imageURL}|${filter._logoColor}`;
-          const immediateSrc = lastTintRenderCache.get(tintBaseKey) || filter.imageURL;
-          return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge tintImg" src="${escapeHtml(immediateSrc)}" data-src="${escapeHtml(filter.imageURL)}" data-tint="${escapeHtml(filter._logoColor)}" data-brightness="${escapeHtml(filter._logoBrightness || 1)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.group-mini-chip'); if(p){p.textContent=this.alt; p.style.fontSize='8px'; p.style.fontWeight='950'; p.style.display='inline-flex'; p.style.alignItems='center'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" /></span>`;
-        }
-        return `<span class="group-mini-chip" style="background:${escapeHtml(miniBg)};border-color:${escapeHtml(miniBorder)};"><img class="group-mini-badge" src="${escapeHtml(filter.imageURL)}" alt="${escapeHtml(filter.name)}" referrerpolicy="no-referrer" onerror="if(this.alt){this.style.display='none'; const p=this.closest('.group-mini-chip'); if(p){p.textContent=this.alt; p.style.fontSize='8px'; p.style.fontWeight='950'; p.style.display='inline-flex'; p.style.alignItems='center'; p.style.justifyContent='center'; p.style.color=p.style.color || '#fff';}}" /></span>`;
-      };
+      const miniBadgeHtml = (filter) => `<span class="group-mini-preview">${makeBadgeHTML(filter, false)}</span>`;
       state.groups.forEach((group, index) => {
         const filters = state.filters.filter((f) => f.groupId === group.id);
         const isOpen = openGroupIds.has(group.id);
@@ -2793,8 +2870,8 @@
                     <label class="control-group color-group use-group" style="grid-column: 1 / -1; justify-content: space-between; padding: 4px 8px; width: 100%;">
                       <span class="field-label" style="font-weight: 700; color: #FFCC00;">Bulk Status</span>
                       <div style="display: flex; gap: 6px;">
-                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${group.id}" data-bulk-action="enable-all">Enable All</button>
-                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${group.id}" data-bulk-action="disable-all">Disable All</button>
+                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${escapeHtml(group.id)}" data-bulk-action="enable-all">Enable All</button>
+                        <button class="btn-soft" style="padding: 3px 10px; font-size: 0.75rem; min-height: 24px; border-radius: 6px; border-color: rgba(255, 255, 255, 0.15);" data-group-id="${escapeHtml(group.id)}" data-bulk-action="disable-all">Disable All</button>
                       </div>
                     </label>
                   </div>
@@ -2804,12 +2881,12 @@
                     </div>
                   </div>
                   <div class="control-line">
-                    <label class="control-group toggle-group"><span class="field-label">Fill All</span><input type="checkbox" data-group-id="${group.id}" data-bulk-action="fill-toggle" ${allFilled ? "checked" : ""}></label>
-                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${group.id}" data-bulk-action="fill-color" value="${escapeHtml(group.color || "#FFCC00")}"></label>
+                    <label class="control-group toggle-group"><span class="field-label">Fill All</span><input type="checkbox" data-group-id="${escapeHtml(group.id)}" data-bulk-action="fill-toggle" ${allFilled ? "checked" : ""}></label>
+                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${escapeHtml(group.id)}" data-bulk-action="fill-color" value="${escapeHtml(group.color || "#FFCC00")}"></label>
                   </div>
                   <div class="control-line">
-                    <label class="control-group toggle-group"><span class="field-label">Border All</span><input type="checkbox" data-group-id="${group.id}" data-bulk-action="border-toggle" ${allBordered ? "checked" : ""}></label>
-                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${group.id}" data-bulk-action="border-color" value="#FFFFFF"></label>
+                    <label class="control-group toggle-group"><span class="field-label">Border All</span><input type="checkbox" data-group-id="${escapeHtml(group.id)}" data-bulk-action="border-toggle" ${allBordered ? "checked" : ""}></label>
+                    <label class="control-group color-group"><span class="field-label">Color</span><input class="badge-color" type="color" data-group-id="${escapeHtml(group.id)}" data-bulk-action="border-color" value="#FFFFFF"></label>
                   </div>
                 </div>
               </div>
@@ -2827,30 +2904,30 @@
                     <div class="filter-header">
                       <div class="filter-name-heading">${escapeHtml(filter.name)}</div>
                       <div class="filter-header-actions">
-                        <button class="btn-copy btn-icon" data-filter-id="${filter.id}" data-badge-action="copy-badge" title="Copy Badge JSON" aria-label="Copy Badge JSON">&#128203;</button>
-                        <button class="btn-danger btn-icon" data-filter-id="${filter.id}" data-badge-action="delete-badge" title="Delete Badge" aria-label="Delete Badge">&#128465;</button>
+                        <button class="btn-copy btn-icon" data-filter-id="${escapeHtml(filter.id)}" data-badge-action="copy-badge" title="Copy Badge JSON" aria-label="Copy Badge JSON">&#128203;</button>
+                        <button class="btn-danger btn-icon" data-filter-id="${escapeHtml(filter.id)}" data-badge-action="delete-badge" title="Delete Badge" aria-label="Delete Badge">&#128465;</button>
                       </div>
                     </div>
                     <div class="filter-main">
                       <div class="filter-info">${badgeHtml}</div>
                       <div class="control-stack">
                         <div class="control-line use-line">
-                          <button class="btn-soft" data-filter-id="${filter.id}" data-badge-action="edit-in-badge-editor" style="grid-column: 1; padding: 4px 8px; font-size: 0.72rem; border-radius: 6px; font-weight: 700; background: rgba(255, 149, 0, 0.12); border: 1px solid rgba(255, 149, 0, 0.3); color: #FF9500; cursor: pointer; text-align: center;" title="Edit in Badge Editor">Edit in Badge Editor</button>
-                          <label class="control-group color-group use-group"><span class="field-label">Use</span><input type="checkbox" data-filter-id="${filter.id}" data-action="enabled" ${filter.isEnabled ? "checked" : ""}></label>
+                          <button class="btn-soft" data-filter-id="${escapeHtml(filter.id)}" data-badge-action="edit-in-badge-editor" style="grid-column: 1; padding: 4px 8px; font-size: 0.72rem; border-radius: 6px; font-weight: 700; background: rgba(255, 149, 0, 0.12); border: 1px solid rgba(255, 149, 0, 0.3); color: #FF9500; cursor: pointer; text-align: center;" title="Edit in Badge Editor">Edit in Badge Editor</button>
+                          <label class="control-group color-group use-group"><span class="field-label">Use</span><input type="checkbox" data-filter-id="${escapeHtml(filter.id)}" data-action="enabled" ${filter.isEnabled ? "checked" : ""}></label>
                         </div>
                         <div class="control-line image-line">
                           <label class="control-group image-link-group">
                             <span class="field-label">Image Link:</span>
-                            <input class="image-link-input" type="text" data-filter-id="${filter.id}" data-action="image-url" value="${escapeHtml(filter.imageURL || "")}" placeholder="https://example.com/badge.png">
+                            <input class="image-link-input" type="text" data-filter-id="${escapeHtml(filter.id)}" data-action="image-url" value="${escapeHtml(filter.imageURL || "")}" placeholder="https://example.com/badge.png">
                           </label>
                         </div>
                         <div class="control-line">
-                          <label class="control-group toggle-group"><span class="field-label">Fill</span><input type="checkbox" data-filter-id="${filter.id}" data-action="filled" ${filled ? "checked" : ""}></label>
-                          <label class="control-group color-group"><span class="field-label">Fill Color</span><input class="badge-color" type="color" data-filter-id="${filter.id}" data-action="color" value="${escapeHtml(fillColor)}" ${filled ? "" : "disabled"}></label>
+                          <label class="control-group toggle-group"><span class="field-label">Fill</span><input type="checkbox" data-filter-id="${escapeHtml(filter.id)}" data-action="filled" ${filled ? "checked" : ""}></label>
+                          <label class="control-group color-group"><span class="field-label">Fill Color</span><input class="badge-color" type="color" data-filter-id="${escapeHtml(filter.id)}" data-action="color" value="${escapeHtml(fillColor)}" ${filled ? "" : "disabled"}></label>
                         </div>
                         <div class="control-line">
-                          <label class="control-group toggle-group"><span class="field-label">Border</span><input type="checkbox" data-filter-id="${filter.id}" data-action="border" ${bordered ? "checked" : ""}></label>
-                          <label class="control-group color-group"><span class="field-label">Border Color</span><input class="badge-color" type="color" data-filter-id="${filter.id}" data-action="border-color" value="${escapeHtml(borderColor)}" ${bordered ? "" : "disabled"}></label>
+                          <label class="control-group toggle-group"><span class="field-label">Border</span><input type="checkbox" data-filter-id="${escapeHtml(filter.id)}" data-action="border" ${bordered ? "checked" : ""}></label>
+                          <label class="control-group color-group"><span class="field-label">Border Color</span><input class="badge-color" type="color" data-filter-id="${escapeHtml(filter.id)}" data-action="border-color" value="${escapeHtml(borderColor)}" ${bordered ? "" : "disabled"}></label>
                         </div>
                       </div>
                     </div>
@@ -2866,8 +2943,8 @@
         card.innerHTML = `
           <div class="group-head">
             <div class="group-reorder">
-              <button class="btn-reorder" data-group-id="${group.id}" data-direction="up" title="Move Up" ${isFirst ? "disabled" : ""}>▲</button>
-              <button class="btn-reorder" data-group-id="${group.id}" data-direction="down" title="Move Down" ${isLast ? "disabled" : ""}>▼</button>
+              <button class="btn-reorder" data-group-id="${escapeHtml(group.id)}" data-direction="up" title="Move Up" ${isFirst ? "disabled" : ""}>▲</button>
+              <button class="btn-reorder" data-group-id="${escapeHtml(group.id)}" data-direction="down" title="Move Down" ${isLast ? "disabled" : ""}>▼</button>
             </div>
             <button class="group-toggle" data-toggle-group="${group.id}" aria-expanded="${isOpen ? "true" : "false"}">
               <span class="group-title-wrap">
@@ -2881,10 +2958,10 @@
             </button>
             <div class="group-actions">
               <div class="group-action-buttons ${isOpen ? "" : "hidden-fade"}">
-                <button class="btn-soft" data-group-id="${group.id}" data-group-action="copy-group">Copy Category</button>
-                <button class="btn-soft" data-group-id="${group.id}" data-group-action="import-badge">Paste Badge JSON</button>
+                <button class="btn-soft" data-group-id="${escapeHtml(group.id)}" data-group-action="copy-group">Copy Category</button>
+                <button class="btn-soft" data-group-id="${escapeHtml(group.id)}" data-group-action="import-badge">Paste Badge JSON</button>
               </div>
-              <button class="btn-danger btn-icon" data-group-id="${group.id}" data-group-action="delete-group" title="Delete Category" aria-label="Delete Category">&#128465;</button>
+              <button class="btn-danger btn-icon" data-group-id="${escapeHtml(group.id)}" data-group-action="delete-group" title="Delete Category" aria-label="Delete Category">&#128465;</button>
             </div>
           </div>
           <div class="collapsible-wrapper ${isOpen ? "is-open" : ""}">
@@ -3045,18 +3122,19 @@
         });
       });
     }
-    function exportJsonText() {
-      sortFiltersByGroupOrder();
-      
-      // Create a clean copy of filters without editor-specific fields
-      const cleanFilters = state.filters.map(f => {
-        const {
-          _badgeWidth, _padX, _padY, _logoColor, _logoBrightness, _manualTagColor, _innerFaceSnapshotBake, ...rest
-        } = f;
-        return rest;
-      });
-      
-      return JSON.stringify({ groups: state.groups, filters: cleanFilters }, null, 2);
+    function cleanExportFilter(f) {
+      const { _badgeWidth, _padX, _padY, _logoColor, _logoBrightness, _manualTagColor, _innerFaceSnapshotBake, ...rest } = f;
+      return rest;
+    }
+    function exportJsonText(data = state) {
+      const order = new Map(data.groups.map((g,i) => [g.id,i]));
+      const filters = [...data.filters].sort((a,b) => (order.get(a.groupId) ?? 9999) - (order.get(b.groupId) ?? 9999));
+      return JSON.stringify({ groups: data.groups, filters: filters.map(cleanExportFilter) }, null, 2);
+    }
+    async function prepareExportFilter(filter) {
+      const copy = clone(filter);
+      if (needsInnerFaceBake(copy)) await bakeInnerFaceForFilter(copy);
+      return cleanExportFilter(copy);
     }
     function checkImageUrlHealth(url, timeoutMs = 8000) {
       return new Promise((resolve) => {
@@ -3093,7 +3171,9 @@
       }
       return imageHealthCache.get(key);
     }
-    async function runHealthCheck() {
+    async function runHealthCheck(data = state) {
+      const {groups, filters} = data;
+      const state = {groups, filters};
       const checks = [];
       const groupIds = state.groups.map((group) => group.id);
       const filterIds = state.filters.map((filter) => filter.id);
@@ -3127,7 +3207,7 @@
       }
       const enabledWithoutImage = state.filters.filter((filter) => filter.isEnabled && !String(filter.imageURL || "").trim());
       if (enabledWithoutImage.length) {
-        checks.push({ tone: "warn", message: `${enabledWithoutImage.length} enabled filters have no image URL.` });
+        checks.push({ tone: "good", message: `${enabledWithoutImage.length} enabled text-only badges.` });
       }
       const badPatterns = state.filters.filter((filter) => String(filter.pattern || "").trim() && !normalizePatternToRegex(filter.pattern));
       if (badPatterns.length) {
@@ -3151,16 +3231,11 @@
             timeoutFilters.push(filter);
           }
         });
-        if (deadFilters.length || timeoutFilters.length) {
-          [...deadFilters, ...timeoutFilters].forEach((filter) => {
-            filter.isEnabled = false;
-          });
-        }
         if (deadFilters.length) {
-          checks.push({ tone: "danger", message: `${deadFilters.length} badges had dead image links and were turned off.` });
+          checks.push({ tone: "danger", message: `${deadFilters.length} badges have image links that could not be loaded.` });
         }
         if (timeoutFilters.length) {
-          checks.push({ tone: "warn", message: `${timeoutFilters.length} badge links timed out and were turned off for safety.` });
+          checks.push({ tone: "warn", message: `${timeoutFilters.length} badge links timed out. Retry on a stable connection.` });
         }
         if (!deadFilters.length && !timeoutFilters.length) {
           checks.push({ tone: "good", message: `Checked ${checkedUrlCount} image links. No dead links found.` });
@@ -3175,35 +3250,37 @@
     }
     async function renderExportScreen() {
       const runId = ++healthCheckRunId;
-      byId("healthSummary").textContent = "Health summary: checking links and validating JSON...";
-      byId("healthList").innerHTML = "";
-      
-      // Auto-bake pending icon changes before running health check and export
+      const snapshot = clone(state);
+      byId('copyJsonCode').disabled = true;
+      byId('downloadJsonCode').disabled = true;
+      byId('jsonCodeOutput').value = '';
+      byId('healthSummary').textContent = 'Preparing badges and checking links…';
+      byId('healthList').innerHTML = '';
+      setStatus('exportStatus', 'Preparing your export…');
       try {
-        await bakePendingForPublish();
-      } catch (e) {
-        console.error("Auto-baking failed: ", e);
-      }
-      
-      const result = await runHealthCheck();
-      if (runId !== healthCheckRunId) {
-        return;
-      }
-      const { checks, deadCount, timeoutCount } = result;
-      const jsonText = exportJsonText();
-      byId("jsonCodeOutput").value = jsonText;
-      byId("healthList").innerHTML = checks
-        .map((check) => `<li class="${check.tone}">${escapeHtml(check.message)}</li>`)
-        .join("");
-      const dangerCount = checks.filter((check) => check.tone === "danger").length;
-      const warnCount = checks.filter((check) => check.tone === "warn").length;
-      const goodCount = checks.filter((check) => check.tone === "good").length;
-      byId("healthSummary").textContent = `Health summary: ${dangerCount} errors, ${warnCount} warnings, ${goodCount} passes.`;
-      if (deadCount || timeoutCount) {
-        setStatus("exportStatus", `Health check turned off ${deadCount + timeoutCount} badges with dead/timed-out image links.`, "warn");
+        const prepared = clone(snapshot);
+        for (let i = 0; i < prepared.filters.length; i++) {
+          if (runId !== healthCheckRunId) return;
+          prepared.filters[i] = await prepareExportFilter(prepared.filters[i]);
+        }
+        if (runId !== healthCheckRunId) return;
+        byId('jsonCodeOutput').value = exportJsonText(prepared);
+        byId('copyJsonCode').disabled = false;
+        byId('downloadJsonCode').disabled = false;
+        setStatus('exportStatus', 'JSON is ready to copy or download. Image checks are still running.', 'good');
+        const result = await runHealthCheck(snapshot);
+        if (runId !== healthCheckRunId) return;
+        const {checks} = result;
+        byId('healthList').innerHTML = checks.map(check => '<li class="' + check.tone + '">' + escapeHtml(check.message) + '</li>').join('');
+        byId('healthSummary').textContent = 'Health summary: ' + checks.filter(c => c.tone === 'danger').length + ' errors, ' + checks.filter(c => c.tone === 'warn').length + ' warnings.';
+        setStatus('exportStatus', result.deadCount || result.timeoutCount ? 'JSON is ready. Some images could not be checked; your badge selections are unchanged.' : 'JSON is ready to copy or download.', result.deadCount || result.timeoutCount ? 'warn' : 'good');
+      } catch (error) {
+        if (runId !== healthCheckRunId) return;
+        byId('healthSummary').textContent = 'Export could not be prepared.';
+        setStatus('exportStatus', 'Could not prepare a badge image: ' + error.message + ' Return to the editor, check the image URL, and try again.', 'danger');
       }
     }
-
+    
     async function createLinkWithJsonBlob(json, useProxy = false) {
       const url = useProxy 
         ? "https://corsproxy.io/?url=https://jsonblob.com/api/jsonBlob" 
@@ -3263,8 +3340,8 @@
       return { url: linkText, provider: "paste.rs" };
     }
     async function copyJsonCode() {
-      const json = exportJsonText();
-      byId("jsonCodeOutput").value = json;
+      const json = byId("jsonCodeOutput").value;
+      if (!json) return;
       try {
         await navigator.clipboard.writeText(json);
         setStatus("exportStatus", "JSON code copied to clipboard.", "good");
@@ -3460,6 +3537,7 @@
           setStatus("startStatus", `Invalid JSON file: ${error.message}`, "danger");
         }
       };
+      reader.onerror = () => setStatus('startStatus', 'Could not read this file. Please choose it again.', 'danger');
       reader.readAsText(file);
     }
     function handleImportCode() {
@@ -3495,7 +3573,9 @@
       }
       updateLayoutSpacing();
     }
+    let premadeLoadingStarted = false;
     function showPremadeMode() {
+      if (!premadeLoadingStarted) { premadeLoadingStarted = true; initPremadePreviews(); }
       const importWrap = byId("importWrapper");
       const premadeWrap = byId("premadeWrapper");
       const btnImport = byId("chooseImport");
@@ -3516,15 +3596,12 @@
     }
     async function initPremadePreviews() {
       renderPremadeCards();
-      await Promise.all(
-        premadeTemplates.map(async (template) => {
-          try {
-            await ensureTemplateLoaded(template);
-          } catch {
-            // Error is shown in each card; continue loading others.
-          }
-        })
-      );
+      const queue = [...premadeTemplates];
+      await Promise.all(Array.from({length: 3}, async () => {
+        while (queue.length) {
+          try { await ensureTemplateLoaded(queue.shift()); } catch { /* Card displays retry. */ }
+        }
+      }));
     }
     byId("chooseImport").addEventListener("click", showImportMode);
     byId("choosePremade").addEventListener("click", showPremadeMode);
@@ -3546,12 +3623,22 @@
       renderEditor();
     });
     byId("copyJsonCode").addEventListener("click", copyJsonCode);
+    byId('downloadJsonCode').addEventListener('click', () => {
+      const json = byId('jsonCodeOutput').value;
+      if (!json) return;
+      const url = URL.createObjectURL(new Blob([json], {type: 'application/json'}));
+      const a = document.createElement('a');
+      a.href = url; a.download = 'badger-badges.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
     byId("convertPastebinBtn").addEventListener("click", handlePastebinConvert);
     byId("copyPastebinRawBtn").addEventListener("click", copyPastebinRawUrl);
     byId("previewLinkInput").addEventListener("input", (event) => {
       previewLinkText = String(event.target.value || "").trim() || "https://stream.example/files/My.Movie.2026.BluRay.REMUX.2160p.HDR10Plus.Dolby.Atmos.TrueHD.7.1.Multi.Language.Dual.Audio.mkv";
       if (!byId("editorScreen").classList.contains("hidden")) {
-        renderEditor();
+        byId("livePreview").innerHTML = previewHtml(state, previewLinkText);
+        processRenderedBadgeImages();
       }
       if (byId("premadeWrapper").classList.contains("is-open")) {
         renderPremadeCards();
@@ -3570,7 +3657,7 @@
     });
     showStart();
     setStatus("startStatus", "Choose Import or Premade to continue.");
-    initPremadePreviews();
+    renderPremadeCards();
 
     // =========================================================================
     // VISUAL BADGE EDITOR INTEGRATION (Nuvio Badge Studio v1.43 Mechanics)
@@ -3669,8 +3756,18 @@
       return Math.round(74 * mult);
     }
 
+    function optionalPadding(value, max) {
+      if (value === null || value === undefined || value === '') return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? Math.max(0, Math.min(max, n)) : null;
+    }
+    function brightnessValue(value) {
+      const n = Number(value ?? 1);
+      return Number.isFinite(n) ? Math.max(0, Math.min(2, n)) : 1;
+    }
     function autoPadX(f) {
-      if (f._padX && +f._padX > 0) return +f._padX;
+      if (optionalPadding(f._padX, 14) !== null) return optionalPadding(f._padX, 14);
+      if (isFullBadgeSnapshot(f) || isInnerFaceSnapshotBadge(f)) return 0;
       const key = streamKey(f.name).replace(/^\s+/, '');
       if (f.groupId === 'gs') {
         const map = { 'apple tv+': 2, 'disney+': 2, 'peacock': 2, 'paramount+': 2, 'crave': 2, 'crunchy roll': 2, 'netflix': 4, 'prime video': 4, 'max': 4, 'hulu': 4 };
@@ -3682,13 +3779,15 @@
     }
 
     function autoPadY(f) {
-      if (f._padY && +f._padY > 0) return +f._padY;
+      if (optionalPadding(f._padY, 10) !== null) return optionalPadding(f._padY, 10);
+      if (isFullBadgeSnapshot(f) || isInnerFaceSnapshotBadge(f)) return 0;
       if (f.groupId === 'ga') return 4;
       return 3;
     }
 
     function isTransparentBadgeColor(v) {
       const s = String(v || '').trim().toLowerCase();
+      if (isTransparentColor(s)) return true;
       if (!s || s === 'transparent' || s === '#00000000' || s === '#0000') return true;
       if (/^rgba\([^)]*,\s*0(?:\.0+)?\s*\)$/i.test(s)) return true;
       return false;
@@ -3709,7 +3808,7 @@
     }
 
     function makeBadgeHTML(f, big = false) {
-      if (isInnerFaceSnapshotBadge(f)) {
+      if (isInnerFaceSnapshotBadge(f) && f._padX == null && f._padY == null && !f._logoColor && !f._manualTagColor) {
         const hasImg = !!f.imageURL;
         const h = big ? 36 : 30;
         const w = hasImg ? autoWidth(f, big) : 0;
@@ -3722,19 +3821,19 @@
       const rawBg = f.tagColor || '#1A1A1A';
       const bg = cssColor(rawBg, '#1A1A1A');
       const manuallySetWhite = !!f._manualTagColor && isWhiteishColor(rawBg);
-      const needsAutoBg = hasImg && !manuallySetWhite && (isWhiteishColor(rawBg) || (/^#[0-9a-f]{8}$/i.test(rawBg || '') && /^#00/i.test(rawBg || '')) || /rgba\([^)]*,\s*0\)/i.test(bg));
+      const needsAutoBg = hasImg && !f._manualTagColor && !manuallySetWhite && (isWhiteishColor(rawBg) || (/^#[0-9a-f]{8}$/i.test(rawBg || '') && /^#00/i.test(rawBg || '')) || /rgba\([^)]*,\s*0\)/i.test(bg));
       const h = big ? 36 : 30;
       const w = hasImg ? autoWidth(f, big) : ((f._badgeWidth && +f._badgeWidth > 0) ? Math.round(+f._badgeWidth * (big ? 1.18 : 1)) : 0);
-      const px = isSnapshotBadge ? 0 : (hasImg ? autoPadX(f) : 10);
-      const py = isSnapshotBadge ? 0 : (hasImg ? autoPadY(f) : 0);
+      const px = hasImg ? autoPadX(f) * (big ? 1.2 : 1) : 10;
+      const py = hasImg ? autoPadY(f) * (big ? 1.2 : 1) : 0;
       const wrapperBg = isSnapshotBadge ? 'transparent' : bg;
       const wrapperBorder = isSnapshotBadge ? 'transparent' : cssColor(f.borderColor || 'transparent', 'transparent');
       const style = `height:${h}px;${w ? `width:${w}px;` : ''}background:${wrapperBg};color:${cssColor(f.textColor || '#fff', '#fff')};border:${isSnapshotBadge ? '0' : `1px solid ${wrapperBorder}`};padding:${hasImg ? `${py}px ${px}px` : '0 10px'};`;
       const autoAttr = needsAutoBg ? ` data-auto-bg="1"` : '';
       if (hasImg && f._logoColor) {
-        const tintBaseKey = `${f.imageURL}|${f._logoColor}`;
+        const tintBaseKey = `${f.imageURL}|${f._logoColor}|${f._logoBrightness ?? 1}`;
         const immediateSrc = lastTintRenderCache.get(tintBaseKey) || f.imageURL;
-        return `<span class="nBadge${isSnapshotBadge ? ' snapshotBadge' : ''}" ${autoAttr} style="${style}" title="${esc(f.name)}"><img class="tintImg" src="${esc(immediateSrc)}" data-src="${esc(f.imageURL)}" data-tint="${esc(f._logoColor)}" data-brightness="${esc(f._logoBrightness || 1)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
+        return `<span class="nBadge${isSnapshotBadge ? ' snapshotBadge' : ''}" ${autoAttr} style="${style}" title="${esc(f.name)}"><img class="tintImg" src="${esc(immediateSrc)}" data-src="${esc(f.imageURL)}" data-tint="${esc(f._logoColor)}" data-brightness="${esc(f._logoBrightness ?? 1)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
       }
       if (hasImg) return `<span class="nBadge${isSnapshotBadge ? ' snapshotBadge' : ''}" ${autoAttr} style="${style}" title="${esc(f.name)}"><img class="cleanImg" src="${esc(f.imageURL)}" data-src="${esc(f.imageURL)}" alt="${esc(f.name)}" onerror="if(this.alt) this.closest('.nBadge').textContent=this.alt;"></span>`;
       return `<span class="nBadge textOnly" style="${style}">${esc(f.name)}</span>`;
@@ -3755,6 +3854,16 @@
       return { r: (nVal >> 16) & 255, g: (nVal >> 8) & 255, b: nVal & 255 };
     }
 
+    function armImageTimeout(img, ms = 8000) {
+      const timer = setTimeout(() => {
+        const onError = img.onerror;
+        img.onload = null;
+        img.onerror = null;
+        if (onError) onError(new Event('error'));
+      }, ms);
+      img.addEventListener('load', () => clearTimeout(timer), {once:true});
+      img.addEventListener('error', () => clearTimeout(timer), {once:true});
+    }
     function loadCanvasImage(src, triedProxy = false) {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -3767,6 +3876,7 @@
             reject(new Error('Could not load image.'));
           }
         };
+        armImageTimeout(img);
         img.src = src;
       });
     }
@@ -3782,7 +3892,7 @@
     }
 
     function tintLogoToDataURL(src, tint, brightness = 1, triedProxy = false) {
-      brightness = Math.max(0, Math.min(2, parseFloat(brightness || 1)));
+      brightness = brightnessValue(brightness);
       const key = src + '|' + tint + '|b:' + brightness + '|proxy:' + triedProxy;
       if (tintCache.has(key)) return tintCache.get(key);
 
@@ -3921,6 +4031,7 @@
             resolve(src);
           }
         };
+        armImageTimeout(img);
         img.src = src;
       });
 
@@ -4030,6 +4141,7 @@
             resolve(src);
           }
         };
+        armImageTimeout(img);
         img.src = src;
       });
       cleanImageCache.set(key, promise);
@@ -4073,6 +4185,7 @@
           }
         };
         img.onerror = () => resolve(null);
+        armImageTimeout(img);
         img.src = src;
       });
       logoLumCache.set(src, promise);
@@ -4101,7 +4214,7 @@
         const dataUrl = await tintLogoToDataURL(src, tint, brightness);
         if (img.dataset.src === src && img.dataset.tint === tint && (img.dataset.brightness || 1) == brightness) {
           img.src = dataUrl;
-          lastTintRenderCache.set(src + '|' + tint, dataUrl);
+          lastTintRenderCache.set(src + '|' + tint + '|' + brightness, dataUrl);
         }
       });
     }
@@ -4116,16 +4229,17 @@
       let src = f.imageURL;
       if (f._logoColor && typeof tintLogoToDataURL === 'function') {
         try {
-          src = await tintLogoToDataURL(f.imageURL, f._logoColor, f._logoBrightness || 1);
+          src = await tintLogoToDataURL(f.imageURL, f._logoColor, f._logoBrightness ?? 1);
         } catch (e) {
           src = f.imageURL;
         }
       }
+      if (!f._logoColor && !src.startsWith('data:')) src = await cleanLogoBackgroundToDataURL(src);
       return await loadCanvasImage(src);
     }
 
     async function bakeInnerFacePng(f) {
-      const cssW = Math.max(24, Math.round(autoWidth(f, false) || 74));
+      const cssW = Math.max(1, Math.round(autoWidth(f, false) || 74));
       const cssH = 30;
       const scale = (typeof nuvioTvUpscaleMode !== 'undefined' && nuvioTvUpscaleMode) ? 4 : 3;
 
@@ -4137,7 +4251,11 @@
       ctx.imageSmoothingQuality = 'high';
       ctx.clearRect(0, 0, out.width, out.height);
 
-      const bg = cssColor(f.tagColor || '#1A1A1A', '#1A1A1A');
+      let bg = cssColor(f.tagColor || '#1A1A1A', '#1A1A1A');
+      if (!f._manualTagColor && !isFullBadgeSnapshot(f) && (isWhiteishColor(f.tagColor) || isTransparentBadgeColor(bg))) {
+        const luminance = await imageAverageLuminance(f.imageURL);
+        if (luminance > 150) bg = '#090b10';
+      }
 
       const faceInsetX = 1.15 * scale;
       const faceInsetY = 1.15 * scale;
@@ -4201,9 +4319,9 @@
       f._logoColor = '';
       f._logoBrightness = 1;
       f._manualTagColor = false;
-      f._badgeWidth = 0;
-      f._padX = 0;
-      f._padY = 0;
+      f._badgeWidth = autoWidth(f, false);
+      f._padX = null;
+      f._padY = null;
       return true;
     }
 
@@ -4212,21 +4330,11 @@
         f._manualTagColor ||
         f._logoColor ||
         (+f._badgeWidth || 0) > 0 ||
-        (+f._padX || 0) > 0 ||
-        (+f._padY || 0) > 0
+        f._padX != null ||
+        f._padY != null
       ));
     }
 
-    async function bakePendingForPublish() {
-      const targets = state.filters.filter(needsInnerFaceBake);
-      let done = 0;
-      for (const f of targets) {
-        done++;
-        await bakeInnerFaceForFilter(f);
-        await new Promise(resolve => setTimeout(resolve, 20));
-      }
-      return targets.length;
-    }
 
     function escapeRegexLiteral(s) {
       return (s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -4236,8 +4344,8 @@
       const raw = (text || '').trim();
       if (!raw) return '(?i)';
       const parts = raw.split(/[\s._-]+/).filter(Boolean).map(escapeRegexLiteral);
-      const joined = parts.join('[\\\\s._-]*');
-      return `(?i)\\\\b${joined}\\\\b`;
+      const joined = parts.join('[\\s._-]*');
+      return `(?i)\\b${joined}\\b`;
     }
 
     function looksLikeRegex(s) {
@@ -4305,10 +4413,10 @@
           ${filtered.map(f => {
             const isActive = f.id === selectedBadgeId;
             return `
-              <div class="badge-tile ${isActive ? 'active' : ''} ${!f.isEnabled ? 'is-disabled' : ''}" data-badge-id="${escapeHtml(f.id)}">
+              <button type="button" aria-label="Edit ${escapeHtml(f.name)}" aria-pressed="${isActive}" class="badge-tile ${isActive ? 'active' : ''} ${!f.isEnabled ? 'is-disabled' : ''}" data-badge-id="${escapeHtml(f.id)}">
                 <div class="badge-tile-preview">${makeBadgeHTML(f)}</div>
                 <div class="badge-tile-name">${escapeHtml(f.name)}</div>
-              </div>
+              </button>
             `;
           }).join("")}
         </div>
@@ -4317,7 +4425,16 @@
       gallery.querySelectorAll(".badge-tile").forEach(tile => {
         tile.addEventListener("click", () => {
           selectedBadgeId = tile.getAttribute("data-badge-id");
-          renderEditor();
+          gallery.querySelectorAll('.badge-tile').forEach(item => {
+            const active = item === tile;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-pressed', String(active));
+          });
+          renderSelectedBadgeDetails();
+          processRenderedBadgeImages();
+          if (matchMedia('(max-width: 920px)').matches) {
+            byId('badgeEditTitle').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+          }
         });
       });
     }
@@ -4380,7 +4497,7 @@
         byId("badgeEditLogoColor").value = f._logoColor || "";
         byId("badgeEditLogoColorPicker").value = logoHex;
         
-        const brightness = f._logoBrightness || 1;
+        const brightness = f._logoBrightness ?? 1;
         byId("badgeEditLogoBrightness").value = brightness;
         byId("badgeEditLogoBrightnessVal").textContent = Math.round(brightness * 100) + "%";
 
@@ -4393,20 +4510,22 @@
         byId("badgeEditLogoTintBlock").classList.add("hidden");
       }
 
+      byId('badgeEditPadXSlider').disabled = !f.imageURL;
+      byId('badgeEditPadYSlider').disabled = !f.imageURL;
       const w = f._badgeWidth || 0;
       byId("badgeEditWidthSlider").value = w;
       byId("badgeEditWidthVal").textContent = w > 0 ? `${w}px` : "Auto";
 
-      const px = f._padX || 0;
+      const px = autoPadX(f);
       byId("badgeEditPadXSlider").value = px;
       byId("badgeEditPadXVal").textContent = `${px}px`;
 
-      const py = f._padY || 0;
+      const py = autoPadY(f);
       byId("badgeEditPadYSlider").value = py;
       byId("badgeEditPadYVal").textContent = `${py}px`;
     }
 
-    function syncSelectedBadgeFromUI() {
+    function syncSelectedBadgeFromUI(event) {
       const f = state.filters.find(filter => filter.id === selectedBadgeId);
       if (!f) return;
 
@@ -4424,7 +4543,7 @@
         const tintEnabled = byId("badgeEditLogoTintCheckbox").checked;
         if (tintEnabled) {
           f._logoColor = byId("badgeEditLogoColor").value.trim();
-          f._logoBrightness = parseFloat(byId("badgeEditLogoBrightness").value) || 1;
+          f._logoBrightness = brightnessValue(byId("badgeEditLogoBrightness").value);
         } else {
           f._logoColor = "";
           f._logoBrightness = 1;
@@ -4432,8 +4551,8 @@
       }
 
       f._badgeWidth = parseInt(byId("badgeEditWidthSlider").value, 10) || 0;
-      f._padX = parseInt(byId("badgeEditPadXSlider").value, 10) || 0;
-      f._padY = parseInt(byId("badgeEditPadYSlider").value, 10) || 0;
+      if (event?.target?.id === 'badgeEditPadXSlider') f._padX = Number(event.target.value);
+      if (event?.target?.id === 'badgeEditPadYSlider') f._padY = Number(event.target.value);
 
       // Update remembered color maps to stay in sync with Template Editor view
       if (f.tagColor && !isTransparentColor(f.tagColor)) {
@@ -4443,7 +4562,7 @@
         rememberedBorderColorByFilterId.set(f.id, extractHexColor(f.borderColor));
       }
 
-      renderEditor();
+      scheduleBadgePreview();
     }
 
     function setupColorReciprocalSync(textId, pickerId) {
@@ -4467,7 +4586,7 @@
             rememberedBorderColorByFilterId.set(f.id, extractHexColor(textEl.value));
           }
 
-          renderEditor();
+          scheduleBadgePreview();
         }
       });
 
@@ -4487,7 +4606,7 @@
             rememberedBorderColorByFilterId.set(f.id, extractHexColor(pickerEl.value));
           }
 
-          renderEditor();
+          scheduleBadgePreview();
         }
       });
     }
@@ -4538,7 +4657,7 @@
       if (byId("badgeCreateLogoBrightness")) byId("badgeCreateLogoBrightness").disabled = !tintEnabled;
 
       const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
-      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+      const logoBrightnessVal = tintEnabled ? (brightnessValue(byId("badgeCreateLogoBrightness").value)) : 1;
 
       const f = {
         name,
@@ -4549,8 +4668,9 @@
         textColor: byId("badgeCreateTextColor").value.trim() || "#FFFFFF",
         isEnabled: true,
         _badgeWidth: 0,
-        _padX: 0,
-        _padY: 0,
+        _padX: null,
+        _padY: null,
+        _manualTagColor: true,
         _logoColor: logoColorVal,
         _logoBrightness: logoBrightnessVal
       };
@@ -4634,8 +4754,8 @@
       f._logoColor = "";
       f._logoBrightness = 1;
       f._badgeWidth = 0;
-      f._padX = 0;
-      f._padY = 0;
+      f._padX = null;
+      f._padY = null;
       f._manualTagColor = false;
       f._innerFaceSnapshotBake = false;
       if (f.tagColor && !isTransparentColor(f.tagColor)) {
@@ -4681,23 +4801,12 @@
       setStatus("editorStatus", `Deleted badge "${f.name}".`, "good");
     }
 
-    function copySelectedBadgeToClipboard() {
+    async function copySelectedBadgeToClipboard() {
       const f = state.filters.find(filter => filter.id === selectedBadgeId);
       if (!f) return;
-      
-      const {
-        _badgeWidth, _padX, _padY, _logoColor, _logoBrightness, _manualTagColor, _innerFaceSnapshotBake, ...rest
-      } = f;
-      
-      const jsonStr = JSON.stringify(rest, null, 2);
-      navigator.clipboard.writeText(jsonStr).then(() => {
-        setStatus("editorStatus", `Copied badge "${f.name}" JSON to clipboard.`, "good");
-      }).catch(err => {
-        setStatus("editorStatus", "Failed to copy badge JSON to clipboard.", "danger");
-      });
+      await copyBadgeJson(f.id);
     }
-
-    function copyBuiltBadgeToClipboard() {
+    async function copyBuiltBadgeToClipboard() {
       const name = byId("badgeCreateName").value.trim();
       const groupId = byId("badgeCreateGroupSelect").value;
       if (!groupId) {
@@ -4723,7 +4832,7 @@
 
       const tintEnabled = byId("badgeCreateLogoTintCheckbox") ? byId("badgeCreateLogoTintCheckbox").checked : false;
       const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
-      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+      const logoBrightnessVal = tintEnabled ? (brightnessValue(byId("badgeCreateLogoBrightness").value)) : 1;
 
       const badge = {
         id,
@@ -4739,12 +4848,14 @@
         type: 'filter'
       };
 
-      const jsonStr = JSON.stringify(badge, null, 2);
-      navigator.clipboard.writeText(jsonStr).then(() => {
-        setStatus("editorStatus", `Copied custom badge "${name}" JSON to clipboard.`, "good");
-      }).catch(err => {
-        setStatus("editorStatus", "Failed to copy badge JSON to clipboard.", "danger");
-      });
+      badge._logoColor = logoColorVal;
+      badge._logoBrightness = logoBrightnessVal;
+      badge._manualTagColor = true;
+      try {
+        const jsonStr = JSON.stringify(await prepareExportFilter(badge), null, 2);
+        await navigator.clipboard.writeText(jsonStr);
+        setStatus('editorStatus', 'Copied custom badge "' + name + '" JSON to clipboard.', 'good');
+      } catch (error) { setStatus('editorStatus', 'Could not copy badge: ' + error.message, 'danger'); }
     }
 
     function addBuiltBadge() {
@@ -4773,7 +4884,7 @@
 
       const tintEnabled = byId("badgeCreateLogoTintCheckbox") ? byId("badgeCreateLogoTintCheckbox").checked : false;
       const logoColorVal = tintEnabled ? (byId("badgeCreateLogoColor").value.trim() || "#FFFFFF") : "";
-      const logoBrightnessVal = tintEnabled ? (parseFloat(byId("badgeCreateLogoBrightness").value) || 1) : 1;
+      const logoBrightnessVal = tintEnabled ? (brightnessValue(byId("badgeCreateLogoBrightness").value)) : 1;
 
       const badge = {
         id,
@@ -4788,8 +4899,9 @@
         tagStyle: hasFill ? 'filled' : (hasBorder ? 'bordered' : 'filled'),
         type: 'filter',
         _badgeWidth: 0,
-        _padX: 0,
-        _padY: 0,
+        _padX: null,
+        _padY: null,
+        _manualTagColor: true,
         _logoColor: logoColorVal,
         _logoBrightness: logoBrightnessVal
       };
@@ -4860,6 +4972,24 @@
       setStatus("editorStatus", `Added category "${name}".`, "good");
     }
 
+    document.addEventListener('keydown', event => {
+      if (byId('badgeImportModal').classList.contains('hidden')) return;
+      if (event.key === 'Escape') { event.preventDefault(); closeBadgeImportModal(); }
+      if (event.key === 'Tab') {
+        const inputs = [...byId('badgeImportModal').querySelectorAll('textarea,button')].filter(el => !el.disabled);
+        const first = inputs[0], last = inputs[inputs.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+    // Associate field labels and announce status changes to assistive technology.
+    document.querySelectorAll('label.field-label').forEach(label => {
+      const input = label.parentElement.querySelector('input[id], select[id]');
+      if (input) label.htmlFor = input.id;
+    });
+    document.querySelectorAll('.status').forEach(el => { el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); });
+    byId('badgeSearchInput').setAttribute('aria-label','Search badges');
+    byId('previewLinkInput').setAttribute('aria-label','Release title for live preview');
     // Set up reciprocal syncs
     setupColorReciprocalSync("badgeEditTagColor", "badgeEditTagColorPicker");
     setupColorReciprocalSync("badgeEditBorderColor", "badgeEditBorderColorPicker");
@@ -4918,25 +5048,25 @@
     byId("badgeEditWidthSlider").addEventListener("input", (e) => {
       const val = parseInt(e.target.value, 10);
       byId("badgeEditWidthVal").textContent = val > 0 ? `${val}px` : "Auto";
-      syncSelectedBadgeFromUI();
+      syncSelectedBadgeFromUI(e);
     });
 
     byId("badgeEditPadXSlider").addEventListener("input", (e) => {
       const val = parseInt(e.target.value, 10);
       byId("badgeEditPadXVal").textContent = `${val}px`;
-      syncSelectedBadgeFromUI();
+      syncSelectedBadgeFromUI(e);
     });
 
     byId("badgeEditPadYSlider").addEventListener("input", (e) => {
       const val = parseInt(e.target.value, 10);
       byId("badgeEditPadYVal").textContent = `${val}px`;
-      syncSelectedBadgeFromUI();
+      syncSelectedBadgeFromUI(e);
     });
 
     byId("badgeEditLogoBrightness").addEventListener("input", (e) => {
       const val = parseFloat(e.target.value);
       byId("badgeEditLogoBrightnessVal").textContent = Math.round(val * 100) + "%";
-      syncSelectedBadgeFromUI();
+      syncSelectedBadgeFromUI(e);
     });
 
     // Edit actions
@@ -4948,8 +5078,8 @@
       const f = state.filters.find(filter => filter.id === selectedBadgeId);
       if (f) {
         f._badgeWidth = 0;
-        f._padX = 0;
-        f._padY = 0;
+        f._padX = null;
+        f._padY = null;
         f._logoColor = "";
         f._logoBrightness = 1;
         f._manualTagColor = false;
@@ -5021,6 +5151,11 @@
       if (byId("badgeCreateBorderColorCheckbox")) byId("badgeCreateBorderColorCheckbox").checked = true;
       if (byId("badgeCreateBorderColor")) byId("badgeCreateBorderColor").disabled = false;
       if (byId("badgeCreateBorderColorPicker")) byId("badgeCreateBorderColorPicker").disabled = false;
+      byId('badgeCreateLogoTintCheckbox').checked = false;
+      byId('badgeCreateLogoColor').value = '';
+      byId('badgeCreateLogoColorPicker').value = '#FFFFFF';
+      byId('badgeCreateLogoBrightness').value = 1;
+      byId('badgeCreateLogoBrightnessVal').textContent = '100%';
       renderCreateBadgePreview();
     });
 
