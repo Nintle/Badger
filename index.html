@@ -2638,87 +2638,98 @@
         </div>
       `;
     }
-    function renderPremadeCards() {
+    function renderPremadeCards(templateId = null) {
       const grid = byId("premadeGrid");
-      grid.innerHTML = premadeTemplates
-        .map((template) => {
-          const cached = templateCache.get(template.id);
-          const loading = cached?.loading;
-          const hasData = Boolean(cached?.json);
-          const error = cached?.error;
-          const creatorMarkup = template.creator
-            ? `<span class="muted">by ${template.creatorUrl ? `<a href="${escapeHtml(template.creatorUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(template.creator)}</a>` : escapeHtml(template.creator)}</span>`
-            : "";
-          const preview = hasData
-            ? templateOverviewHtml(normalize(cached.json, { rememberColors: false }))
-            : error
-              ? `<div class="muted">Preview could not load: ${escapeHtml(error)}</div>`
-              : '<div class="muted">Loading preview...</div>';
-          return `
-            <article class="template-card">
-              <div class="template-title">
-                <div class="template-name">${escapeHtml(template.name)}</div>
-                ${creatorMarkup}
-              </div>
-              <div class="template-preview">${preview}</div>
-              <div class="template-actions">
-                <button class="btn-main" data-use-template="${template.id}" ${loading ? "disabled" : ""}>Edit This Template</button>
-                <button class="btn-soft" data-copy-template="${template.id}">Copy JSON Link</button>
-              </div>
-            </article>
-          `;
-        })
-        .join("");
-      grid.querySelectorAll("[data-use-template]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const id = btn.getAttribute("data-use-template");
-          if (!id) return;
-          const template = premadeTemplates.find((t) => t.id === id);
-          if (!template) return;
-          try {
-            setStatus("startStatus", `Loading template: ${template.name}...`);
-            const payload = await ensureTemplateLoaded(template);
-            const sourceName = template.creator ? `${template.name} (by ${template.creator})` : template.name;
-            setState(payload.json, { type: "premade", name: sourceName });
-            setStatus("editorStatus", `${template.name} loaded.`, "good");
-          } catch (error) {
-            setStatus("startStatus", `Could not load template ${template.name}: ${error.message}`, "danger");
-          }
-        });
-      });
-      grid.querySelectorAll("[data-copy-template]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const id = btn.getAttribute("data-copy-template");
-          if (!id) return;
-          const template = premadeTemplates.find((t) => t.id === id);
-          if (!template) return;
-          const link = template.url;
-          const isInlineOnly = !link || link === "inline-template" || link === "fallback-inline-template";
-          try {
-            if (isInlineOnly) {
+      if (!grid.children.length) {
+        grid.innerHTML = premadeTemplates
+          .map((template) => {
+            const creatorMarkup = template.creator
+              ? `<span class="muted">by ${template.creatorUrl ? `<a href="${escapeHtml(template.creatorUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(template.creator)}</a>` : escapeHtml(template.creator)}</span>`
+              : "";
+            return `
+              <article class="template-card" data-template-id="${template.id}">
+                <div class="template-title">
+                  <div class="template-name">${escapeHtml(template.name)}</div>
+                  ${creatorMarkup}
+                </div>
+                <div class="template-preview"><div class="muted">Loading preview...</div></div>
+                <div class="template-actions">
+                  <button class="btn-main" data-use-template="${template.id}">Edit This Template</button>
+                  <button class="btn-soft" data-copy-template="${template.id}">Copy JSON Link</button>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+        grid.querySelectorAll("[data-use-template]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-use-template");
+            if (!id) return;
+            const template = premadeTemplates.find((t) => t.id === id);
+            if (!template) return;
+            try {
+              setStatus("startStatus", `Loading template: ${template.name}...`);
               const payload = await ensureTemplateLoaded(template);
-              await navigator.clipboard.writeText(JSON.stringify(payload.json, null, 2));
-              setStatus("startStatus", `Copied ${template.name} JSON code.`, "good");
-              return;
+              const sourceName = template.creator ? `${template.name} (by ${template.creator})` : template.name;
+              setState(payload.json, { type: "premade", name: sourceName });
+              setStatus("editorStatus", `${template.name} loaded.`, "good");
+            } catch (error) {
+              setStatus("startStatus", `Could not load template ${template.name}: ${error.message}`, "danger");
             }
-            await navigator.clipboard.writeText(link);
-            setStatus("startStatus", `Copied ${template.name} JSON link.`, "good");
-          } catch {
-            if (isInlineOnly) {
-              setStatus("startStatus", "Clipboard was blocked. Load the template and use Export > Copy JSON Code.", "warn");
-              return;
-            }
-            setStatus("startStatus", `Clipboard was blocked. JSON link: ${link}`, "warn");
-          }
+          });
         });
+        grid.querySelectorAll("[data-copy-template]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-copy-template");
+            if (!id) return;
+            const template = premadeTemplates.find((t) => t.id === id);
+            if (!template) return;
+            const link = template.url;
+            const isInlineOnly = !link || link === "inline-template" || link === "fallback-inline-template";
+            try {
+              if (isInlineOnly) {
+                const payload = await ensureTemplateLoaded(template);
+                await navigator.clipboard.writeText(JSON.stringify(payload.json, null, 2));
+                setStatus("startStatus", `Copied ${template.name} JSON code.`, "good");
+                return;
+              }
+              await navigator.clipboard.writeText(link);
+              setStatus("startStatus", `Copied ${template.name} JSON link.`, "good");
+            } catch {
+              if (isInlineOnly) {
+                setStatus("startStatus", "Clipboard was blocked. Load the template and use Export > Copy JSON Code.", "warn");
+                return;
+              }
+              setStatus("startStatus", `Clipboard was blocked. JSON link: ${link}`, "warn");
+            }
+          });
+        });
+      }
+      // Keep loaded cards (and their images, focus and scroll positions) intact.
+      const templates = templateId ? premadeTemplates.filter(t => t.id === templateId) : premadeTemplates;
+      templates.forEach(template => {
+        const cached = templateCache.get(template.id);
+        const card = grid.querySelector(`[data-template-id="${template.id}"]`);
+        card.querySelector("[data-use-template]").disabled = Boolean(cached?.loading);
+        const preview = card.querySelector(".template-preview");
+        if (!cached || preview._templatePayload === cached) return;
+        preview._templatePayload = cached;
+        if (cached.json) {
+          preview.innerHTML = templateOverviewHtml(normalize(cached.json, { rememberColors: false }));
+          processRenderedBadgeImages(preview);
+        } else if (cached.error) {
+          preview.innerHTML = `<div class="muted">Preview could not load: ${escapeHtml(cached.error)}</div>`;
+        } else {
+          preview.innerHTML = '<div class="muted">Loading preview...</div>';
+        }
       });
-      processRenderedBadgeImages();
     }
     async function ensureTemplateLoaded(template) {
       const existing = templateCache.get(template.id);
       if (existing?.json) {
         return existing;
       }
+      if (existing?.promise) return existing.promise;
       if (template.inlineJson) {
         const payload = {
           loading: false,
@@ -2727,44 +2738,48 @@
           error: null
         };
         templateCache.set(template.id, payload);
-        renderPremadeCards();
+        renderPremadeCards(template.id);
         return payload;
       }
-      templateCache.set(template.id, { loading: true });
-      renderPremadeCards();
-      try {
-        const loaded = await loadJsonWithFallback(template.url);
-        const payload = {
-          loading: false,
-          json: loaded.json,
-          usedUrl: loaded.usedUrl,
-          error: null
-        };
-        templateCache.set(template.id, payload);
-        renderPremadeCards();
-        return payload;
-      } catch (error) {
-        if (template.fallbackInlineJson) {
-          const fallbackPayload = {
+      const pending = { loading: true };
+      templateCache.set(template.id, pending);
+      renderPremadeCards(template.id);
+      pending.promise = (async () => {
+        try {
+          const loaded = await loadJsonWithFallback(template.url);
+          const payload = {
             loading: false,
-            json: template.fallbackInlineJson,
-            usedUrl: "fallback-inline-template",
+            json: loaded.json,
+            usedUrl: loaded.usedUrl,
             error: null
           };
-          templateCache.set(template.id, fallbackPayload);
-          renderPremadeCards();
-          return fallbackPayload;
+          templateCache.set(template.id, payload);
+          renderPremadeCards(template.id);
+          return payload;
+        } catch (error) {
+          if (template.fallbackInlineJson) {
+            const fallbackPayload = {
+              loading: false,
+              json: template.fallbackInlineJson,
+              usedUrl: "fallback-inline-template",
+              error: null
+            };
+            templateCache.set(template.id, fallbackPayload);
+            renderPremadeCards(template.id);
+            return fallbackPayload;
+          }
+          const payload = {
+            loading: false,
+            json: null,
+            usedUrl: null,
+            error: error.message || "Unknown error"
+          };
+          templateCache.set(template.id, payload);
+          renderPremadeCards(template.id);
+          throw error;
         }
-        const payload = {
-          loading: false,
-          json: null,
-          usedUrl: null,
-          error: error.message || "Unknown error"
-        };
-        templateCache.set(template.id, payload);
-        renderPremadeCards();
-        throw error;
-      }
+      })();
+      return pending.promise;
     }
     function updateLivePreviewPosition() {
       const container = byId("livePreviewContainer");
@@ -3575,7 +3590,6 @@
     }
     let premadeLoadingStarted = false;
     function showPremadeMode() {
-      if (!premadeLoadingStarted) { premadeLoadingStarted = true; initPremadePreviews(); }
       const importWrap = byId("importWrapper");
       const premadeWrap = byId("premadeWrapper");
       const btnImport = byId("chooseImport");
@@ -3593,9 +3607,17 @@
         setStatus("startStatus", "Community mode selected. Pick a template below.", "good");
       }
       updateLayoutSpacing();
+      if (!premadeLoadingStarted && premadeWrap.classList.contains("is-open")) {
+        // Let the panel finish expanding before JSON parsing and image work begin.
+        requestAnimationFrame(async () => {
+          await Promise.allSettled(premadeWrap.getAnimations().map(animation => animation.finished));
+          if (premadeLoadingStarted || !premadeWrap.classList.contains("is-open")) return;
+          premadeLoadingStarted = true;
+          initPremadePreviews();
+        });
+      }
     }
     async function initPremadePreviews() {
-      renderPremadeCards();
       const queue = [...premadeTemplates];
       await Promise.all(Array.from({length: 3}, async () => {
         while (queue.length) {
@@ -3639,9 +3661,6 @@
       if (!byId("editorScreen").classList.contains("hidden")) {
         byId("livePreview").innerHTML = previewHtml(state, previewLinkText);
         processRenderedBadgeImages();
-      }
-      if (byId("premadeWrapper").classList.contains("is-open")) {
-        renderPremadeCards();
       }
     });
     byId("backToStart").addEventListener("click", () => {
@@ -4148,8 +4167,8 @@
       return promise;
     }
 
-    async function applyCleanImageBackgrounds() {
-      const imgs = Array.from(document.querySelectorAll('img.cleanImg'));
+    async function applyCleanImageBackgrounds(root = document) {
+      const imgs = Array.from(root.querySelectorAll('img.cleanImg'));
       for (const img of imgs) {
         const src = img.dataset.src;
         if (!src || img.src.startsWith('data:image/')) continue;
@@ -4192,8 +4211,8 @@
       return promise;
     }
 
-    async function applyAdaptiveBadgeBackgrounds() {
-      const badges = Array.from(document.querySelectorAll('.nBadge[data-auto-bg="1"]'));
+    async function applyAdaptiveBadgeBackgrounds(root = document) {
+      const badges = Array.from(root.querySelectorAll('.nBadge[data-auto-bg="1"]'));
       for (const badge of badges) {
         const img = badge.querySelector('img');
         const src = img?.dataset?.src || img?.src;
@@ -4205,8 +4224,8 @@
       }
     }
 
-    function applyLogoTints() {
-      document.querySelectorAll('img.tintImg').forEach(async img => {
+    function applyLogoTints(root = document) {
+      root.querySelectorAll('img.tintImg').forEach(async img => {
         const src = img.dataset.src;
         const tint = img.dataset.tint;
         const brightness = img.dataset.brightness || 1;
@@ -4219,10 +4238,10 @@
       });
     }
 
-    function processRenderedBadgeImages() {
-      applyCleanImageBackgrounds();
-      applyLogoTints();
-      applyAdaptiveBadgeBackgrounds();
+    function processRenderedBadgeImages(root = document) {
+      applyCleanImageBackgrounds(root);
+      applyLogoTints(root);
+      applyAdaptiveBadgeBackgrounds(root);
     }
 
     async function loadInnerFaceLogoImage(f) {
